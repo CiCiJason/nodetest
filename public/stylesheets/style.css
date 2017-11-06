@@ -1,8 +1,145 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px "微软雅黑", "宋体", "仿宋", Helvetica, Arial, sans-serif;
+    background: #007bb6;
 }
 
-a {
-  color: #00B7FF;
+header {
+    padding: 2em;
+}
+
+nav#nav {
+    float: right;
+    background: #007bb6;
+    border: 1px solid #007bb6;
+}
+
+#nav ul.nav>li>a {
+    color: white;
+}
+
+#nav ul.nav>li>a:hover,
+#nav ul.nav>li>a:focus {
+    background: white;
+    border-radius: 0.4em;
+    font-weight: bold;
+    color: #00B7FF;
+}
+
+nav#nav li {
+    padding: 0.4em 0 0 0;
+}
+
+nav#nav li.li-dividing {
+    border-bottom: 1px solid #ccc;
+}
+
+.index-info h2,
+.index-info p {
+    color: white;
+    padding: 1em 0 1em 0;
+    line-height: 1.6em;
+}
+
+div.login {
+    background: #006292;
+    border-radius: 1em;
+}
+
+div.login-form {
+    background: #004a6d;
+    padding: 2em;
+    border-radius: 0 0 1em 1em;
+}
+
+div.login form input {
+    font-size: 1.2em;
+    margin: 1em 0;
+    height: 2.6em;
+}
+
+footer {
+    padding: 2em 0 2em 0;
+    text-align: center;
+}
+
+
+/* 表单验证 */
+
+
+/*.ng-pristine {
+    color: green;
+}
+
+.ng-dirty {
+    color: green;
+}
+*/
+
+
+/*
+.ng-invalid {
+    color: red;
+}
+*/
+
+div.pub-bgcolor {
+    background: white;
+}
+
+.img-border {
+    border: 1px solid gray;
+    padding: 1em;
+    margin: 4em 1em 2em 1em;
+    text-align: center;
+}
+
+.pro-description {
+    background: #f1f0f0;
+    padding: 1em;
+}
+
+.pro-description h2 {
+    margin-bottom: 1.4em;
+}
+
+.pro-description p {
+    line-height: 2em;
+}
+
+div.panel {
+    margin-bottom: 0;
+}
+
+div.panel .panel-heading {
+    position: relative;
+}
+
+div.panel .panel-heading .more,
+button.more {
+    float: right;
+}
+
+table td:last-child {
+    display: inline-table;
+}
+
+div.panel {
+    padding-bottom: 1em;
+    margin-bottom: 2em;
+}
+
+div.text-right {
+    text-align: right;
+}
+
+div.text-center {
+    text-align: center;
+}
+
+div.text-center button {
+    font-size: 1.4em;
+}
+
+.note {
+    color: red;
 }

@@ -1,0 +1,566 @@
+<div class="pub-bgcolor">
+    <div class="container-fluid">
+
+        <h3>送样信息表明细</h3>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">送样信息表</h3>
+            </div>
+            <div class="panel-body">
+
+                <form novalidate role="form">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">送样信息表编号</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model='orderDetail.orderId' name="orderId" disabled/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">项目编号</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model='orderDetail.proId' name="proId" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">机构</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select required="required" class="form-control" name="instituion" ng-model="orderDetail.instituion">
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">收货地址</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="address" class="form-control" required="required"  ng-model="orderDetail.address">
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">测序平台</label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sequencingPlatform" id="" value="1" ng-model="orderDetail.sequencingPlatform" ng-checked="sequencingPlatform==1"
+                                            checked> Novaseq 6000 S2(仅包FC)
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="sequencingPlatform" id="" value="2" ng-model="orderDetail.sequencingPlatform" ng-checked="sequencingPlatform==2"> Hiseq X Ten
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="sequencingPlatform" id="" value="3" ng-model="orderDetail.sequencingPlatform" ng-checked="sequencingPlatform==3"> NHiseq 4000
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="sequencingPlatform" id="" value="4" ng-model="orderDetail.sequencingPlatform" ng-checked="sequencingPlatform==4"> Miseq
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="sequencingPlatform" id="" value="5" ng-model="orderDetail.sequencingPlatform" ng-checked="sequencingPlatform==5"> Nextseq 500
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="sequencingPlatform" id="" value="6" ng-model="orderDetail.sequencingPlatform" ng-checked="sequencingPlatform==6"> MiniSeq
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">读长</label>
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="radio" ng-show='sequencingPlatform==1'>
+                                    <label>
+                                        <input type="radio" name="Novaseq 6000 S2" id="" value="" checked="checked"  ng-model="orderDetail."> 包FC PE 150 bp 数据量 1000-1200Gb
+                                    </label>
+                                </div>
+
+                                <div class="radio" ng-show='sequencingPlatform==2'>
+                                    <label>
+                                        <input type="radio" name="Hiseq X Ten" id="" value="" checked="checked" ng-model="orderDetail."> 包lane PE150 bp 数据量 120Gb
+                                    </label>
+                                </div>
+
+                                <div class="radio" ng-show='sequencingPlatform==3'>
+                                    <label>
+                                        <input type="radio" name="NHiseq 4000" id="" value="" checked="checked" ng-model="orderDetail."> 包lane PE150 bp 数据量 100Gb
+                                    </label>
+                                </div>
+
+                                <div class="radio" ng-show='sequencingPlatform==4'>
+                                    <label>
+                                        <input type="radio" name="Miseq" id="" value="" checked="checked" ng-model="orderDetail."> 包FC PE250 bp 数据量4.5-5.1Gb
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="Miseq" id="" value="" ng-model="orderDetail."> Miseq 包FC PE300 bp 数据量13.2-15Gb
+                                    </label>
+                                </div>
+
+                                <div class="radio" ng-show='sequencingPlatform==5'>
+                                    <label>
+                                        <input type="radio" name="Nextseq 500" id="" value="" checked="checked" ng-model="orderDetail."> High-Output kit 包FC PE150 bp 数据量100-120Gb
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="Nextseq 500" id="" value="" ng-model="orderDetail."> Mid-Output kit 包FC PE150 bp 数据量 32.5-39Gb
+                                    </label>
+                                </div>
+
+                                <div class="radio" ng-show='sequencingPlatform==6'>
+                                    <label>
+                                        <input type="radio" name="MiniSeq" id="" value="" checked="checked" ng-model="orderDetail."> High-Output kit 包FC PE150 bp 数据量6.6-7.5Gb
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="MiniSeq" id="" value="" ng-model="orderDetail."> Mid-Output kit 包FC PE150 bp 数据量2.1-2.4Gb
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">送样信息表类型</label>
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="type" id="" value="" checked="checked" ng-model="orderDetail.type"> 文库无需世和混合，包lane
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="type" id="" value="" ng-model="orderDetail.type"> 文库需世和混合上机，包lane
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="type" id="" value="" ng-model="orderDetail.type"> 需要世和混合上机，不包lane包G
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="type" id="" value="" ng-model="orderDetail.type"> 文库无需世和混合，包FC(flow cell)
+                                    </label>
+                                    <br>
+                                    <p class="note">注：如需世和混样，需加收混样费</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">包lane数目</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" name="laneNum" min="0"  ng-model="orderDetail.laneNum"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">标签选择</label>
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="tagSelect" id="" value="" checked="checked" ng-model="orderDetail.tagSelect"> 单端标签
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="tagSelect" id="" value="" ng-model="orderDetail.tagSelect"> 双端标签
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">文库2100结果</label>
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="library2100result" id="" value="" checked="checked" ng-model="orderDetail.library2100result"> 已有2100质检结果（请上传2100原始结果附件）
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="library2100result" id="" value="" ng-model="orderDetail.library2100result"> 无2100质检结果，需世和做（收费）
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="library2100result" id="" value="" ng-model="orderDetail.library2100result"> 无2100质检结果，不需要
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">运单号</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="waybillNumber"  ng-model="orderDetail.waybillNumber"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">运输方式</label>
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="modeOfTransport" id="" value="1" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==1"> 干冰+冰袋(推荐使用)
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="modeOfTransport" id="" value="2" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==2"> 冰袋(推荐使用)
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="modeOfTransport" id="" value="3" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==3"> 液氮
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="modeOfTransport" id="" value="4" checked="checked" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==4"> 其它
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="orderDetail.modeOfTransport==4">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">其他运输方式</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="otherModeOfTransport"  ng-model="orderDetail.otherModeOfTransport"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">是否携带硬盘</label>
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="carryHardDisk" id="" value="1" checked="checked" ng-model="orderDetail.carryHardDisk" ng-checked="orderDetail.carryHardDisk==1"> 是
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="carryHardDisk" id="" value="2" ng-model="orderDetail.carryHardDisk" ng-checked="orderDetail.carryHardDisk==2"> 否
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="orderDetail.carryHardDisk==1">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">硬盘SN码</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="SNNum" ng-model="orderDetail.SNNum"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">样本总数</label>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="1" aria-describedby="basic-addon2" min="0" name="totalNumberOfSamples" ng-model="orderDetail.totalNumberOfSamples">
+                                    <span class="input-group-addon" id="basic-addon2">份样品</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <label for="">每份样本</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">每份样本</span>
+                                    <input type="number" class="form-control" placeholder="1" aria-label="Amount (to the nearest dollar)" min="0" name="totalNumberOfTubes" ng-model="orderDetail.totalNumberOfTubes">
+                                    <span class="input-group-addon">管</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">样本说明</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="sampleDescription"  ng-model="orderDetail.sampleDescription"/>
+                            </div>
+                            <div class="col-md-3">
+                                <b>如多库一lane，请在备注中说明</b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">样本物种</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="sampleSpecies"  ng-model="orderDetail.sampleSpecies"/>
+                            </div>
+                            <div class="col-md-3">
+                                <b>非单一物种，请在备注中说明</b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">建库方法</label>
+                            </div>
+                            <div class="col-md-8">
+                                {{!--
+                                <input type="text" class="form-control" name="accountname" /> --}}
+
+                                <textarea class="editor" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod" autofocus></textarea>
+                                
+                                <p class="note">注：提供建库方法、使用的试剂盒及品牌、以及建库所用接头引物序列（若为illumina系统接头只需要提供接头种类和名称）。若为特殊接头并需要特殊测序引物请客户标注清楚并将所需引物与样品一起寄送。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">特定序列</label>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea class="editor" class="form-control" rows="15" name="specificSequence" ng-model="orderDetail.specificSequence" autofocus></textarea>
+                                <p class="note">注：如果文库是PCR产物建库或者插入片段中有特定序列，请在样品信息单中说明。GC含量：</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1 text-right">
+                                <label for="">备注</label>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea class="editor" class="form-control" rows="15" name="remarks" ng-model="orderDetail.remarks" autofocus></textarea>
+                                <p class="note">注：送样单的备注信息</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+
+                <span>上传附件列表</span>
+
+                <button type="button" class="btn btn-info">下载世和基因文库送样信息表</button>
+                <button type="button" class="btn btn-info">下载SR样本文库信息附表</button>
+                <button type="button" class="btn btn-info">世和基因样本要求</button>
+
+                <button class="more btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span> 上传附件</button>
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>附件名称</th>
+                            <th>附件大小</th>
+                            <th>上传进度</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <span class="panel-title">样品列表</span>
+                        <button type="button" class="btn btn-primary more">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            新增
+                        </button>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped table-hover table-bordered table-responsive table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>样本编号</th>
+                                    <th>文库类型</th>
+                                    <th>包lane数量</th>
+                                    <th>文库插入片段长度(接头+插入片段长度,2100结果)</th>
+                                    <th>是否拆分数据
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="all" ng-model="all"> 全是
+                                            </label>
+                                        </div>
+
+                                    </th>
+                                    <th>样品是否在世和</th>
+                                    <th>摩尔浓度</th>
+                                    <th>体积</th>
+                                    <th>要求世和加phix比例</th>
+                                    <th>操作列</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="number" name="" id="" class="" value="" required="required">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" id="" class="" value="" required="required">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" id="" class="" value="" required="required">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" id="" class="" value="" required="required">bp
+                                    </td>
+                                    <td>
+
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="" id="" value="" ng-check="all"> 是
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="" id="" value="" ng-check="all"> 否
+                                            </label>
+                                        </div>
+
+                                    </td>
+                                    <td>
+
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="" id="" value="" ng-check="all"> 是
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="" id="" value="" ng-check="all"> 否
+                                            </label>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" id="" class="" value="" required="required">nM
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" id="" class="" value="" required="required">ul
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" id="" class="" value="" required="required">%
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary">删除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary center">保存</button>
+
+                    <button type="button" class="btn btn-primary center">取消</button>
+
+                    <button type="button" class="btn btn-primary center">提交</button>
+                </div>
+            </div>
+
+        </div>{{!-- body结束 --}}
+
+        <h4><b>以上项目必须填写，请在□上打√，如无对应选项，请在□其他上打√并详细说明。</b></h4>
+        <span>1. 请写明所提供待测文库的具体信息，标明物种信息、文库类型、插入片段大小、建库方式、建库所用接头等。若有可能请提供待检文库的安捷伦2100检测结果。</span>
+        <br>
+        <span>2. 请写明希望得到的测序效果，如所需测序平台、读长、数据量等。</span>
+        <br>
+        <span>3. 文库特殊情况或有特殊要求请在客户自建库样品信息单中注明。</span>
+        <br>
+        <span>4、 文库要求</span>
+        <br>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;4.1. 若使用Miseq测序仪进行一次文库测序，请提供插入片段长度300bp-600bp之间，浓度4nM以上，体积15ul以上的文库。 若使用Nextseq 500测序仪进行一次文库测序，请提供请提供插入片段长度150bp-500bp之间，浓度4nM以上，体积20ul以上的文库。若使用Hiseq4000/HiseqX测序仪进行1条Lane文库测序，请提供浓度3nM以上，体积20ul以上的文库。（若进行“一库多lane”多条Lane文库测序，则文库的需要量将会增加。）若使用Novaseq
+            6000测序仪进行包FC（S2）测序，浓度10nM以上，体积50ul以上的文库。</span>
+        <br>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;4.2. 文库最终请溶于无酶水中。请在文库管子上标记清楚文库名称、所用接头、文库浓度、体积等。</span>
+        <br>
+        <span>5、 文库运输</span>
+        <br>
+        <spanp>&nbsp;&nbsp;&nbsp;&nbsp;5.1. 文库样品建议在-20℃环境中保存，短时间内运输可以采用冰袋，长时间请采用干冰加冰袋的方式。</spanp>
+        <br>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;5.2. 样品管请置于50ml管或样品盒中，再用泡沫塑料等包裹，保证样品到达实验室的时候状态良好，不破不漏。</span>
+        <br>
+
+        <h5>收件地址：江苏省南京市高新技术产业开发区新锦湖路3-1中丹生态生命科学产业园B栋17楼南京世和基因生物技术有限公司. 收件人：实验部张玲玲15205196993。</h5>
+
+    </div>
+</div>

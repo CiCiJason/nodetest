@@ -1,0 +1,94 @@
+<div class="container content">
+
+    <div class="row index-info">
+        <div class="col-md-7">
+            <h2>优质&nbsp;&nbsp;快速&nbsp;&nbsp;专业&nbsp;&nbsp;灵活</h2>
+            <p>世和基因从2008年开始致力于高通量测序（NGS）在肿瘤精准医学领域的临床转化研究，拥有中国最大的肿瘤NGS基因组数据库（>50000份样本）。世和基因拥有国内首家无瑕疵通过CAP验收认证的肿瘤临床检验中心，并已通过包括美国CAP、欧洲EMQN、中国卫计委临检中心室间质评在内的多项国内外权威认证。</p>
+            <p>世和基因在加拿大和中国两地建有转化医学中心逾10,000平方米，拥有Illumina全系列高通量测序平台。经过近九年的研发投入和近四年的市场耕耘，世和基因已经与全国400多家三级甲等医院和肿瘤专科医院开展合作，成为中国肿瘤精准医学领域的领军企业。</p>
+            <div class='firstpage-img'>
+                <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
+            </div>
+        </div>
+        <div class="col-md-5">
+            {{!-- 登录 --}}
+            <div class="login" ng-show='login'>
+                <h2 ng-hide='loginSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;登录</h2>
+                <h2 ng-show='loginSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;登录成功！</h2>
+                <div class="login-form">
+                    <form ng-hide='loginSuccess' role="form" name='loginForm' novalidate ng-submit='loginSubmit()'>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="accountname" ng-model='user.accountname' placeholder="账户(用户名、手机号或者邮箱)" ng-minlength='6'
+                                ng-maxlength='20' required/>
+                            <div class="error" ng-messages="loginForm.accountname.$error">
+                                <div ng-message="required">请输入账号(数字,字母,下划线)</div>
+                                <div ng-message="minlength">账户名至少为3位</div>
+                                <div ng-message="maxlength">账户名最多为20位</div>
+                            </div>
+
+
+                            <input type="password" class="form-control" name="password" ng-model='user.password' id="" placeholder="密码" ng-minlength='6'
+                                ng-maxlength='20' required/>
+                            <div class="error" ng-messages="loginForm.password.$error">
+                                <div ng-message="required">请输入密码(请输入数字,字母的混合)</div>
+                                <div ng-message="minlength">密码至少为6位</div>
+                                <div ng-message="maxlength">密码最多为20位</div>
+                            </div>
+
+                        </div>
+                        <input type="submit" class="form-control btn btn-info" value="登录" />
+                    </form>
+                    <p>还没有账户？
+                        <a href="javascript:;" ng-click='change()'>注册</a>
+                    </p>
+                </div>
+            </div>
+
+            {{!-- 注册 --}}
+            <div class="login" ng-hide='reg'>
+                <h2>&nbsp;&nbsp;&nbsp;&nbsp;注册</h2>
+                <h2 ng-show='regSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;注册成功！</h2>
+                <div class="login-form">
+                    <form role="form" name='regForm' novalidate ng-submit="regSubmit()">
+                        <div class="form-group">
+                            <input type="text" name='accountname' class="form-control" ng-model='user.accountname' id="" placeholder="账户(用户名、手机号或者邮箱)"
+                                ng-minlength='3' ng-maxlength='20' required/> {{!--
+                            <div>请输入账号</div>--}}
+                            <div class="error" ng-messages="regForm.accountname.$error">
+                                <div ng-message="required">请输入账号</div>
+                                <div ng-message="minlength">账户名至少为3位</div>
+                                <div ng-message="maxlength">请输入不超过20个字符的账号</div>
+                            </div>
+
+                            <input type="password" class="form-control" name="password" ng-model='user.password' id="" placeholder="密码" ng-minlength='6'
+                                ng-maxlength='20' required/>
+                            <div class="error" ng-messages="regForm.password.$error">
+                                <div ng-message="required">请输入密码(请输入数字,字母的混合)</div>
+                                <div ng-message="minlength">密码至少为6位</div>
+                                <div ng-message="maxlength">密码最多为20位</div>
+                            </div>
+
+                            <input type="password" class="form-control" name="repassword" ng-model='user.repassword' id="" placeholder="确认密码" required/>
+                            <div class="error" ng-messages="regForm.password.$error">
+                                <div ng-message="required">请再次输入密码</div>
+                            </div>
+
+                            <input type="email" class="form-control" name="email" ng-model='user.email' id="" placeholder="请输入邮箱验证" required/>
+                            <div class="error" ng-messages="regForm.email.$error">
+                                <div ng-message="required">请再次输入密码</div>
+                            </div>
+
+                        </div>
+                        <input type="submit" class="form-control  btn btn-info" value="注册" />
+                    </form>
+                    <p>已有账户？
+                        <a href="javascript:;" ng-click='change()'>登录</a>
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

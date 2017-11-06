@@ -26,7 +26,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
         $http({
             method: 'POST',
-            url: '/api/login',
+            url: '/login',
             data: { user: $scope.user }
         }).then(function(data) {
             if (!data.data.code) {
@@ -52,11 +52,12 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
         $http({
             method: 'POST',
-            url: '/api/register',
+            url: '/login/register',
             data: { user: $scope.user }
-        }).then(function(data, status, headers, config) {
+        }).then(function(data) {
 
-            $window.sessionStorage.token = data.token;
+            $window.location.href('/index/main');;
+            console.log('注册成功');
 
         }, function(data, status, headers, config) {
             // Erase the token if the user fails to log in

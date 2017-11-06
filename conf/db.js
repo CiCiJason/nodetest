@@ -4,13 +4,13 @@ var setting = require('./setting');
 /**
  * 连接
  */
-mongoose.connect(setting);
+mongoose.connect(setting.mongodb);
 
 /**
  * 连接成功
  */
 mongoose.connection.on('connected', function() {
-    console.log('Mongoose connection open to ' + setting);
+    console.log('Mongoose connection open to ' + setting.mongodb);
 });
 
 /**

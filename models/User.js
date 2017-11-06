@@ -49,28 +49,29 @@ var UserSchema = new Schema({
 
 });
 
-
 module.exports = mongoose.model('User', UserSchema);
 
+
+
 //给用户密码加盐加密
-Users.prototype.hashPassword = function(fn) {
-    var user = this;
-    // bcrypt.genSalt(12, function(err, salt) {
-    //     if (err) {
-    //         return fn(err);
-    //     }
-    //     user.salt = salt;
-    //     bcrypt.hash(user.password, salt, function(err, hash) {
-    //         if (err) {
-    //             return fn(err);
-    //         }
-    //         user.password = hash;
-    //         return fn();
-    //     });
-    // });
+// User.prototype.hashPassword = function(fn) {
+//     var user = this;
+//     // bcrypt.genSalt(12, function(err, salt) {
+//     //     if (err) {
+//     //         return fn(err);
+//     //     }
+//     //     user.salt = salt;
+//     //     bcrypt.hash(user.password, salt, function(err, hash) {
+//     //         if (err) {
+//     //             return fn(err);
+//     //         }
+//     //         user.password = hash;
+//     //         return fn();
+//     //     });
+//     // });
 
-    bcrypt.hash(user.password, 12, function(err, hash) {
-        user.save();
-    });
+//     bcrypt.hash(user.password, 12, function(err, hash) {
+//         user.save();
+//     });
 
-};
+// };

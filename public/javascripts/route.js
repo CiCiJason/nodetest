@@ -68,6 +68,10 @@ app.config(['$routeProvider', '$interpolateProvider', 'ACCESS_LEVELS', function(
             templateUrl: '/users/institutionDetail',
             controller: 'institutionCtrl'
         }) //机构管理明细
+        .when('/login', {
+            templateUrl: '/login',
+            controller: 'indexCtrl'
+        }) //机构管理明细
 
     .otherwise({ redirectTo: '/index/main' });
 

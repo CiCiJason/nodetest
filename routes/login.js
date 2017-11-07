@@ -28,6 +28,7 @@ router.post('/', function(req, res, next) {
  * 用户注册
  */
 router.post('/register', function(req, res, next) {
+    var resultData = {};
     var accountname = req.body.user.accountname;
     var password = req.body.user.password;
     var repassword = req.body.user.repassword;
@@ -40,11 +41,41 @@ router.post('/register', function(req, res, next) {
     });
     console.log(data);
     if (!accountname && !password && !repassword && !email) {
-        return { code: 1, message: "请填写完整的注册信息" }
+        resultData.code = 1;
+        resultData.message = "请填写完整的注册信息";
+        return res.json(resultData);
     } else if (password != repassword) {
-        return { code: 2, message: "用户名和密码不一致" };
+        resultData.code = 2;
+        resultData.message = "用户名和密码不一致";
+        return res.json(resultData);
     } else {
-        UserService.SignUp(data);
+        UserService.SignUp(data, function(flag, msg) {
+            if (flag) {
+                resultData.code = 0;
+                resultData.message = "注册成功";
+                return res.json(resultData);
+            } else {
+                resultData.code = 3;
+                resultData.message = "用户名或者邮箱已经被注册";
+                return res.json(resultData);
+            }
+        });
+        //console.log(1);
+    }
+});
+
+router.post("/SignUp", function(req, res, next) {
+    var resultData = {};
+    if (req.session.codeEmail == req.body.Code) {
+        userService.SignUp(req.body, function(flage, msg) {
+            resultData.isSuccess = flage;
+            resultData.msg = msg;
+            return res.json(resultData);
+        });
+    } else {
+        resultData.isSuccess = false;
+        resultData.msg = "验证码不正确!";
+        return res.json(resultData);
     }
 });
 

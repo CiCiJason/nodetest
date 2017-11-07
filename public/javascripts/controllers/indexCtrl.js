@@ -55,11 +55,21 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
             url: '/login/register',
             data: { user: $scope.user }
         }).then(function(data) {
+            console.log(data);
+            if (data.data.code == 0) {
+                console.log(data.data.message);
+                $scope.message = data.data.message;
+                $('#myModal').modal({
+                    show: true
+                });
+            } else {
+                $scope.message = data.data.message;
+                $('#myModal').modal("show");
+                console.log(data.data.message);
+            }
 
-            $window.location.href('/index/main');;
-            console.log('注册成功');
 
-        }, function(data, status, headers, config) {
+        }, function(data) {
             // Erase the token if the user fails to log in
             delete $window.sessionStorage.token;
 
@@ -67,6 +77,20 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
             // $scope.message = 'Error: Invalid user or password';
         });
     }
+
+    $scope.closeModal = function() {
+        setTimeout(function() {
+            $window.location = '#!/index/main';
+            setTimeout(function() {
+                $('#myModal').modal("hide");
+
+            }, 1);
+        }, 500);
+
+
+    }
+
+
 
 
 }]);

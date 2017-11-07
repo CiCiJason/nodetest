@@ -27,21 +27,25 @@ var bcrypt = require('bcrypt');
 //     });
 // }
 
-function InsertUser(data) {
-    var userInsert = Object.assign({}, new User({ accountname: data.accountname, email: data.email, password: data.password }));
-    bcrypt.hash(userInsert.password, 12, function(hash) {
-        return userInsert.sava();
+function InsertUser(data, callback) {
+
+    bcrypt.hash(data.password, 12, function(err, hash) {
+        var userInsert = new User({ accountname: data.accountname, email: data.email, password: hash });
+        userInsert.save().then(function(result) {
+            callback(result);
+        });
     });
 }
 
 //注册
-exports.SignUp = function(data) {
-    User.findOne({ "$or": [{ 'accountname': data.accountname }, { 'email': data.email }] }, function(finddata) {
-        if (finddata) {
-            console.log(finddata);
-            InsertUser(data);
+exports.SignUp = function(data, callback) {
+    User.find({ $or: [{ 'accountname': data.accountname }, { 'email': data.email }] }, function(err, finddata) {
+        if (!finddata.length) {
+            InsertUser(data, function(result) {
+                return callback(true, "注册成功");
+            });
         } else {
-            return "用户名或者邮箱已经被注册";
+            return callback(false, "用户名或者邮箱已经被注册");
         }
     });
 }

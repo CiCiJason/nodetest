@@ -51,32 +51,16 @@ exports.SignUp = function(data, callback) {
 }
 
 //登录
-exports.SignIn = function(data) {
-    var password = bcrypt.hash(data.password, 12);
+exports.SignIn = function(data, callback) {
 
-    User.find({ "$or": [{ 'accountname': data.accountname, 'password': password }, { 'email': data.email, 'password': password }] }, function(finddata) {
-        if (finddata) {
-            return true; //登录成功
-        } else {
-            return false; //登录失败
-        }
+    bcrypt.hash(data.password, 12, function(err, hash) {
+        //data.password = hash;
+        User.find({ accountname: data.accountname, password: hash }, function(err, finddata) {
+            if (!finddata.length) {
+                return callback(true, "登录成功");
+            } else {
+                return callback(false, "账户名或者密码错误");
+            }
+        });
     });
 }
-
-// exports.checkPwd = function(data, callBack) {
-//     var lastPwd = data.body.lastPwd;
-//     var Account = data.session.Account ? data.session.Account : "";
-//     User.getUserByName(Account).then(function(result) {
-//         if (result && result.created_at) {
-//             User.fetch({ Account: Account, Pwd: salt.encrypt(lastPwd, result.salt) }).then(function(result) {
-//                 if (result && result.length > 0) {
-//                     callBack(true, "登录成功");
-//                 } else {
-//                     callBack(false, "用户名或密码不正确");
-//                 }
-//             })
-//         } else {
-//             callBack(false, "用户名或密码不正确");
-//         }
-//     });
-// }

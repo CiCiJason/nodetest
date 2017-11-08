@@ -1,3 +1,26 @@
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">提示信息：</h4>
+          </div>
+          <div class="modal-body">
+            <p>[[message]]</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="closeModal()">确定</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    
 <div class="container content">
 
     <div class="row index-info">
@@ -13,7 +36,6 @@
             {{!-- 登录 --}}
             <div class="login" ng-show='login'>
                 <h2 ng-hide='loginSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;登录</h2>
-                <h2 ng-show='loginSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;登录成功！</h2>
                 <div class="login-form">
                     <form ng-hide='loginSuccess' role="form" name='loginForm' novalidate ng-submit='loginSubmit()'>
                         <div class="form-group">
@@ -46,7 +68,6 @@
             {{!-- 注册 --}}
             <div class="login" ng-hide='reg'>
                 <h2>&nbsp;&nbsp;&nbsp;&nbsp;注册</h2>
-                <h2 ng-show='regSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;注册成功！</h2>
                 <div class="login-form">
                     <form role="form" name='regForm' novalidate ng-submit="regSubmit()">
                         <div class="form-group">

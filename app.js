@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 
+var apiAuth = require("./utils/Validauth");
+
 var routes = require('./routes/route');
 
 var expressJwt = require('express-jwt');
@@ -38,6 +40,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+app.all('/*', [apiAuth]);
 routes(app);
 
 

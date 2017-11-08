@@ -12,41 +12,28 @@ router.get('/', function(req, res, next) {
 
 
 /**
- * 用户登录
- */
-router.post('/', function(req, res, next) {
-    var accountname = req.body.user.accountname;
-    var password = req.body.user.password;
-    var data = new User({
-        accountname: accountname,
-        password: password
-    });
-    UserService.SignIn(data);
-});
-
-/**
  * 用户注册
  */
 router.post('/register', function(req, res, next) {
     var resultData = {};
-    var accountname = req.body.user.accountname;
-    var password = req.body.user.password;
-    var repassword = req.body.user.repassword;
-    var email = req.body.user.email;
+    var accountname = req.body.accountname;
+    var password = req.body.password;
+    var repassword = req.body.repassword;
+    var email = req.body.email;
     var data = new User({
         accountname: accountname,
         password: password,
         repassword: repassword,
         email: email
     });
-    console.log(data);
+    //console.log(data);
     if (!accountname && !password && !repassword && !email) {
         resultData.code = 1;
         resultData.message = "请填写完整的注册信息";
         return res.json(resultData);
     } else if (password != repassword) {
         resultData.code = 2;
-        resultData.message = "用户名和密码不一致";
+        resultData.message = "两次输入密码不一致";
         return res.json(resultData);
     } else {
         UserService.SignUp(data, function(flag, msg) {
@@ -60,23 +47,42 @@ router.post('/register', function(req, res, next) {
                 return res.json(resultData);
             }
         });
-        //console.log(1);
     }
 });
 
-router.post("/SignUp", function(req, res, next) {
+/**
+ * 用户登录
+ */
+
+router.post("/", function(req, res, next) {
     var resultData = {};
-    if (req.session.codeEmail == req.body.Code) {
-        userService.SignUp(req.body, function(flage, msg) {
-            resultData.isSuccess = flage;
-            resultData.msg = msg;
-            return res.json(resultData);
+    var accountname = req.body.accountname;
+    var password = req.body.password;
+    var data = new User({
+        accountname: accountname,
+        password: password
+    });
+    if (accountname && password) {
+        UserService.SignIn(req.body, function(flag, msg) {
+            if (flag) {
+                resultData.code = 0;
+                resultData.message = msg;
+                resultData.token = jwthelper.genToken(req.body.accountname);
+                console.log(resultData.token);
+                return res.json(resultData);
+            } else {
+                resultData.code = 2;
+                resultData.msg = msg;
+                return res.json(resultData);
+            }
         });
     } else {
-        resultData.isSuccess = false;
-        resultData.msg = "验证码不正确!";
+        resultData.code = 1;
+        resultData.message = "请填写完整的登录信息";
         return res.json(resultData);
     }
+
+
 });
 
 

@@ -30,7 +30,6 @@
             {{!-- 登录 --}}
             <div class="login" ng-show='login'>
                 <h2 ng-hide='loginSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;登录</h2>
-                <h2 ng-show='loginSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;登录成功！</h2>
                 <div class="login-form">
                     <form ng-hide='loginSuccess' role="form" name='loginForm' novalidate ng-submit='loginSubmit()'>
                         <div class="form-group">
@@ -63,7 +62,6 @@
             {{!-- 注册 --}}
             <div class="login" ng-hide='reg'>
                 <h2>&nbsp;&nbsp;&nbsp;&nbsp;注册</h2>
-                <h2 ng-show='regSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;注册成功！</h2>
                 <div class="login-form">
                     <form role="form" name='regForm' novalidate ng-submit="regSubmit()">
                         <div class="form-group">

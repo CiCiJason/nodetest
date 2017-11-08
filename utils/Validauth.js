@@ -8,13 +8,13 @@
 
 var jwt = require('jwt-simple'); //加密工具
 var config = require('../conf/config');
-var logger = require('./loghelper').helper;
+//var logger = require('./loghelper').helper;
 
 module.exports = function(req, res, next) {
-    if (req.url === '/' || req.url.indexOf('/api') > -1 || req.url.indexOf('/Login') > -1 || req.url.indexOf('/serviceDetail') > -1 || req.url.indexOf('/js/') > -1 || req.url.indexOf('/css/') > -1 || req.url.indexOf('/img/') > -1 || req.url.indexOf('/fonts/') > -1 || req.url.indexOf('/index') > -1 || req.url === '/index/main' || req.url.indexOf('/files') > -1) {
+    if (req.url === '/' || req.url.indexOf('/api') > -1 || req.url.indexOf('/login') > -1 || req.url.indexOf('/register') > -1 || req.url.indexOf('/serviceDetail') > -1 || req.url.indexOf('/js/') > -1 || req.url.indexOf('/css/') > -1 || req.url.indexOf('/img/') > -1 || req.url.indexOf('/fonts/') > -1 || req.url.indexOf('/index') > -1 || req.url === '/index/main' || req.url.indexOf('/files') > -1) {
         next();
     } else {
-        var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+        var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'] || localStorage.getItem(token);
         var key = (req.body && req.body.mxkey) || (req.query && req.query.mxkey) || req.headers['mxkey'];
         var index = req.url.indexOf("?")
         var url = index > 0 ? req.url.substring(0, index) : req.url;
@@ -27,7 +27,9 @@ module.exports = function(req, res, next) {
                         "message": "未登录!",
                         "backurl": url
                     };
-                    res.render("error", error);
+                    // res.render("error", error);
+                    // return;
+                    res.render('login', { title: '世和送样信息表系统', layout: null });
                     return;
                 }
 
@@ -38,7 +40,9 @@ module.exports = function(req, res, next) {
                         "message": "登录过期!",
                         "backurl": url
                     };
-                    res.render("error", error);
+                    // res.render("error", error);
+                    // return;
+                    res.render('login', { title: '世和送样信息表系统', layout: null });
                     return;
                 } else {
                     next();
@@ -50,7 +54,9 @@ module.exports = function(req, res, next) {
                     "backurl": url
 
                 };
-                res.render("error", error);
+                //res.render("error", error);
+
+                res.render('login', { title: '世和送样信息表系统', layout: null });
                 return;
             }
         } else {
@@ -61,7 +67,9 @@ module.exports = function(req, res, next) {
                 "backurl": url
 
             };
-            res.render("error", error);
+            // res.render("error", error);
+            // return;
+            res.render('login', { title: '世和送样信息表系统', layout: null });
             return;
         }
     }

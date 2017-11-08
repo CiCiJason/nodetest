@@ -1,47 +1,42 @@
 app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
     $scope.login = 1;
     $scope.reg = 1;
-    $scope.loginSuccess = 0;
-    $scope.regSuccess = 0;
-
-
-
 
     $scope.change = function() {
         $scope.login = !$scope.login;
         $scope.reg = !$scope.reg;
-        $scope.loginSuccess = 0;
-        $scope.regSuccess = 0;
     };
+
+
     /**
      * 登录
      */
-    $scope.user = {
-        accountname: '',
-        password: '',
-        repassword: '',
-        email: ''
-    };
     $scope.loginSubmit = function() {
-
         $http({
             method: 'POST',
             url: '/login',
-            data: { user: $scope.user }
+            data: {
+                accountname: $scope.user.accountname,
+                password: md5($scope.user.password)
+            }
         }).then(function(data) {
-            if (!data.data.code) {
-
-                $window.sessionStorage.token = data.data.token;
-                $scope.loginSuccess = 1;
-
-                //alert(data.data.message);
+            if (data.data.code == 0) {
+                $scope.message = data.data.message;
+                localStorage.setItem('token', data.data.token);
+                $('#myModal').modal("show");
             } else {
-                alert(data.data.message);
+                $scope.message = data.data.message;
+
+                $('#myModal').modal("show");
+
             }
 
+            // }, function(data) {
+            //     // Erase the token if the user fails to log in
+            //     delete $window.sessionStorage.token;
 
-            $scope.message = data.data.message;
-
+            //     // Handle login errors here
+            //     // $scope.message = 'Error: Invalid user or password';
         });
     };
 
@@ -49,32 +44,35 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
      * 注册
      */
     $scope.regSubmit = function() {
-
         $http({
             method: 'POST',
             url: '/login/register',
-            data: { user: $scope.user }
+            data: {
+                accountname: $scope.user.accountname,
+                password: md5($scope.user.password),
+                repassword: md5($scope.user.repassword),
+                email: $scope.user.email
+            }
         }).then(function(data) {
             console.log(data);
             if (data.data.code == 0) {
-                console.log(data.data.message);
+                //console.log(data.data.message);
                 $scope.message = data.data.message;
-                $('#myModal').modal({
-                    show: true
-                });
+                //showMessage($scope, data.data.message);
+                $('#myModal').modal("show");
             } else {
                 $scope.message = data.data.message;
+                //showMessage($scope, data.data.message);
                 $('#myModal').modal("show");
-                console.log(data.data.message);
+                //console.log(data.data.message);
             }
 
+            // }, function(data) {
+            //     // Erase the token if the user fails to log in
+            //     delete $window.sessionStorage.token;
 
-        }, function(data) {
-            // Erase the token if the user fails to log in
-            delete $window.sessionStorage.token;
-
-            // Handle login errors here
-            // $scope.message = 'Error: Invalid user or password';
+            //     // Handle login errors here
+            //     // $scope.message = 'Error: Invalid user or password';
         });
     }
 
@@ -86,21 +84,6 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
             }, 1);
         }, 500);
-
-
     }
 
-
-
-
 }]);
-
-// function(data, status, headers, config) {
-//     // Erase the token if the user fails to log in
-//     delete $window.sessionStorage.token;
-
-//     // Handle login errors here
-//     // $scope.message = 'Error: Invalid user or password';
-// });
-// }
-// }]);

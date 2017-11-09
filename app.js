@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var apiAuth = require("./utils/Validauth");
 
@@ -31,9 +32,19 @@ app.use(cookieParser());
 app.use(session({
     secret: '123456',
     name: 'testapp', //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }, //设置maxAge是1天，即1天后session和相应的cookie失效过期
-    resave: false,
-    saveUninitialized: true,
+    //cookie: { maxAge: 1000 * 60 * 60 * 24 }, //设置maxAge是1天，即1天后session和相应的cookie失效过期
+    cookie: { maxAge: 1000 * 5 },
+
+    resave: false, // 是否每次都重新保存会话，建议false
+    saveUninitialized: true, // 是否自动保存未初始化的会话，建议false
+    store: new MongoStore({ //创建新的mongodb数据库
+        host: '127.0.0.1', //数据库的地址，本机的话就是127.0.0.1，也可以是网络主机
+        port: 27020, //数据库的端口号
+        url: 'mongodb://127.0.0.1:27020/shihe',
+        db: 'shihe', //数据库的名称。
+        cookieSecret: 'shihe',
+        mongodb: 'mongodb://127.0.0.1:27020/shihe',
+    })
 }));
 
 

@@ -27,10 +27,8 @@
                                 <label for="">省份</label>
                             </div>
                             <div class="col-md-8">
-                                <select id="" class="form-control" ng-model='addressDetail.province' name="province">
-                                    <option value="">请选择省份</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
+                                <select id="province" class="form-control" name="province" ng-change="changeProvince()">
+                                    <option value="[[x]]" ng-repeat="x in addressDetail.province">[[x]]</option>
                                 </select>
                             </div>
                         </div>
@@ -42,10 +40,8 @@
                                 <label for="">城市</label>
                             </div>
                             <div class="col-md-8">
-                                <select id="" class="form-control" ng-model='addressDetail.city' name="city">
-                                    <option value="">请选择城市</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
+                                <select id="city" class="form-control" ng-model='addressDetail.city' name="city">
+                                    <option value=""></option>
                                 </select>
                             </div>
                         </div>
@@ -57,7 +53,7 @@
                                 <label for="">县/区</label>
                             </div>
                             <div class="col-md-8">
-                                <select id="" class="form-control" ng-model='addressDetail.district' name="district">
+                                <select id="district" class="form-control" ng-model='addressDetail.district' name="district">
                                     <option value="">请选择区/县</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -111,10 +107,10 @@
                     </div>
 
                     <div class="text-center">
-                        
-                        <button type="button" class="btn btn-primary center" ng-click="addressSave()" >保存</button>
 
-                        <button type="button" class="btn btn-primary center" ng-click="addressCancel()" >取消</button>
+                        <button type="button" class="btn btn-primary center" ng-click="addressSave()">保存</button>
+
+                        <button type="button" class="btn btn-primary center" ng-click="addressCancel()">取消</button>
 
                     </div>
 

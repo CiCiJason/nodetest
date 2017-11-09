@@ -12,105 +12,7 @@
 
 <body ng-app='orderSystem'>
 
-  <header>
-
-
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h1>世和基因</h1>
-        </div>
-        <div class="col-md-8 ">
-          <nav class="navbar navbar-default" role="navigation" id="nav">
-            <!-- Brand and toggle get grouped for better mobile display 手机页面 -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button> {{!--
-              <a class="navbar-brand" href="#">世和基因</a> --}}
-            </div>
-
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-              <ul class="nav navbar-nav">
-                <li>
-                  <a href="#!/">首页</a>
-                </li>
-                <li>
-                  <a href="#!/serviceInfo">服务介绍</a>
-                </li>
-                <li>
-                  <a href="#!/serviceList">测序服务</a>
-                </li>
-              </ul>
-
-              <ul class="nav navbar-nav navbar-right">
-
-                <li class="dropdown">
-                  <a href="" class="dropdown-toggle" data-toggle="dropdown">用户名:$window.sessionStorage.token
-                    <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="#!/users/baseInfo">基本信息设置</a>
-                    </li>
-                    <li>
-                      <a href="#!/users/institution">机构管理</a>
-                    </li>
-                    <li>
-                      <a href="#!/users/address">地址管理</a>
-                    </li>
-                    <li class="li-dividing"></li>
-                    <li>
-                      <a href="#!/orders/myorders">送样信息表管理</a>
-                    </li>
-                    <li class="li-dividing"></li>
-                    <li>
-                      <a href="#!/users/password">修改密码</a>
-                    </li>
-                    <li>
-                      <a href="javascripts:;" ng-click='logout()'>退出登录</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-          </nav>
-
-        </div>
-      </div>
-    </div>
-  </header>
-
-
-
-
-
-
-
-
-
-
-
-
-  </header>
-
-
-  {{!--
-  <div class="container content"> --}} {{{body}}} {{!-- </div> --}}
-
-
-
-
-  <footer>
-    <h4>南京世和基因生物技术有限公司</h4>
-  </footer>
+ {{{body}}}
 
   <script src="/javascripts/static/jquery-3.2.1.min.js"></script>
   <script src="/javascripts/static/bootstrap.min.js"></script>
@@ -125,8 +27,11 @@
   <script src="/javascripts/static/uploader.js"></script>
   <script src="/javascripts/static/simditor.js"></script>
   <script src="/javascripts/static/md5.min.js"></script>
+  <script src="/javascripts/static/city.min.js"></script>
+  
 
   <script src="/javascripts/route.js"></script>
+  <script src="/javascripts/controllers/baseCtrl.js"></script>  
   <script src="/javascripts/controllers/indexCtrl.js"></script>
   <script src="/javascripts/controllers/baseInfoCtrl.js"></script>
   <script src="/javascripts/controllers/institutionCtrl.js"></script>

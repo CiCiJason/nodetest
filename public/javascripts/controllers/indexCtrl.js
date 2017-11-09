@@ -7,7 +7,6 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
         $scope.reg = !$scope.reg;
     };
 
-
     /**
      * 登录
      */
@@ -24,6 +23,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
                 $scope.message = data.data.message;
                 localStorage.setItem('token', data.data.token);
                 $('#myModal').modal("show");
+                localStorage.setItem('loginName', data.data.accountname);
             } else {
                 $scope.message = data.data.message;
 

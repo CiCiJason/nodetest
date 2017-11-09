@@ -5,6 +5,7 @@ var UserService = require('../Service/User/UserService');
 var jwthelper = require('../utils/jwthelper');
 var User = require('../models/User');
 
+
 //跳转登录和注册
 router.get('/', function(req, res, next) {
     res.render('login', { title: '世和送样信息表系统', layout: null });
@@ -64,13 +65,33 @@ router.post("/", function(req, res, next) {
     });
     if (accountname && password) {
         UserService.SignIn(req.body, function(flag, msg) {
+
             if (flag) {
+                req.session.regenerate(function(err) {
+                    if (err) {
+                        return res.json({ code: 10, ret_msg: '登录失败' });
+                    }
+                    req.session.accountname = req.body.accountname;
+                });
+
                 resultData.code = 0;
                 resultData.message = msg;
-                resultData.token = jwthelper.genToken(req.body.accountname);
-                console.log(resultData.token);
+                resultData.backurl = req.baseUrl;
+                resultData.accountname = req.body.accountname;
+
+                //return res.json(Object.assign({}, jwtHelper.genToken(resultData), resultData));
                 return res.json(resultData);
-            } else {
+            }
+
+            // if (flag) {
+            //     resultData.code = 0;
+            //     resultData.message = msg;
+            //     resultData.token = jwthelper.genToken(req.body.accountname);
+            //     resultData.accountname = req.body.accountname;
+            //     //console.log(resultData.token);
+            //     return res.json(resultData);
+            // }
+            else {
                 resultData.code = 2;
                 resultData.msg = msg;
                 return res.json(resultData);
@@ -82,11 +103,7 @@ router.post("/", function(req, res, next) {
         return res.json(resultData);
     }
 
-
 });
-
-
-
 
 
 

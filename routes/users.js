@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var AddressrService = require('../Service/User/AddressService');
+
 
 
 
@@ -33,5 +35,50 @@ router.get('/addressDetail', function(req, res, next) {
     res.render('users/addressDetail', { title: '世和送样信息表系统', layout: null });
 });
 
+
+/**
+ * 新增地址
+ */
+router.post('/addressDetail', function(req, res, next) {
+    var resultData = {};
+    var accountnprovinceame = req.body.province;
+    var city = req.body.city;
+    var district = req.body.district;
+    var detailedAddress = req.body.detailedAddress;
+    var ZipCode = req.body.ZipCode;
+    var contactPerson = req.body.contactPerson;
+    var contactTel = req.body.contactTel;
+    var accountName = req.body.accountname;
+
+    var data = new Address({
+        country: country,
+        province: province,
+        district: district,
+        detailedAddress: detailedAddress,
+        ZipCode: ZipCode,
+        contactPerson: contactPerson,
+        contactTel: contactTel,
+        //accountName: accountName,
+    });
+
+    //console.log(data);
+    if (!detailedAddress && !contactPerson && !contactTel) {
+        resultData.code = 1;
+        resultData.message = "请填写完整的地址信息";
+        return res.json(resultData);
+    } else {
+        AddressrService.save(data, function(flag, msg) {
+            if (flag) {
+                resultData.code = 0;
+                resultData.message = "新增成功";
+                return res.json(resultData);
+            } else {
+                resultData.code = 2;
+                resultData.message = "新增失败";
+                return res.json(resultData);
+            }
+        });
+    }
+});
 
 module.exports = router;

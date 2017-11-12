@@ -20,8 +20,8 @@ module.exports = function(req, res, next) {
         console.log("访问的url是" + req.url);
         next();
     } else {
-
         if (req.session.cookie) {
+            console.log("有cookie，可以继续访问");
             next();
         } else {
             res.render('login', { title: '世和送样信息表系统', layout: null });

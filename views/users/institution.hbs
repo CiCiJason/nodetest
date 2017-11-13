@@ -39,9 +39,9 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <span class="panel-title">机构列表</span>
-                <button type="button" class="btn btn-primary more">
+                <a type="button" class="btn btn-primary more" href="#!/users/inistitutionDetail?type=add">
                     <span class="glyphicon glyphicon-plus"></span>
-                    新增</button>
+                    新增</a>
             </div>
             <div class="panel-body">
 
@@ -59,34 +59,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
+                        <tr ng-repeat="x in data">
+                            <td>[[x.country]]</td>
+                            <td>[[x.institutionName]]</td>
+                            <td>[[x.department]]</td>
+                            <td>[[x.secondaryDepartment]]</td>
+                            <td>[[x.tertiaryDepartment]]</td>
+                            <td>[[x.principal]]</td>
+                            <td>[[x.remarks]]</td>
                             <td>
                                 <button type="submit" class="btn btn-primary"><a href="#!/users/institutionDetail">编辑查看</a></button>
                                 <button type="submit" class="btn btn-info">默认机构</button>
                                 <button type="submit" class="btn btn-warning">删除</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary">编辑查看</button>
-                                <button type="submit" class="btn btn-info">默认机构</button>
-                                <button type="submit" class="btn btn-warning">删除</button>
-                            </td>
-                        </tr>
+                        
                     </tbody>
                 </table>
 

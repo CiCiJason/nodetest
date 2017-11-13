@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var AddressrService = require('../Service/User/AddressService');
+var Address = require('../models/Address');
+
+var InistitutionService = require('../Service/User/InistitutionService');
+var Institution = require('../models/Institution');
 
 
 
@@ -41,24 +45,26 @@ router.get('/addressDetail', function(req, res, next) {
  */
 router.post('/addressDetail', function(req, res, next) {
     var resultData = {};
-    var accountnprovinceame = req.body.province;
+    var country = req.body.country;
+    var province = req.body.province;
     var city = req.body.city;
     var district = req.body.district;
     var detailedAddress = req.body.detailedAddress;
     var ZipCode = req.body.ZipCode;
     var contactPerson = req.body.contactPerson;
     var contactTel = req.body.contactTel;
-    var accountName = req.body.accountname;
+    var accountName = req.body.accountName;
 
     var data = new Address({
         country: country,
         province: province,
+        city: city,
         district: district,
         detailedAddress: detailedAddress,
         ZipCode: ZipCode,
         contactPerson: contactPerson,
         contactTel: contactTel,
-        //accountName: accountName,
+        accountName: accountName,
     });
 
     //console.log(data);
@@ -80,5 +86,68 @@ router.post('/addressDetail', function(req, res, next) {
         });
     }
 });
+
+/**
+ * 新增机构
+ */
+router.post('/institutionDetail', function(req, res, next) {
+    var resultData = {};
+    var country = req.body.country;
+    var institutionName = req.body.institutionName;
+    var department = req.body.department;
+    var secondaryDepartment = req.body.secondaryDepartment;
+    var tertiaryDepartment = req.body.tertiaryDepartment;
+    var principal = req.body.principal;
+    var remarks = req.body.remarks;
+    var accountName = req.body.accountName;
+
+    var data = new Institution({
+        country: country,
+        institutionName: institutionName,
+        department: department,
+        secondaryDepartment: secondaryDepartment,
+        tertiaryDepartment: tertiaryDepartment,
+        principal: principal,
+        remarks: remarks,
+        accountName: accountName,
+    });
+
+    //console.log(data);
+    if (!principal && !institutionName) {
+        resultData.code = 1;
+        resultData.message = "请填写完整的机构信息";
+        return res.json(resultData);
+    } else {
+        InistitutionService.save(data, function(flag, msg) {
+            if (flag) {
+                resultData.code = 0;
+                resultData.message = "新增成功";
+                return res.json(resultData);
+            } else {
+                resultData.code = 2;
+                resultData.message = "新增失败";
+                return res.json(resultData);
+            }
+        });
+    }
+});
+
+
+
+
+//获得机构列表
+router.get('/getInistitutionLists', function(req, res, next) {
+    //var resultData = {};
+    Institution.find().then(function(data) {
+        data: data
+    });
+});
+
+
+
+
+
+
+
 
 module.exports = router;

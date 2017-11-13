@@ -24,25 +24,21 @@ app.config(['$routeProvider', '$interpolateProvider', 'ACCESS_LEVELS', function(
     $routeProvider
         .when('/index/main', {
             templateUrl: '/index/main',
-            controller: 'indexCtrl',
-            access_level: [ACCESS_LEVELS.pub, ACCESS_LEVELS.user]
+            controller: 'indexCtrl'
         }) //首页
         .when('/serviceInfo', {
-            templateUrl: '/serviceInfo',
-            access_level: [ACCESS_LEVELS.pub, ACCESS_LEVELS.user]
+            templateUrl: '/serviceInfo'
         }) //服务介绍
         .when('/serviceList', {
-            templateUrl: '/serviceList',
-            access_level: [ACCESS_LEVELS.pub, ACCESS_LEVELS.user]
+            templateUrl: '/serviceList'
         }) //测序服务
         .when('/users/baseInfo', {
             controller: 'baseInfoCtrl',
-            templateUrl: '/users/baseInfo',
-            access_level: [ACCESS_LEVELS.user]
+            templateUrl: '/users/baseInfo'
         }) //基本信息设置
         .when('/users/institution', {
             templateUrl: '/users/institution',
-            access_level: [ACCESS_LEVELS.user]
+            controller: 'institutionCtrl'
         }) //机构管理
         .when('/users/address', {
             templateUrl: '/users/address',
@@ -62,11 +58,11 @@ app.config(['$routeProvider', '$interpolateProvider', 'ACCESS_LEVELS', function(
         }) //送样信息表明细
         .when('/users/addressDetail', {
             templateUrl: '/users/addressDetail',
-            controller: 'addressCtrl'
+            controller: 'addressDetailCtrl'
         }) //地址管理明细
         .when('/users/institutionDetail', {
             templateUrl: '/users/institutionDetail',
-            controller: 'institutionCtrl'
+            controller: 'institutionDetailCtrl'
         }) //机构管理明细
         .when('/login', {
             templateUrl: '/login',

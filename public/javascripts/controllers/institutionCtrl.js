@@ -1,38 +1,17 @@
 app.controller('institutionCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
 
+    $http({
+        method: 'GET',
+        url: '/users/getInistitutionLists',
+        data: {
+            accountName: localStorage.getItem('accountId')
+        }
+    }).then(function(data) {
 
-    $scope.institutionDetail = {
-        country: '',
-        institutionName: '',
-        department: '',
-        secondaryDepartment: '',
-        tertiaryDepartment: '',
-        principal: '',
-        remarks: ''
-    };
-    $scope.institutionSave = function() {
+        $scope.data = data.data;
 
-        $http({
-            method: 'POST',
-            url: '/api/institution',
-            data: { institutionDetail: $scope.institutionDetail }
-        }).then(function(data) {
-            if (!data.data.code) {
-
-                alert(data.data.message);
-                // $window.location.reload();
-                $scope.institutionDetail = {};
-
-            } else {
-                alert(data.data.message);
-            }
-
-        });
-    };
+    });
 
 
-    $scope.institutionCancel = function() {
-        window.location.href = "#!/users/institution";
-    }
 
 }]);

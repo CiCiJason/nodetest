@@ -1,5 +1,7 @@
 var User = require("../../models/User.js");
 var bcrypt = require('bcrypt');
+//var mongo = require('mongodb');
+
 
 // function ValidationUserName(data, callback, next, Validation) {
 //     User.getSingleUser({ 'accountname': data.accountname }, function(finddata) {
@@ -29,13 +31,24 @@ var bcrypt = require('bcrypt');
 
 function InsertUser(data, callback) {
 
-    bcrypt.hash(data.password, 12, function(err, hash) {
-        var userInsert = new User({ accountname: data.accountname, email: data.email, password: hash });
-        userInsert.save().then(function(result) {
-            callback(result);
+    // bcrypt.hash(data.password, 12, function(err, hash) {
+    //     var userInsert = new User({ accountname: data.accountname, email: data.email, password: hash });
+    //     userInsert.save().then(function(result) {
+    //         callback(result);
+    //     });
+    // });
+    bcrypt.genSalt(12, function(err, salt) {
+        bcrypt.hash(data.password, salt, function(err, hash) {
+            // Store hash in your password DB.
+            var userInsert = new User({ accountname: data.accountname, email: data.email, password: hash });
+            userInsert.save().then(function(result) {
+                callback(result);
+            });
         });
     });
 }
+
+
 
 //注册
 exports.SignUp = function(data, callback) {
@@ -53,14 +66,19 @@ exports.SignUp = function(data, callback) {
 //登录
 exports.SignIn = function(data, callback) {
 
-    bcrypt.hash(data.password, 12, function(err, hash) {
-        //data.password = hash;
-        User.find({ accountname: data.accountname, password: hash }, function(err, finddata) {
-            if (!finddata.length) {
-                return callback(true, "登录成功");
+    User.findOne({ accountname: data.accountname }).then(function(finddata) {
+        var hash = finddata._doc.password;
+        var id1 = JSON.stringify({ id: finddata._id });
+        var id2 = JSON.parse(id1);
+        bcrypt.compare(data.password, hash, function(err, res) {
+            if (res == true) {
+                return callback(true, "登录成功", id2.id);
             } else {
-                return callback(false, "账户名或者密码错误");
+                return callback(false, "账户名或者密码错误", null);
+
             }
         });
     });
+
+
 }

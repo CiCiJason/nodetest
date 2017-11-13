@@ -22,8 +22,10 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
             if (data.data.code == 0) {
                 $scope.message = data.data.message;
                 localStorage.setItem('token', data.data.token);
-                $('#myModal').modal("show");
                 localStorage.setItem('loginName', data.data.accountname);
+                localStorage.setItem('accountId', data.data.userId);
+                $('#myModal').modal("show");
+
             } else {
                 $scope.message = data.data.message;
 

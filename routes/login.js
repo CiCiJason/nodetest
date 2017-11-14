@@ -66,12 +66,10 @@ router.post("/", function(req, res, next) {
         UserService.SignIn(req.body, function(flag, msg, userId) {
 
             if (flag) {
-                req.session.regenerate(function(err) {
-                    if (err) {
-                        return res.json({ code: 10, ret_msg: '登录失败' });
-                    }
-                    req.session.accountname = req.body.accountname;
-                });
+
+                req.session.accountname = req.body.accountname;
+                req.session.accountId = userId;
+
 
                 resultData.code = 0;
                 resultData.message = msg;

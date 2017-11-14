@@ -39,7 +39,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <span class="panel-title">机构列表</span>
-                <a type="button" class="btn btn-primary more" href="#!/users/inistitutionDetail?type=add">
+                <a type="button" class="btn btn-primary more" href="#!/users/institutionDetail">
                     <span class="glyphicon glyphicon-plus"></span>
                     新增</a>
             </div>
@@ -68,9 +68,10 @@
                             <td>[[x.principal]]</td>
                             <td>[[x.remarks]]</td>
                             <td>
-                                <button type="submit" class="btn btn-primary"><a href="#!/users/institutionDetail">编辑查看</a></button>
-                                <button type="submit" class="btn btn-info">默认机构</button>
-                                <button type="submit" class="btn btn-warning">删除</button>
+                                <span class="btn btn-primary"><a href="#!/users/institutionDetail?_id=[[x._id]]&type=edit">编辑查看</a></span>
+                                <button type="button" class="btn btn-info" ng-click="setDefault([[x._id]])">设置默认</button>
+                                <button type="button" class="btn btn-success">默认地址</button>
+                                <button type="button" class="btn btn-warning" ng-click="delete([[x._id]])">删除</button>
                             </td>
                         </tr>
                         

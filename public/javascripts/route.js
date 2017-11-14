@@ -42,7 +42,7 @@ app.config(['$routeProvider', '$interpolateProvider', 'ACCESS_LEVELS', function(
         }) //机构管理
         .when('/users/address', {
             templateUrl: '/users/address',
-            access_level: [ACCESS_LEVELS.user]
+            controller: 'addressCtrl'
         }) //地址管理
         .when('/orders/myorders', {
             templateUrl: 'orders/myorders',

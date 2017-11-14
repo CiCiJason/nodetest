@@ -143,3 +143,7 @@ div.text-center button {
 .note {
     color: red;
 }
+
+span.btn a {
+    color: white;
+}

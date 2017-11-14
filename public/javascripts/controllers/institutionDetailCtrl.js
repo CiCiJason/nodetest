@@ -1,4 +1,4 @@
-app.controller('institutionDetailCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
+app.controller('institutionDetailCtrl', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location) {
 
 
     $scope.institutionDetail = {
@@ -23,7 +23,8 @@ app.controller('institutionDetailCtrl', ['$scope', '$http', '$window', function(
                     tertiaryDepartment: $scope.institutionDetail.tertiaryDepartment,
                     principal: $scope.institutionDetail.principal,
                     remarks: $scope.institutionDetail.remarks,
-                    accountName: localStorage.getItem('accountId')
+                    accountName: localStorage.getItem('accountId'),
+                    id: $location.$$search._id
                 }
             }).then(function(data) {
                 if (data.data.code == 0) {
@@ -42,9 +43,37 @@ app.controller('institutionDetailCtrl', ['$scope', '$http', '$window', function(
 
     };
 
+    $scope.closeModal = function() {
+        setTimeout(function() {
+            window.history.back();
+            setTimeout(function() {
+                $('#myModal').modal("hide");
+            }, 1);
+        }, 500);
+    }
+
 
     $scope.institutionCancel = function() {
         window.location.href = "#!/users/institution";
     }
+
+    if ($location.$$search._id && $location.$$search.type == 'edit') {
+        $http({
+            method: "GET",
+            url: "/users/getOneInstitution",
+            params: {
+                id: $location.$$search._id
+            }
+        }).then(function(data) {
+            $scope.institutionDetail.country = data.data.country;
+            $scope.institutionDetail.institutionName = data.data.institutionName;
+            $scope.institutionDetail.department = data.data.department;
+            $scope.institutionDetail.secondaryDepartment = data.data.secondaryDepartment;
+            $scope.institutionDetail.tertiaryDepartment = data.data.tertiaryDepartment;
+            $scope.institutionDetail.principal = data.data.principal;
+            $scope.institutionDetail.remarks = data.data.remarks;
+        });
+    }
+
 
 }]);

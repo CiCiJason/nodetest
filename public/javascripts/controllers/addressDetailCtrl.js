@@ -1,4 +1,4 @@
-app.controller('addressDetailCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
+app.controller('addressDetailCtrl', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location) {
 
 
     var citylist = citys.citylist;
@@ -64,12 +64,14 @@ app.controller('addressDetailCtrl', ['$scope', '$http', '$window', function($sco
                     ZipCode: $scope.addressDetail.ZipCode,
                     contactPerson: $scope.addressDetail.contactPerson,
                     contactTel: $scope.addressDetail.contactTel,
-                    accountName: localStorage.getItem('accountId')
+                    accountName: localStorage.getItem('accountId'),
+                    id: $location.$$search._id
                 }
             }).then(function(data) {
                 if (data.data.code == 0) {
                     $scope.message = data.data.message;
                     $('#myModal').modal("show");
+
                 } else {
                     $scope.message = data.data.message;
                     $('#myModal').modal("show");
@@ -84,12 +86,41 @@ app.controller('addressDetailCtrl', ['$scope', '$http', '$window', function($sco
     }
 
 
+
     $scope.closeModal = function() {
-        $('#myModal').modal("hide");
+        setTimeout(function() {
+            window.history.back();
+            setTimeout(function() {
+                $('#myModal').modal("hide");
+            }, 1);
+        }, 500);
     }
 
     $scope.addressCancel = function() {
         window.location.href = "#!/users/address";
     }
+
+
+    if ($location.$$search._id && $location.$$search.type == 'edit') {
+        $http({
+            method: "GET",
+            url: "/users/getOneAddress",
+            params: {
+                id: $location.$$search._id
+            }
+        }).then(function(data) {
+            $scope.addressDetail.country = data.data.country;
+            $scope.addressDetail.province = data.data.province;
+            $scope.addressDetail.city = data.data.city;
+            $scope.addressDetail.district = data.data.district;
+            $scope.addressDetail.detailedAddress = data.data.detailedAddress;
+            $scope.addressDetail.ZipCode = data.data.ZipCode;
+            $scope.addressDetail.contactPerson = data.data.contactPerson;
+            $scope.addressDetail.contactTel = data.data.contactTel;
+            $scope.$watch('addressDetail.province', $scope.changeCity());
+            $scope.$watch('addressDetail.city', $scope.changeDistrict());
+        });
+    }
+
 
 }]);

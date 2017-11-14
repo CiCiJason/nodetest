@@ -5,9 +5,9 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <span class="panel-title">地址列表</span>
-                <button type="button" class="btn btn-primary more">
+                <a type="button" class="btn btn-primary more" href="#!/users/addressDetail">
                     <span class="glyphicon glyphicon-plus"></span>
-                    新增</button>
+                    新增</a>
             </div>
             <div class="panel-body">
 
@@ -26,36 +26,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>                            
+                        <tr ng-repeat="x in data">
+                            <td>[[x.country]]</td>
+                            <td>[[x.province]]</td>
+                            <td>[[x.city]]</td>
+                            <td>[[x.district]]</td>
+                            <td>[[x.detailedAddress]]</td>
+                            <td>[[x.ZipCode]]</td>
+                            <td>[[x.contactPerson]]</td>
+                            <td>[[x.contactTel]]</td>                            
                             <td>
-                                <button type="submit" class="btn btn-primary"><a href="#!/users/addressDetail">编辑</a></button>
-                                <button type="button" class="btn btn-danger">删除</button>
-                                <button type="submit" class="btn btn-warning">设置默认</button>
+                                <span class="btn btn-primary"><a href="#!/users/addressDetail?_id=[[x._id]]&type=edit">编辑查看</a></span>
+                                <button type="button" class="btn btn-info" ng-click="setDefault([[x._id]])">设置默认</button>
+                                <button type="button" class="btn btn-success">默认地址</button>
+                                <button type="button" class="btn btn-warning" ng-click="delete([[x._id]])">删除</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>                            
-                            <td>
-                                <button type="submit" class="btn btn-primary">编辑</button>
-                                <button type="button" class="btn btn-danger">删除</button>
-                                <button type="submit" class="btn btn-info">设置默认</button>
-                            </td>
-                        </tr>
+                        
                    
                     </tbody>
                 </table>

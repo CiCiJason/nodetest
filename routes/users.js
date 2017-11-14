@@ -40,6 +40,15 @@ router.get('/addressDetail', function(req, res, next) {
 });
 
 
+//获取机构信息明细，新增，修改
+router.get('/getInistitutionDetail', function(req, res, next) {
+    var resultData = {};
+    inistitution.getInistitutionById(req, function(issucess, data) {
+        resultData.data = data;
+        return res.json(resultData);
+    });
+});
+
 /**
  * 新增地址
  */
@@ -139,9 +148,10 @@ router.post('/institutionDetail', function(req, res, next) {
 router.get('/getInistitutionLists', function(req, res, next) {
     //var resultData = {};
     Institution.find().then(function(data) {
-        data: data
+        return res.json(data);
     });
 });
+
 
 
 

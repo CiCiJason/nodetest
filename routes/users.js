@@ -257,6 +257,7 @@ router.get('/inistitutionDelete', function(req, res, next) {
 
 //获得机构列表
 router.get('/getInistitutionLists', function(req, res, next) {
+
     var id = req.session.accountId;
     Institution.find({ accountName: id }).then(function(data) {
         return res.json(data);
@@ -269,10 +270,12 @@ router.get('/getAddressLists', function(req, res, next) {
     var id = req.session.accountId;
 
     Address.find({ accountName: id }).then(function(data) {
+
         return res.json(data);
     });
 
 });
+
 
 
 

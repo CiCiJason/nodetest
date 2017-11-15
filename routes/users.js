@@ -121,7 +121,7 @@ router.post('/addressDetail', function(req, res, next) {
  */
 router.get('/addressDelete', function(req, res, next) {
     var resultData = {};
-    var id = req.query.id;
+    var id = String(req.query.id).slice(2, -2);
 
     if (id) { //有id
         AddressrService.deleteById(id, function(flag, msg) {
@@ -234,7 +234,9 @@ router.get('/getOneInistitution', function(req, res, next) {
  */
 router.get('/inistitutionDelete', function(req, res, next) {
     var resultData = {};
-    var id = req.query.id;
+    var id = String(req.query.id).slice(2, -2);
+
+
 
     if (id) { //有id
         InistitutionService.deleteById(id, function(flag, msg) {

@@ -1,3 +1,26 @@
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">提示信息：</h4>
+                </div>
+                <div class="modal-body">
+                    <p>确定要删除吗？</p>
+                    <span ng-hide="ture" ng-bind="[[deleteid]]"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ensure([[deleteid]])">确定</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="closeModal()">取消</button>                    
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 <div class="pub-bgcolor">
     <div class="container">
 
@@ -70,9 +93,9 @@
                             <td>
 
                                 <span class="btn btn-primary"><a href="#!/users/institutionDetail?_id=[[x._id]]&type=edit">编辑查看</a></span>
-                                <button type="button" class="btn btn-info" ng-click="setDefault([[x._id]])">设置默认</button>
-                                <button type="button" class="btn btn-success">默认地址</button>
-                                <button type="button" class="btn btn-warning" ng-click="delete([[x._id]])">删除</button>
+                                <button type="button" class="btn btn-info" ng-click="setDefault([[x._id]])" ng-hide="[[x.asDefaultInstitution]]">设置默认</button>
+                                <button type="button" class="btn btn-warning" ng-show="[[x.asDefaultInstitution]]">默认机构</button>
+                                <button type="button" class="btn btn-danger" ng-click="delete([[x._id]])">删除</button>
 
                             </td>
                         </tr>

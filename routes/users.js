@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
-var AddressrService = require('../Service/User/AddressService');
+var AddressService = require('../Service/User/AddressService');
 var Address = require('../models/Address');
 
 var InistitutionService = require('../Service/User/InistitutionService');
 var Institution = require('../models/Institution');
+
+var UserService = require('../Service/User/UserService');
 
 var mongo = require('mongodb');
 
@@ -81,7 +83,7 @@ router.post('/addressDetail', function(req, res, next) {
 
     if (id) { //有id，即为保存修改过的数据
 
-        AddressrService.updateById(id, data, function(flag, msg) {
+        AddressService.updateById(id, data, function(flag, msg) {
             if (flag) {
                 resultData.code = 0;
                 resultData.message = "修改成功";
@@ -101,7 +103,7 @@ router.post('/addressDetail', function(req, res, next) {
             resultData.message = "请填写完整的地址信息";
             return res.json(resultData);
         } else {
-            AddressrService.save(data, function(flag, msg) {
+            AddressService.save(data, function(flag, msg) {
                 if (flag) {
                     resultData.code = 0;
                     resultData.message = "新增成功";
@@ -121,10 +123,10 @@ router.post('/addressDetail', function(req, res, next) {
  */
 router.get('/addressDelete', function(req, res, next) {
     var resultData = {};
-    var id = String(req.query.id).slice(2, -2);
+    var id = String(req.query.id).slice(4, -4);
 
     if (id) { //有id
-        AddressrService.deleteById(id, function(flag, msg) {
+        AddressService.deleteById(id, function(flag, msg) {
             if (flag) {
                 resultData.code = 0;
                 resultData.message = "删除成功";
@@ -146,13 +148,52 @@ router.get('/getOneAddress', function(req, res, next) {
     var resultData = {};
     var id = req.query.id;
 
-    AddressrService.getById(id, function(flag, obj) {
+    AddressService.getById(id, function(flag, obj) {
         if (flag) {
             return res.json(obj);
         }
     });
 
 });
+/**
+ * 设置默认地址
+ */
+router.get('/setDefaultAddress', function(req, res, next) {
+    var resultData = {};
+    var userid = req.session.accountId;
+    var addressId = String(req.query.id).slice(2, -2);
+
+
+
+
+    if (addressId) { //有id
+        AddressService.updateDefaultAddress(userid, addressId, function(flag, msg) {
+            if (flag) {
+                resultData.code = 0;
+                resultData.message = "设置默认成功";
+                return res.json(resultData);
+            } else {
+                resultData.code = 2;
+                resultData.message = "设置默认失败";
+                return res.json(resultData);
+            }
+        });
+
+    }
+});
+//获得地址列表
+router.get('/getAddressLists', function(req, res, next) {
+
+    var userid = req.session.accountId;
+
+    Address.find({ accountName: userid }).then(function(data) {
+
+        return res.json(data);
+    });
+
+});
+
+
 
 /**
  * 新增机构
@@ -234,7 +275,7 @@ router.get('/getOneInistitution', function(req, res, next) {
  */
 router.get('/inistitutionDelete', function(req, res, next) {
     var resultData = {};
-    var id = String(req.query.id).slice(2, -2);
+    var id = String(req.query.id).slice(4, -4);
 
 
 
@@ -254,31 +295,87 @@ router.get('/inistitutionDelete', function(req, res, next) {
     }
 });
 
+/**
+ * 设置默认机构
+ */
+router.get('/setDefaultInistitution', function(req, res, next) {
+    var resultData = {};
+    var userid = req.session.accountId;
+    var inistitutionId = String(req.query.id).slice(2, -2);
+
+
+
+
+    if (inistitutionId) { //有id
+        InistitutionService.updateDefaultInistitution(userid, inistitutionId, function(flag, msg) {
+            if (flag) {
+                resultData.code = 0;
+                resultData.message = "设置默认成功";
+                return res.json(resultData);
+            } else {
+                resultData.code = 2;
+                resultData.message = "设置默认失败";
+                return res.json(resultData);
+            }
+        });
+
+    }
+});
+
+
 
 
 
 //获得机构列表
 router.get('/getInistitutionLists', function(req, res, next) {
 
-    var id = req.session.accountId;
-    Institution.find({ accountName: id }).then(function(data) {
+    var userid = req.session.accountId;
+    Institution.find({ accountName: userid }).then(function(data) {
         return res.json(data);
     });
 });
 
-//获得地址列表
-router.get('/getAddressLists', function(req, res, next) {
 
-    var id = req.session.accountId;
+//获得用户信息
+router.get('/getUserInfo', function(req, res, next) {
 
-    Address.find({ accountName: id }).then(function(data) {
-
-        return res.json(data);
+    var userid = req.session.accountId;
+    UserService.getById(id1, function(flag, data) {
+        if (flag) {
+            res.json(data);
+        }
     });
-
 });
 
 
+//保存用户编辑之后的个人信息
+router.get('/saveUserInfo', function(req, res, next) {
+    var accountname = req.body.accountname;
+    var username = req.body.username;
+    var email = req.body.email;
+    var tel = req.body.tel;
+
+    var data = new Address({
+        accountname: accountname,
+        username: username,
+        email: email,
+        tel: tel
+    });
+    var userid = req.session.accountId;
+
+    UserService.updateById(userid, data, function(flag, data) {
+        if (flag) {
+            resultData.code = 0;
+            resultData.message = "修改成功";
+            return res.json(resultData);
+        } else {
+            resultData.code = 2;
+            resultData.message = "修改失败";
+            return res.json(resultData);
+        }
+    });
+
+});
 
 
 

@@ -9,7 +9,7 @@
             </div>
             <div class="panel-body">
 
-                <form novalidate role="form" ng-show='showUser'>
+                <form novalidate role="form" ng-if="show">
 
                     <div class="form-group">
                         <div class="row">
@@ -17,7 +17,7 @@
                                 <label for="">账户</label>
                             </div>
                             <div class="col-md-3">
-                                <label for="">账户的名字</label>
+                                <label ng-bind="userInfo.accountname"></label>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                                 <label for="">用户姓名</label>
                             </div>
                             <div class="col-md-3">
-                                <label for="">用户姓名的名字</label>
+                                <label for="" ng-bind="userInfo.username">用户姓名的名字</label>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                                 <label for="">邮箱</label>
                             </div>
                             <div class="col-md-3">
-                                <label for="">邮箱的名字</label>
+                                <label for="" ng-bind="userInfo.email">邮箱的名字</label>
                             </div>
                         </div>
                     </div>
@@ -50,14 +50,14 @@
                                 <label for="">电话</label>
                             </div>
                             <div class="col-md-3">
-                                <label for="">电话的名字</label>
+                                <label for="" ng-bind="userInfo.tel">电话的名字</label>
                             </div>
                         </div>
                     </div>
                     <br>
                 </form>
 
-                <form novalidate role="form" ng-hide='showUser'>
+                <form novalidate role="form" ng-if="!show">
 
                     <div class="form-group">
                         <div class="row">
@@ -65,7 +65,7 @@
                                 <label for="">账户</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="accountname" />
+                                <input type="text" class="form-control" name="accountname"  ng-model="userInfo.accountname" placeholder="您的账户名"/>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                 <label for="">用户姓名</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="username" />
+                                <input type="text" class="form-control" name="username"  ng-model="userInfo.username" placeholder="您的姓名"/><span style="color:red" ng-show="warning">请输入您的姓名</span>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 <label for="">邮箱</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="email" class="form-control" name="email" />
+                                <input type="email" class="form-control" name="email"  ng-model="userInfo.email" placeholder="您的邮箱"/>
                             </div>
                         </div>
                     </div>
@@ -98,16 +98,16 @@
                                 <label for="">电话</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="tel" />
+                                <input type="text" class="form-control" name="tel"  ng-model="userInfo.tel" placeholder="您的常用电话"/><span style="color:red" ng-show="warning">请输入您的电话</span>
                             </div>
                         </div>
                     </div>
 
                 </form>
 
-                <button type="submit" class="btn btn-primary" ng-show='showUser' ng-click='changeUserInfo()'>编辑</button>
-                <button type="submit" class="btn btn-primary" ng-hide='showUser' ng-click='changeUserInfo()'>保存</button>
-                <button type="submit" class="btn btn-primary">取消</button>
+                <a class="btn btn-primary" ng-click='changeUserInfo()' ng-if="show">编辑</a>
+                <a class="btn btn-primary" ng-click='saveUser()' ng-if="!show" ng-disabled="!userInfo.accountname||!userInfo.username||!userInfo.email||!userInfo.tel">保存</a>
+                <a class="btn btn-primary" ng-click='canceledit()' >取消</a>
 
             </div>
         </div>

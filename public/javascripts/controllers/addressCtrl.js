@@ -10,6 +10,29 @@ app.controller('addressCtrl', ['$scope', '$http', '$window', function($scope, $h
     });
 
     $scope.delete = function(id) {
+        $scope.deleteid = id;
+        $('#myModal').modal("show");
+    }
+
+
+    $scope.setDefault = function(id) {
+        if (id) {
+            $http({
+                method: 'GET',
+                url: '/users/setDefaultAddress',
+                params: {
+                    id: id
+                }
+            }).then(function(data) {
+
+                $window.location.reload()
+
+            });
+        }
+    }
+
+
+    $scope.ensure = function(id) {
         if (id) {
             $http({
                 method: 'GET',
@@ -24,5 +47,10 @@ app.controller('addressCtrl', ['$scope', '$http', '$window', function($scope, $h
             });
         }
     }
+    $scope.closeModal = function() {
+        $('#myModal').modal("hide");
+    }
+
+
 
 }]);

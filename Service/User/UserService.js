@@ -80,6 +80,26 @@ exports.SignIn = function(data, callback) {
             }
         });
     });
+}
 
+exports.getById = function(data, callback) {
+
+    User.findById({ _id: data }).then(function(result) {
+        callback(true, result._doc);
+    });
+
+}
+
+//更新更改之后的信息
+exports.updateById = function(id, data, callback) {
+
+    User.update({ _id: id }, {
+        accountname: data.accountname,
+        username: data.username,
+        email: data.email,
+        tel: data.tel
+    }).then(function(data) {
+        callback(true, "修改成功");
+    });
 
 }

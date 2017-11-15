@@ -38,8 +38,21 @@ exports.updateById = function(id, data, callback) {
     //删除地址
 exports.deleteById = function(id, callback) {
 
-    Address.remove({ _id: id }).then(function(data) {
-        callback(true, "删除成功");
+        Address.remove({ _id: id }).then(function(data) {
+            callback(true, "删除成功");
+        });
+
+    }
+    //设置默认地址
+exports.updateDefaultAddress = function(userid, addressId, callback) {
+
+    Address.updateMany({ accountName: userid }, { $set: { asDefaultAddress: false } }).then(function(err, data) {
+        //console.log(1);
+        Address.update({ _id: addressId }, { $set: { asDefaultAddress: true } }).then(function(err, data) {
+            callback(true, "设置默认成功");
+        });
     });
+
+
 
 }

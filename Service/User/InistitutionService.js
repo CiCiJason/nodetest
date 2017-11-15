@@ -36,8 +36,23 @@ exports.updateById = function(id, data, callback) {
     //删除机构
 exports.deleteById = function(id, callback) {
 
-    Institution.remove({ _id: id }).then(function(data) {
-        callback(true, "删除成功");
+        Institution.remove({ _id: id }, function(err, data) {
+            if (err) console.log("失败");
+        }).then(function(data) {
+            callback(true, "删除成功");
+        });
+
+    }
+    //设置默认机构
+exports.updateDefaultInistitution = function(userid, inistitutionId, callback) {
+
+    Institution.updateMany({ accountName: userid }, { $set: { asDefaultInstitution: false } }).then(function(err, data) {
+        //console.log(1);
+        Institution.update({ _id: inistitutionId }, { $set: { asDefaultInstitution: true } }).then(function(err, data) {
+            callback(true, "设置默认成功");
+        });
     });
+
+
 
 }

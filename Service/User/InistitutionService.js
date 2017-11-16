@@ -13,6 +13,8 @@ exports.getById = function(data, callback) {
 
         Institution.findById({ _id: data }).then(function(result) {
             callback(true, result._doc);
+        }, function(err, data) {
+            callback(false, "失败");
         });
 
     }
@@ -29,8 +31,11 @@ exports.updateById = function(id, data, callback) {
             remarks: data.remarks,
             accountName: data.accountName
         }).then(function(data) {
-            callback(true, "修改成功");
-        });
+                callback(true, "修改成功");
+            },
+            function(err, data) {
+                callback(false, "修改失败");
+            });
 
     }
     //删除机构
@@ -52,7 +57,14 @@ exports.updateDefaultInistitution = function(userid, inistitutionId, callback) {
             callback(true, "设置默认成功");
         });
     });
+}
 
+//获取默认机构
+exports.getDefaultInistitution = function(userid, callback) {
 
+    Institution.find({ accountName: userid }, { 'institutionName': 1, 'asDefaultInstitution': 1, 'department': 1, 'secondaryDepartment': 1, 'tertiaryDepartment': 1 }).sort({ 'asDefaultInstitution': -1 }).then(function(data) {
 
+        callback(true, data);
+
+    });
 }

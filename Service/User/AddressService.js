@@ -52,7 +52,14 @@ exports.updateDefaultAddress = function(userid, addressId, callback) {
             callback(true, "设置默认成功");
         });
     });
+}
 
+//获取默认地址
+exports.getDefaultAddress = function(userid, callback) {
 
+    Address.find({ accountName: userid }, { 'province': 1, 'asDefaultAddress': 1, 'city': 1, 'district': 1, 'detailedAddress': 1 }).sort({ 'asDefaultAddress': -1 }).then(function(data) {
 
+        callback(true, data);
+
+    });
 }

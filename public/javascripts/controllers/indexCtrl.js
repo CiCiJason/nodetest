@@ -80,7 +80,8 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
     $scope.closeModal = function() {
         setTimeout(function() {
-            $window.location = '#!/index/main';
+            $window.location = '#!/users/baseInfo';
+            window.location.reload();
             setTimeout(function() {
                 $('#myModal').modal("hide");
 

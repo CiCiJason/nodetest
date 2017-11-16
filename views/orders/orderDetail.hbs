@@ -1,5 +1,5 @@
 <div class="pub-bgcolor">
-    <div class="container-fluid">
+    <div class="container">
 
         <h3>送样信息表明细</h3>
         <div class="panel panel-success">
@@ -15,7 +15,7 @@
                             <div class="col-md-2 col-md-offset-1 text-right">
                                 <label for="">送样信息表编号</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" ng-model='orderDetail.orderId' name="orderId" disabled/>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                             <div class="col-md-2 col-md-offset-1 text-right">
                                 <label for="">项目编号</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" ng-model='orderDetail.proId' name="proId" />
                             </div>
                         </div>
@@ -37,12 +37,12 @@
                             <div class="col-md-2 col-md-offset-1 text-right">
                                 <label for="">机构</label>
                             </div>
-                            <div class="col-md-4">
-                                <select required="required" class="form-control" name="instituion" ng-model="orderDetail.instituion">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
+                            <div class="col-md-6">
 
+                                <select id="institution" class="form-control" name="institution" ng-model="orderDetail.institutionSelected">
+                                   <option value="[[x.institutionName]]-[[x.department]]-[[x.secondaryDepartment]]-[[x.tertiaryDepartment]]" ng-repeat="x in orderDetail.institution">[[x.institutionName]]-[[x.department]]-[[x.secondaryDepartment]]-[[x.tertiaryDepartment]]</option>
                                 </select>
+
                             </div>
                         </div>
                     </div>
@@ -52,15 +52,17 @@
                             <div class="col-md-2 col-md-offset-1 text-right">
                                 <label for="">收货地址</label>
                             </div>
-                            <div class="col-md-4">
-                                <select name="address" class="form-control" required="required"  ng-model="orderDetail.address">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
+                            <div class="col-md-6">
+
+                                <select id="address" class="form-control" name="address" ng-model="orderDetail.addressSelected">
+                                   <option value="[[x.province]]-[[x.city]]-[[x.district]]-[[x.detailedAddress]]" ng-repeat="x in orderDetail.address">[[x.province]]-[[x.city]]-[[x.district]]-[[x.detailedAddress]]</option>
                                 </select>
+
                             </div>
                         </div>
                     </div>
 
+                    {{!--
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-2 col-md-offset-1 text-right">
@@ -101,7 +103,7 @@
 
                                 <div class="radio" ng-show='sequencingPlatform==1'>
                                     <label>
-                                        <input type="radio" name="Novaseq 6000 S2" id="" value="" checked="checked"  ng-model="orderDetail."> 包FC PE 150 bp 数据量 1000-1200Gb
+                                        <input type="radio" name="Novaseq 6000 S2" id="" value="" checked="checked" ng-model="orderDetail."> 包FC PE 150 bp 数据量 1000-1200Gb
                                     </label>
                                 </div>
 
@@ -185,7 +187,7 @@
                                 <label for="">包lane数目</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" class="form-control" name="laneNum" min="0"  ng-model="orderDetail.laneNum"/>
+                                <input type="number" class="form-control" name="laneNum" min="0" ng-model="orderDetail.laneNum" />
                             </div>
                         </div>
                     </div>
@@ -239,7 +241,7 @@
                                 <label for="">运单号</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="waybillNumber"  ng-model="orderDetail.waybillNumber"/>
+                                <input type="text" class="form-control" name="waybillNumber" ng-model="orderDetail.waybillNumber" />
                             </div>
                         </div>
                     </div>
@@ -276,10 +278,10 @@
                                 <label for="">其他运输方式</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="otherModeOfTransport"  ng-model="orderDetail.otherModeOfTransport"/>
+                                <input type="text" class="form-control" name="otherModeOfTransport" ng-model="orderDetail.otherModeOfTransport" />
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <div class="row">
@@ -307,7 +309,7 @@
                                 <label for="">硬盘SN码</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="SNNum" ng-model="orderDetail.SNNum"/>
+                                <input type="text" class="form-control" name="SNNum" ng-model="orderDetail.SNNum" />
                             </div>
                         </div>
                     </div>
@@ -319,7 +321,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="1" aria-describedby="basic-addon2" min="0" name="totalNumberOfSamples" ng-model="orderDetail.totalNumberOfSamples">
+                                    <input type="number" class="form-control" placeholder="1" aria-describedby="basic-addon2" min="0" name="totalNumberOfSamples"
+                                        ng-model="orderDetail.totalNumberOfSamples">
                                     <span class="input-group-addon" id="basic-addon2">份样品</span>
                                 </div>
                             </div>
@@ -330,7 +333,8 @@
                             <div class="col-md-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">每份样本</span>
-                                    <input type="number" class="form-control" placeholder="1" aria-label="Amount (to the nearest dollar)" min="0" name="totalNumberOfTubes" ng-model="orderDetail.totalNumberOfTubes">
+                                    <input type="number" class="form-control" placeholder="1" aria-label="Amount (to the nearest dollar)" min="0" name="totalNumberOfTubes"
+                                        ng-model="orderDetail.totalNumberOfTubes">
                                     <span class="input-group-addon">管</span>
                                 </div>
                             </div>
@@ -343,7 +347,7 @@
                                 <label for="">样本说明</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" name="sampleDescription"  ng-model="orderDetail.sampleDescription"/>
+                                <input type="text" class="form-control" name="sampleDescription" ng-model="orderDetail.sampleDescription" />
                             </div>
                             <div class="col-md-3">
                                 <b>如多库一lane，请在备注中说明</b>
@@ -357,7 +361,7 @@
                                 <label for="">样本物种</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" name="sampleSpecies"  ng-model="orderDetail.sampleSpecies"/>
+                                <input type="text" class="form-control" name="sampleSpecies" ng-model="orderDetail.sampleSpecies" />
                             </div>
                             <div class="col-md-3">
                                 <b>非单一物种，请在备注中说明</b>
@@ -374,8 +378,9 @@
                                 {{!--
                                 <input type="text" class="form-control" name="accountname" /> --}}
 
-                                <textarea class="editor" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod" autofocus></textarea>
-                                
+                                <textarea class="editor" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod"
+                                    autofocus></textarea>
+
                                 <p class="note">注：提供建库方法、使用的试剂盒及品牌、以及建库所用接头引物序列（若为illumina系统接头只需要提供接头种类和名称）。若为特殊接头并需要特殊测序引物请客户标注清楚并将所需引物与样品一起寄送。</p>
                             </div>
                         </div>
@@ -539,7 +544,9 @@
 
         </div>{{!-- body结束 --}}
 
-        <h4><b>以上项目必须填写，请在□上打√，如无对应选项，请在□其他上打√并详细说明。</b></h4>
+        <h4>
+            <b>以上项目必须填写，请在□上打√，如无对应选项，请在□其他上打√并详细说明。</b>
+        </h4>
         <span>1. 请写明所提供待测文库的具体信息，标明物种信息、文库类型、插入片段大小、建库方式、建库所用接头等。若有可能请提供待检文库的安捷伦2100检测结果。</span>
         <br>
         <span>2. 请写明希望得到的测序效果，如所需测序平台、读长、数据量等。</span>
@@ -549,7 +556,8 @@
         <span>4、 文库要求</span>
         <br>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;4.1. 若使用Miseq测序仪进行一次文库测序，请提供插入片段长度300bp-600bp之间，浓度4nM以上，体积15ul以上的文库。 若使用Nextseq 500测序仪进行一次文库测序，请提供请提供插入片段长度150bp-500bp之间，浓度4nM以上，体积20ul以上的文库。若使用Hiseq4000/HiseqX测序仪进行1条Lane文库测序，请提供浓度3nM以上，体积20ul以上的文库。（若进行“一库多lane”多条Lane文库测序，则文库的需要量将会增加。）若使用Novaseq
-            6000测序仪进行包FC（S2）测序，浓度10nM以上，体积50ul以上的文库。</span>
+            6000测序仪进行包FC（S2）测序，浓度10nM以上，体积50ul以上的文库。
+        </span>
         <br>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;4.2. 文库最终请溶于无酶水中。请在文库管子上标记清楚文库名称、所用接头、文库浓度、体积等。</span>
         <br>

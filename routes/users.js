@@ -7,6 +7,8 @@ var Address = require('../models/Address');
 
 var InistitutionService = require('../Service/User/InistitutionService');
 var Institution = require('../models/Institution');
+var User = require('../models/User');
+
 
 var UserService = require('../Service/User/UserService');
 
@@ -181,6 +183,24 @@ router.get('/setDefaultAddress', function(req, res, next) {
 
     }
 });
+/**
+ * 获取默认地址
+ */
+router.get('/getDefaultAddress', function(req, res, next) {
+    var resultData = {};
+    var userid = req.session.accountId;
+
+    AddressService.getDefaultAddress(userid, function(flag, data) {
+        if (flag) {
+            resultData.code = 0;
+            return res.json(data);
+        } else {
+            resultData.code = 2;
+            return res.json(data);
+        }
+    });
+});
+
 //获得地址列表
 router.get('/getAddressLists', function(req, res, next) {
 
@@ -259,7 +279,7 @@ router.post('/institutionDetail', function(req, res, next) {
 /**
  * 获取单个地址信息
  */
-router.get('/getOneInistitution', function(req, res, next) {
+router.get('/getOneInstitution', function(req, res, next) {
     var resultData = {};
     var id = req.query.id;
 
@@ -307,23 +327,36 @@ router.get('/setDefaultInistitution', function(req, res, next) {
 
 
     if (inistitutionId) { //有id
-        InistitutionService.updateDefaultInistitution(userid, inistitutionId, function(flag, msg) {
+        InistitutionService.updateDefaultInistitution(userid, inistitutionId, function(flag, data) {
             if (flag) {
                 resultData.code = 0;
-                resultData.message = "设置默认成功";
-                return res.json(resultData);
+                return res.json(data);
             } else {
                 resultData.code = 2;
-                resultData.message = "设置默认失败";
-                return res.json(resultData);
+                return res.json(data);
             }
         });
 
     }
 });
 
+/**
+ * 获取默认机构
+ */
+router.get('/getDefaultInistitution', function(req, res, next) {
+    var resultData = {};
+    var userid = req.session.accountId;
 
-
+    InistitutionService.getDefaultInistitution(userid, function(flag, data) {
+        if (flag) {
+            resultData.code = 0;
+            return res.json(data);
+        } else {
+            resultData.code = 2;
+            return res.json(data);
+        }
+    });
+});
 
 
 //获得机构列表
@@ -340,7 +373,7 @@ router.get('/getInistitutionLists', function(req, res, next) {
 router.get('/getUserInfo', function(req, res, next) {
 
     var userid = req.session.accountId;
-    UserService.getById(id1, function(flag, data) {
+    UserService.getById(userid, function(flag, data) {
         if (flag) {
             res.json(data);
         }
@@ -348,14 +381,34 @@ router.get('/getUserInfo', function(req, res, next) {
 });
 
 
+//显示信息时，获取个人信息
+router.get('/getUserInfo', function(req, res, next) {
+
+    var userid = req.session.accountId;
+
+    UserService.updateById(userid, data, function(flag, data) {
+        if (flag) {
+            resultData.code = 0;
+            resultData.message = "修改成功";
+            return res.json(resultData);
+        } else {
+            resultData.code = 2;
+            resultData.message = "修改失败";
+            return res.json(resultData);
+        }
+    });
+
+});
+
 //保存用户编辑之后的个人信息
-router.get('/saveUserInfo', function(req, res, next) {
+router.post('/saveUserInfo', function(req, res, next) {
+    var resultData = {};
     var accountname = req.body.accountname;
     var username = req.body.username;
     var email = req.body.email;
     var tel = req.body.tel;
 
-    var data = new Address({
+    var data = new User({
         accountname: accountname,
         username: username,
         email: email,

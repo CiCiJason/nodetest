@@ -100,6 +100,8 @@ exports.updateById = function(id, data, callback) {
         tel: data.tel
     }).then(function(data) {
         callback(true, "修改成功");
+    }, function(err, data) {
+        callback(false, "修改失败");
     });
 
 }

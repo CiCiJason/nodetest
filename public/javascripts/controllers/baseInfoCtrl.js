@@ -21,10 +21,10 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
     $scope.saveUser = function() {
         if ($scope.userInfo.accountname && $scope.userInfo.username && $scope.userInfo.email && $scope.userInfo.tel) {
             $http({
-                method: "GET",
+                method: "POST",
                 url: "/users/saveUserInfo",
                 data: {
-                    accountnam: $scope.userInfo.accountname,
+                    accountname: $scope.userInfo.accountname,
                     username: $scope.userInfo.username,
                     email: $scope.userInfo.email,
                     tel: $scope.userInfo.tel,

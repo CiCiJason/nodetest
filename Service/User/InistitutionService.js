@@ -62,7 +62,7 @@ exports.updateDefaultInistitution = function(userid, inistitutionId, callback) {
 //获取默认机构
 exports.getDefaultInistitution = function(userid, callback) {
 
-    Institution.find({ accountName: userid }, { 'institutionName': 1, 'asDefaultInstitution': 1, 'department': 1, 'secondaryDepartment': 1, 'tertiaryDepartment': 1 }).sort({ 'asDefaultInstitution': -1 }).then(function(data) {
+    Institution.find({ accountName: userid }).sort({ 'asDefaultInstitution': -1 }).then(function(data) {
 
         callback(true, data);
 

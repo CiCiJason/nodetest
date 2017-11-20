@@ -7,7 +7,7 @@ var OrderDetailSchema = new Schema({
 
     orderId: { //送样信息表编号
         type: Number,
-        default: 0
+        default: 10000
     },
 
     proId: { //项目编号
@@ -15,7 +15,7 @@ var OrderDetailSchema = new Schema({
         default: ''
     },
 
-    instituion: { //机构
+    institution: { //机构
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Institution'
     },
@@ -47,11 +47,11 @@ var OrderDetailSchema = new Schema({
     },
 
     modeOfTransport: { //运输方式
-        type: String,
-        default: 'other'
+        type: Number,
+        default: ''
     },
 
-    modeOfTransport: { //其他运输方式
+    otherModeOfTransport: { //其他运输方式
         type: String,
         default: ''
     },

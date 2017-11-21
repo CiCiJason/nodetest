@@ -128,39 +128,25 @@
                             <th>项目ID</th>
                             <th>送样信息表类型</th>
                             <th>机构地址</th>
-                            <th>送样信息表状态</th>
                             <th>收货地址</th>
                             <th>运单号</th>
                             <th>操作列</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
+                        <tr ng-repeat="x in data">
+                            <td>[[x.orderId]]</td>
+                            <td>[[x.proId]]</td>
+                            <td>[[x.type]]</td>
+                            <td>[[x.institution]]</td>
+                            <td>[[x.address]]</td>
+                            <td>[[x.waybillNumber]]</td>                          
                             <td>
-                                <button type="submit" class="btn btn-primary"><a href="#!/orders/orderDetail">编辑查看</a> </button>
-                                <button type="submit" class="btn btn-info">打印</button>
-                                <button type="submit" class="btn btn-warning">物流</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary">编辑查看</button>
-                                <button type="submit" class="btn btn-info">打印</button>
-                                <button type="submit" class="btn btn-warning">物流</button>
+                                <span class="btn btn-primary"><a href="#!/orders/orderDetail?_id=[[x._id]]&type=edit">编辑查看</a></span>
+                                <button type="button" class="btn btn-info" ng-click="">打印</button>
+                                <button type="button" class="btn btn-warning" ng-click="">物流</button>
+                                
+                                
                             </td>
                         </tr>
                     </tbody>

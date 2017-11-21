@@ -3,10 +3,10 @@ var Sample = require("../../models/Sample.js");
 exports.SampleModel = Sample;
 
 //新增地址
-exports.save = function(data, callback) {
+exports.save = function(data, callBack) {
 
         data.save().then(function(result) {
-            if (result && result.result && result.result.ok == 1) {
+            if (result && result._doc) {
                 callBack(true, "新增成功");
             } else {
                 callBack(false, "新增失败");
@@ -15,13 +15,20 @@ exports.save = function(data, callback) {
 
     }
     //
-exports.getById = function(data, callback) {
+    // exports.getorderId = function(data, callback) {
 
-    Sample.findById({ _id: data }).then(function(result) {
-        callback(true, result._doc);
-    });
+//     Sample.find().sort({ 'orderId': -1 }).then(function(finddata) {
 
-}
+//         if (finddata) {
+//             var orderId = finddata[0].orderId;
+//             callBack(true, orderId);
+//         } else {
+//             callBack(false, "新增失败");
+//         }
+
+
+//     });
+// }
 
 //编辑更改地址
 exports.updateById = function(id, data, callback) {

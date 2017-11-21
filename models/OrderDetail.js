@@ -19,10 +19,17 @@ var OrderDetailSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Institution'
     },
-
+    institutionText: { //机构
+        type: String,
+        default: ''
+    },
     address: { //收货地址
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Address'
+    },
+    addressText: { //收货地址
+        type: String,
+        default: ''
     },
     sequencingPlatform: String, //测序平台
 

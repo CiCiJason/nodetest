@@ -1,18 +1,24 @@
 app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location) {
 
-    var editor = new Simditor({
-        textarea: $('.editor'),
-        placeholder: '',
-        defaultImage: 'images/image.png',
-        params: {},
-        upload: false,
-        tabIndent: true,
-        toolbar: true,
-        toolbarFloat: true,
-        toolbarFloatOffset: 0,
-        toolbarHidden: false,
-        pasteImage: false,
-        cleanPaste: false
+    var editor1 = new Simditor({
+        textarea: $('#editor1'),
+        // placeholder: '',
+        // defaultImage: 'images/image.png',
+        // params: {},
+        // upload: false,
+        // tabIndent: true,
+        // toolbar: true,
+        // toolbarFloat: true,
+        // toolbarFloatOffset: 0,
+        // toolbarHidden: false,
+        // pasteImage: false,
+        // cleanPaste: false
+    });
+    var editor2 = new Simditor({
+        textarea: $('#editor2')
+    });
+    var editor3 = new Simditor({
+        textarea: $('#editor3')
     });
 
     $scope.orderDetail = { samples: [] }; //orderdetail
@@ -36,6 +42,14 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
             $scope.addressList = data.data;
             //$scope.orderDetail.addressSelected = data.data[0].province+"-"+data.data[0].city+"-"+data.data[0].district+"-"+data.data[0].detailedAddress;    
             $scope.orderDetail.address = data.data[0]._id;
+        });
+        $http({
+            method: "GET",
+            url: "/orders/getDefaultOrderId"
+        }).then(function(data) {
+            $scope.orderDetail.orderId = data.data;
+            //$scope.orderDetail.addressSelected = data.data[0].province+"-"+data.data[0].city+"-"+data.data[0].district+"-"+data.data[0].detailedAddress;    
+            //$scope.orderDetail.address = data.data[0]._id;
         });
     }
     init();
@@ -74,7 +88,8 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
                     specificSequence: $scope.orderDetail.specificSequence,
                     remarks: $scope.orderDetail.remarks,
                     samples: $scope.orderDetail.samples,
-
+                    institutionText: angular.element("input[institution]").val(),
+                    addressText: angular.element("input[address]").val(),
 
                     // accountName: localStorage.getItem('accountId'),
                     id: $location.$$search._id

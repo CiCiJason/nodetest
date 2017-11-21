@@ -15,7 +15,12 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
         $scope.userInfo.username = data.data.username;
         $scope.userInfo.email = data.data.email;
         $scope.userInfo.tel = data.data.tel;
-
+    });
+    $http({
+        method: "GET",
+        url: "/orders/getOrderInfo"
+    }).then(function(data) {
+        $scope.data = data.data;
     });
 
     $scope.saveUser = function() {

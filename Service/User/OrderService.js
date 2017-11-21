@@ -15,33 +15,26 @@ exports.getorderId = function(callback) {
 
 
 //保存
-exports.save = function(data, callback) {
+exports.save = function(data, callBack) {
 
         data.save().then(function(result) {
-            if (result && result.result && result.result.ok == 1) {
-                callBack(true, "新增成功");
+            if (result) {
+                callBack(true, result._id);
             } else {
                 callBack(false, "新增失败");
             }
         });
 
     }
-    //登录
-exports.SignIn = function(data, callback) {
+    //获取默认的orderId
+exports.getorderId = function(callBack) {
 
-    User.findOne({ accountname: data.accountname }).then(function(finddata) {
-        var hash = finddata._doc.password;
-        //var id1 = JSON.stringify({ id: finddata._id });
-        //var id2 = JSON.parse(id1);
-        var id = finddata._id;
-        bcrypt.compare(data.password, hash, function(err, res) {
-            if (res == true) {
-                return callback(true, "登录成功", id);
-            } else {
-                return callback(false, "账户名或者密码错误", null);
-
-            }
-        });
+    OrderDetail.find().sort({ 'orderId': -1 }).then(function(finddata) {
+        if (finddata) {
+            callBack(true, finddata[0].orderId);
+        } else {
+            callBack(false, "新增失败");
+        }
     });
 }
 
@@ -65,6 +58,17 @@ exports.updateById = function(id, data, callback) {
         callback(true, "修改成功");
     }, function(err, data) {
         callback(false, "修改失败");
+    });
+
+}
+
+//获取送样信息列表
+exports.getOrderLists = function(id, callback) {
+
+    OrderDetail.find({ accountName: id }).sort({ "createDate": -1 }).then(function(data) {
+        callback(true, data);
+    }, function(err, data) {
+        callback(false, "查找失败");
     });
 
 }

@@ -39,7 +39,7 @@
                                     <label for="">送样信息表编号</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" ng-model='orderDetail.orderId' name="orderId" />
+                                    <input type="text" class="form-control" ng-model='orderDetail.orderId' name="orderId" disabled/>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,6 @@
                                     <select id="institution" class="form-control" name="institution" ng-model="orderDetail.institution">
                                         <option value="[[x._id]]" ng-repeat="x in institutionList">[[x.institutionName]][[x.department]][[x.secondaryDepartment]][[x.tertiaryDepartment]]</option>
                                     </select>
-
                                 </div>
                             </div>
                         </div>
@@ -126,7 +125,7 @@
 
                                     <div class="radio">
                                         <label ng-show='orderDetail.sequencingPlatform==1'>
-                                            <input type="radio" name="readLong" id="" value="1" ng-checked="true" ng-model="orderDetail.readLong"> 包FC PE 150 bp 数据量 1000-1200Gb
+                                            <input type="radio" name="readLong" id="" value="1" ng-checked="true" ng-model="orderDetail.readLong" ng-init="orderDetail.readLong=1"> 包FC PE 150 bp 数据量 1000-1200Gb
                                         </label>
 
                                         <label ng-show='orderDetail.sequencingPlatform==2'>
@@ -172,7 +171,7 @@
 
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="type" id="" value="1" ng-checked="true" ng-model="orderDetail.type"> 文库无需世和混合，包lane
+                                            <input type="radio" name="type" id="" value="1" ng-checked="true" ng-model="orderDetail.type" ng-init="orderDetail.type=1"> 文库无需世和混合，包lane
                                         </label>
                                     </div>
                                     <div class="radio">
@@ -214,7 +213,7 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="tagSelect" id="" value="1" ng-model="orderDetail.tagSelect" ng-checked="true"> 单端标签
+                                            <input type="radio" name="tagSelect" id="" value="1" ng-model="orderDetail.tagSelect" ng-checked="true" ng-init="orderDetail.tagSelect=1"> 单端标签
                                         </label>
                                         <label>
                                             <input type="radio" name="tagSelect" id="" value="0" ng-model="orderDetail.tagSelect"> 双端标签
@@ -232,7 +231,7 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="library2100result" id="" value="1" ng-model="orderDetail.library2100result" ng-checked="true"> 已有2100质检结果（请上传2100原始结果附件）
+                                            <input type="radio" name="library2100result" id="" value="1" ng-model="orderDetail.library2100result" ng-checked="true" ng-init="orderDetail.library2100result=1"> 已有2100质检结果（请上传2100原始结果附件）
                                         </label>
                                         <label>
                                             <input type="radio" name="library2100result" id="" value="2" ng-model="orderDetail.library2100result"> 无2100质检结果，需世和做（收费）
@@ -264,7 +263,7 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="modeOfTransport" id="" value="1" ng-model="orderDetail.modeOfTransport" ng-checked="true"> 干冰+冰袋(推荐使用)
+                                            <input type="radio" name="modeOfTransport" id="" value="1" ng-model="orderDetail.modeOfTransport" ng-checked="true"  ng-init="orderDetail.modeOfTransport=1"> 干冰+冰袋(推荐使用)
                                         </label>
                                         <label>
                                             <input type="radio" name="modeOfTransport" id="" value="2" ng-model="orderDetail.modeOfTransport"> 冰袋(推荐使用)
@@ -386,7 +385,7 @@
                                 <div class="col-md-8">
 
 
-                                    <textarea class="editor" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod"
+                                    <textarea id="editor1" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod"
                                         autofocus>
                                     </textarea>
 
@@ -401,7 +400,7 @@
                                     <label for="">特定序列</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <textarea class="editor" class="form-control" rows="15" name="specificSequence" ng-model="orderDetail.specificSequence" autofocus></textarea>
+                                    <textarea id="editor2" class="form-control" rows="15" name="specificSequence" ng-model="orderDetail.specificSequence" autofocus></textarea>
                                     <p class="note">注：如果文库是PCR产物建库或者插入片段中有特定序列，请在样品信息单中说明。GC含量：</p>
                                 </div>
                             </div>
@@ -413,7 +412,7 @@
                                     <label for="">备注</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <textarea class="editor" class="form-control" rows="15" name="remarks" ng-model="orderDetail.remarks" autofocus></textarea>
+                                    <textarea id="editor3" class="form-control" rows="15" name="remarks" ng-model="orderDetail.remarks" autofocus></textarea>
                                     <p class="note">注：送样单的备注信息</p>
                                 </div>
                             </div>

@@ -41,22 +41,6 @@ router.get('/getOrderInfo', function(req, res, next) {
     OrderService.getOrderLists(userid, function(flag, data) {
         if (flag) {
             return res.json(data);
-
-            if (data && data.length > 0) {
-                data.map(function(item) {
-                    AddressService.getById(item.address, function(flag, addressresult) {
-                        if (flag) {
-                            return res.json(addressresult);
-                        }
-                    });
-                    InistitutionService.getById(item.institution, function(flag, institutionresult) {
-                        if (flag) {
-                            return res.json(institutionresult);
-                        }
-                    });
-                });
-            }
-
         } else {
             resultData.code = 2;
             resultData.message = "删除失败";
@@ -82,7 +66,7 @@ router.get('/getAddressLists', function(req, res, next) {
 router.post('/orderDetail', function(req, res, next) {
     var resultData = {};
 
-    // var accountName = req.session.accountId; //创建用户
+    var id = req.body.id;
 
     var samples = req.body.samples;
 
@@ -111,62 +95,122 @@ router.post('/orderDetail', function(req, res, next) {
         remarks: req.body.remarks,
         accountName: req.session.accountId,
         institutionText: req.body.institutionText,
-        addressText: req.body.addressText
+        addressText: req.body.addressText,
+        typeText: req.body.typeText
     });
 
-    // if (id) { //有id，即为保存修改过的数据
+    console.log(data);
 
-    //     OrderService.updateById(id, data, function(flag, msg) {
-    //         if (flag) {
-    //             resultData.code = 0;
-    //             resultData.message = "修改成功";
-    //             return res.json(resultData);
-    //         } else {
-    //             resultData.code = 2;
-    //             resultData.message = "修改失败";
-    //             return res.json(resultData);
-    //         }
-    //     });
+    if (id) { //有id，即为保存修改过的数据
 
-    // } else {
+        OrderService.updateById(id, data, function(flag, msg) {
+            if (flag) {
+                // 删除
+                var id1 = String(req.query.id).slice(2, -2);
+                //if (id) { //有id
+                SampleService.deleteById(id1).then(function() {
+                    samples.map(function(item) {
+                        var sampleData = new SampleService.SampleModel({
+                            SampleId: item.SampleId,
+                            type: item.type,
+                            laneNum: item.laneNum,
+                            fragmentLength: item.fragmentLength,
+                            splitData: item.splitData,
+                            INshihe: item.INshihe,
+                            MolarConcentration: item.MolarConcentration,
+                            volume: item.volume,
+                            proportion: item.proportion,
+                            accountName: req.session.accountId,
+                            orderId: result
+                        });
+                        SampleService.save(sampleData, function(flag, msg) {
+                            if (flag) {
+                                //resultData.code = 0;
+                                console.log("新增sample成功");
+                                //return res.json(resultData);
+                            } else {
+                                //resultData.code = 2;
+                                //resultData.message = "新增失败";
+                                console.log("新增sample失败");
+                                //return res.json(resultData);
+                            }
+                        })
+                    });
 
-    OrderService.save(data, function(flag, result) {
-        if (flag) {
 
-            samples.map(function(item) {
-                var sampleData = new SampleService.SampleModel({
-                    SampleId: item.SampleId,
-                    type: item.type,
-                    laneNum: item.laneNum,
-                    fragmentLength: item.fragmentLength,
-                    splitData: item.splitData,
-                    INshihe: item.INshihe,
-                    MolarConcentration: item.MolarConcentration,
-                    volume: item.volume,
-                    proportion: item.proportion,
-                    accountName: req.session.accountId,
-                    orderId: result
                 });
-                SampleService.save(sampleData, function(flag, msg) {
-                    if (flag) {
-                        //resultData.code = 0;
-                        console.log("新增sample成功");
-                        //return res.json(resultData);
-                    } else {
-                        //resultData.code = 2;
-                        //resultData.message = "新增失败";
-                        console.log("新增sample失败");
-                        //return res.json(resultData);
-                    }
-                })
+
+            } else {
+                resultData.code = 2;
+                resultData.message = "修改失败";
+                return res.json(resultData);
+            }
+        });
+
+    } else {
+
+        OrderService.save(data, function(flag, result) {
+            if (flag) {
+
+                samples.map(function(item) {
+                    var sampleData = new SampleService.SampleModel({
+                        SampleId: item.SampleId,
+                        type: item.type,
+                        laneNum: item.laneNum,
+                        fragmentLength: item.fragmentLength,
+                        splitData: item.splitData,
+                        INshihe: item.INshihe,
+                        MolarConcentration: item.MolarConcentration,
+                        volume: item.volume,
+                        proportion: item.proportion,
+                        accountName: req.session.accountId,
+                        orderId: result
+                    });
+                    SampleService.save(sampleData, function(flag, msg) {
+                        if (flag) {
+                            //resultData.code = 0;
+                            console.log("新增sample成功");
+                            //return res.json(resultData);
+                        } else {
+                            //resultData.code = 2;
+                            //resultData.message = "新增失败";
+                            console.log("新增sample失败");
+                            //return res.json(resultData);
+                        }
+                    })
+                });
+
+            } else {
+                resultData.code = 2;
+                resultData.message = "新增失败";
+                //return res.json(resultData);
+            }
+        });
+
+    }
+
+});
+
+/**
+ * 获取单个送样信息表--编辑查看
+ */
+router.get('/getOneOrder', function(req, res, next) {
+    var resultData = {};
+    var id = req.query.id;
+
+    OrderService.getById(id, function(flag, obj) {
+        if (flag) {
+            //return res.json(obj);
+            SampleService.find(obj._id, function(flag, data) {
+                if (flag) {
+                    obj.samples = data;
+                    return res.json(obj);
+                } else {
+                    console.log("查找样本表错误");
+                }
             });
-
-
-
         } else {
-            resultData.code = 2;
-            resultData.message = "新增失败";
-            //return res.json(resultData);
+            console.log("查找单条送样信息表错误");
         }
     });
 });

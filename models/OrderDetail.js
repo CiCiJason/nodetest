@@ -42,8 +42,8 @@ var OrderDetailSchema = new Schema({
         default: 0
     },
     tagSelect: { //标签选择
-        type: Boolean,
-        default: true //true:单端标签  false:双端标签  
+        type: Number,
+        default: 1 //1:单端标签  2:双端标签  
     },
 
     library2100result: String, //文库2100结果
@@ -64,12 +64,12 @@ var OrderDetailSchema = new Schema({
     },
 
     carryHardDisk: { //是否携带硬盘
-        type: Boolean,
-        default: true //true 携带硬盘 false不携带硬盘
+        type: Number,
+        default: 1 //1 携带硬盘 2
     },
 
     SNNum: { //是否携带硬盘
-        type: Number,
+        type: String,
         default: 0
     },
 

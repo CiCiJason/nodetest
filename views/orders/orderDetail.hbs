@@ -93,23 +93,23 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="sequencingPlatform" id="" value="1" ng-model="orderDetail.sequencingPlatform" ng-checked="true"
+                                            <input type="radio" name="sequencingPlatform" id="" value="1" ng-model="orderDetail.sequencingPlatform"  ng-checked="orderDetail.sequencingPlatform==1"
                                                 ng-init="orderDetail.sequencingPlatform=1"> Novaseq 6000 S2(仅包FC)
                                         </label>
                                         <label>
-                                            <input type="radio" name="sequencingPlatform" id="" value="2" ng-model="orderDetail.sequencingPlatform"> Hiseq X Ten
+                                            <input type="radio" name="sequencingPlatform" id="" value="2" ng-model="orderDetail.sequencingPlatform" ng-checked="orderDetail.sequencingPlatform==2"> Hiseq X Ten
                                         </label>
                                         <label>
-                                            <input type="radio" name="sequencingPlatform" id="" value="3" ng-model="orderDetail.sequencingPlatform"> NHiseq 4000
+                                            <input type="radio" name="sequencingPlatform" id="" value="3" ng-model="orderDetail.sequencingPlatform" ng-checked="orderDetail.sequencingPlatform==3"> NHiseq 4000
                                         </label>
                                         <label>
-                                            <input type="radio" name="sequencingPlatform" id="" value="4" ng-model="orderDetail.sequencingPlatform"> Miseq
+                                            <input type="radio" name="sequencingPlatform" id="" value="4" ng-model="orderDetail.sequencingPlatform" ng-checked="orderDetail.sequencingPlatform==4"> Miseq
                                         </label>
                                         <label>
-                                            <input type="radio" name="sequencingPlatform" id="" value="5" ng-model="orderDetail.sequencingPlatform"> Nextseq 500
+                                            <input type="radio" name="sequencingPlatform" id="" value="5" ng-model="orderDetail.sequencingPlatform" ng-checked="orderDetail.sequencingPlatform==5"> Nextseq 500
                                         </label>
                                         <label>
-                                            <input type="radio" name="sequencingPlatform" id="" value="6" ng-model="orderDetail.sequencingPlatform"> MiniSeq
+                                            <input type="radio" name="sequencingPlatform" id="" value="6" ng-model="orderDetail.sequencingPlatform" ng-checked="orderDetail.sequencingPlatform==6"> MiniSeq
                                         </label>
                                     </div>
                                 </div>
@@ -125,36 +125,36 @@
 
                                     <div class="radio">
                                         <label ng-show='orderDetail.sequencingPlatform==1'>
-                                            <input type="radio" name="readLong" id="" value="1" ng-checked="true" ng-model="orderDetail.readLong" ng-init="orderDetail.readLong=1"> 包FC PE 150 bp 数据量 1000-1200Gb
+                                            <input type="radio" name="readLong" id="" value="1" ng-model="orderDetail.readLong" ng-init="orderDetail.readLong=1" ng-checked="orderDetail.readLong==1"> 包FC PE 150 bp 数据量 1000-1200Gb
                                         </label>
 
                                         <label ng-show='orderDetail.sequencingPlatform==2'>
-                                            <input type="radio" name="readLong" id="" value="2" ng-model="orderDetail.readLong"> 包lane PE150 bp 数据量 120Gb
+                                            <input type="radio" name="readLong" id="" value="2" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==2"> 包lane PE150 bp 数据量 120Gb
                                         </label>
 
                                         <label ng-show='orderDetail.sequencingPlatform==3'>
-                                            <input type="radio" name="readLong" id="" value="3" ng-model="orderDetail.readLong"> 包lane PE150 bp 数据量 100Gb
+                                            <input type="radio" name="readLong" id="" value="3" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==3"> 包lane PE150 bp 数据量 100Gb
                                         </label>
 
                                         <label ng-show='orderDetail.sequencingPlatform==4'>
-                                            <input type="radio" name="readLong" id="" value="4" ng-model="orderDetail.readLong"> 包FC PE250 bp 数据量4.5-5.1Gb
+                                            <input type="radio" name="readLong" id="" value="4" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==4"> 包FC PE250 bp 数据量4.5-5.1Gb
                                         </label>
                                         <label ng-show='orderDetail.sequencingPlatform==4'>
-                                            <input type="radio" name="readLong" id="" value="5" ng-model="orderDetail.readLong"> Miseq 包FC PE300 bp 数据量13.2-15Gb
+                                            <input type="radio" name="readLong" id="" value="5" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==5"> Miseq 包FC PE300 bp 数据量13.2-15Gb
                                         </label>
 
                                         <label ng-show='orderDetail.sequencingPlatform==5'>
-                                            <input type="radio" name="readLong" id="" value="6" ng-model="orderDetail.readLong"> High-Output kit 包FC PE150 bp 数据量100-120Gb
+                                            <input type="radio" name="readLong" id="" value="6" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==6"> High-Output kit 包FC PE150 bp 数据量100-120Gb
                                         </label>
                                         <label ng-show='orderDetail.sequencingPlatform==5'>
-                                            <input type="radio" name="readLong" id="" value="7" ng-model="orderDetail.readLong"> Mid-Output kit 包FC PE150 bp 数据量 32.5-39Gb
+                                            <input type="radio" name="readLong" id="" value="7" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==7"> Mid-Output kit 包FC PE150 bp 数据量 32.5-39Gb
                                         </label>
 
                                         <label ng-show='orderDetail.sequencingPlatform==6'>
-                                            <input type="radio" name="readLong" id="" value="8" ng-model="orderDetail.readLong"> High-Output kit 包FC PE150 bp 数据量6.6-7.5Gb
+                                            <input type="radio" name="readLong" id="" value="8" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==8"> High-Output kit 包FC PE150 bp 数据量6.6-7.5Gb
                                         </label>
                                         <label ng-show='orderDetail.sequencingPlatform==6'>
-                                            <input type="radio" name="readLong" id="" value="9" ng-model="orderDetail.readLong"> Mid-Output kit 包FC PE150 bp 数据量2.1-2.4Gb
+                                            <input type="radio" name="readLong" id="" value="9" ng-model="orderDetail.readLong" ng-checked="orderDetail.readLong==9"> Mid-Output kit 包FC PE150 bp 数据量2.1-2.4Gb
                                         </label>
 
                                     </div>
@@ -171,22 +171,22 @@
 
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="type" id="" value="1" ng-checked="true" ng-model="orderDetail.type" ng-init="orderDetail.type=1"> 文库无需世和混合，包lane
+                                            <input type="radio" name="type" id="" value="1" ng-model="orderDetail.type" ng-init="orderDetail.type=1" ng-checked="orderDetail.type==1"> 文库无需世和混合，包lane
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="type" id="" value="2" ng-model="orderDetail.type"> 文库需世和混合上机，包lane
+                                            <input type="radio" name="type" id="" value="2" ng-model="orderDetail.type" ng-checked="orderDetail.type==2"> 文库需世和混合上机，包lane
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="type" id="" value="3" ng-model="orderDetail.type"> 需要世和混合上机，不包lane包G
+                                            <input type="radio" name="type" id="" value="3" ng-model="orderDetail.type" ng-checked="orderDetail.type==3"> 需要世和混合上机，不包lane包G
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="type" id="" value="4" ng-model="orderDetail.type"> 文库无需世和混合，包FC(flow cell)
+                                            <input type="radio" name="type" id="" value="4" ng-model="orderDetail.type" ng-checked="orderDetail.type==4"> 文库无需世和混合，包FC(flow cell)
                                         </label>
                                     </div>
                                     <p class="note">注：如需世和混样，需加收混样费</p>
@@ -213,10 +213,10 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="tagSelect" id="" value="1" ng-model="orderDetail.tagSelect" ng-checked="true" ng-init="orderDetail.tagSelect=1"> 单端标签
+                                            <input type="radio" name="tagSelect" id="" value="1" ng-model="orderDetail.tagSelect" ng-init="orderDetail.tagSelect=1" ng-checked="orderDetail.tagSelect==1"> 单端标签
                                         </label>
                                         <label>
-                                            <input type="radio" name="tagSelect" id="" value="0" ng-model="orderDetail.tagSelect"> 双端标签
+                                            <input type="radio" name="tagSelect" id="" value="2" ng-model="orderDetail.tagSelect" ng-checked="orderDetail.tagSelect==2"> 双端标签
                                         </label>
                                     </div>
                                 </div>
@@ -231,13 +231,13 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="library2100result" id="" value="1" ng-model="orderDetail.library2100result" ng-checked="true" ng-init="orderDetail.library2100result=1"> 已有2100质检结果（请上传2100原始结果附件）
+                                            <input type="radio" name="library2100result" id="" value="1" ng-model="orderDetail.library2100result"  ng-checked="orderDetail.library2100result==1" ng-init="orderDetail.library2100result=1"> 已有2100质检结果（请上传2100原始结果附件）
                                         </label>
                                         <label>
-                                            <input type="radio" name="library2100result" id="" value="2" ng-model="orderDetail.library2100result"> 无2100质检结果，需世和做（收费）
+                                            <input type="radio" name="library2100result" id="" value="2" ng-model="orderDetail.library2100result"  ng-checked="orderDetail.library2100result==2"> 无2100质检结果，需世和做（收费）
                                         </label>
                                         <label>
-                                            <input type="radio" name="library2100result" id="" value="3" ng-model="orderDetail.library2100result"> 无2100质检结果，不需要
+                                            <input type="radio" name="library2100result" id="" value="3" ng-model="orderDetail.library2100result"  ng-checked="orderDetail.library2100result==3"> 无2100质检结果，不需要
                                         </label>
                                     </div>
                                 </div>
@@ -263,16 +263,16 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="modeOfTransport" id="" value="1" ng-model="orderDetail.modeOfTransport" ng-checked="true"  ng-init="orderDetail.modeOfTransport=1"> 干冰+冰袋(推荐使用)
+                                            <input type="radio" name="modeOfTransport" id="" value="1" ng-model="orderDetail.modeOfTransport" ng-init="orderDetail.modeOfTransport=1" ng-checked="orderDetail.modeOfTransport==1"> 干冰+冰袋(推荐使用)
                                         </label>
                                         <label>
-                                            <input type="radio" name="modeOfTransport" id="" value="2" ng-model="orderDetail.modeOfTransport"> 冰袋(推荐使用)
+                                            <input type="radio" name="modeOfTransport" id="" value="2" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==2"> 冰袋(推荐使用)
                                         </label>
                                         <label>
-                                            <input type="radio" name="modeOfTransport" id="" value="3" ng-model="orderDetail.modeOfTransport"> 液氮
+                                            <input type="radio" name="modeOfTransport" id="" value="3" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==3"> 液氮
                                         </label>
                                         <label>
-                                            <input type="radio" name="modeOfTransport" id="" value="4" ng-model="orderDetail.modeOfTransport"> 其他
+                                            <input type="radio" name="modeOfTransport" id="" value="4" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==4"> 其他
                                         </label>
                                     </div>
                                 </div>
@@ -300,7 +300,7 @@
 
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="carryHardDisk" id="" value="1" ng-checked="true" ng-model="orderDetail.carryHardDisk" ng-init="orderDetail.carryHardDisk=1"> 是
+                                            <input type="radio" name="carryHardDisk" id="" value="1" ng-model="orderDetail.carryHardDisk" ng-init="orderDetail.carryHardDisk=1" ng-checked="orderDetail.carryHardDisk==1"> 是
                                         </label>
                                         <label>
                                             <input type="radio" name="carryHardDisk" id="" value="2" ng-model="orderDetail.carryHardDisk" ng-checked="orderDetail.carryHardDisk==2"> 否
@@ -551,7 +551,7 @@
                     <div class="text-center">
                         <a class="btn btn-primary center" ng-click="orderSave()">保存</a>
 
-                        <a class="btn btn-primary center">取消</a>
+                        <a class="btn btn-primary center" ng-click="orderCancel()">取消</a>
 
                         <a class="btn btn-primary center">提交</a>
                     </div>

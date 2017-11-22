@@ -40,7 +40,7 @@ exports.getorderId = function(callBack) {
 
 exports.getById = function(data, callback) {
 
-    User.findById({ _id: data }).then(function(result) {
+    OrderDetail.findById({ _id: data }).then(function(result) {
         callback(true, result._doc);
     });
 
@@ -49,11 +49,33 @@ exports.getById = function(data, callback) {
 //更新更改之后的信息
 exports.updateById = function(id, data, callback) {
 
-    User.update({ _id: id }, {
-        accountname: data.accountname,
-        username: data.username,
-        email: data.email,
-        tel: data.tel
+    OrderDetail.update({ _id: id }, {
+        orderId: data.orderId,
+        proId: data.proId,
+        institution: data.institution,
+        address: data.address,
+        sequencingPlatform: data.sequencingPlatform,
+        readLong: data.readLong,
+        type: data.type,
+        laneNum: data.laneNum,
+        tagSelect: data.tagSelect,
+        library2100result: data.library2100result,
+        waybillNumber: data.waybillNumber,
+        modeOfTransport: data.modeOfTransport,
+        otherModeOfTransport: data.otherModeOfTransport,
+        carryHardDisk: data.carryHardDisk,
+        SNNum: data.SNNum,
+        totalNumberOfSamples: data.totalNumberOfSamples,
+        totalNumberOfTubes: data.totalNumberOfTubes,
+        sampleDescription: data.sampleDescription,
+        sampleSpecies: data.sampleSpecies,
+        constructionMethod: data.constructionMethod,
+        specificSequence: data.specificSequence,
+        remarks: data.remarks,
+        accountName: data.accountName,
+        institutionText: data.institutionText,
+        addressText: data.addressText,
+        typeText: data.typeText
     }).then(function(data) {
         callback(true, "修改成功");
     }, function(err, data) {

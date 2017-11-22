@@ -88,10 +88,9 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
                     specificSequence: $scope.orderDetail.specificSequence,
                     remarks: $scope.orderDetail.remarks,
                     samples: $scope.orderDetail.samples,
-                    institutionText: angular.element("input[institution]").val(),
-                    addressText: angular.element("input[address]").val(),
+                    institutionText: angular.element(":input[name=institution] option:selected").text(),
+                    addressText: angular.element(":input[name=address] option:selected").text(),
 
-                    // accountName: localStorage.getItem('accountId'),
                     id: $location.$$search._id
                 }
             }).then(function(data) {
@@ -120,12 +119,8 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
     }
 
 
-
-
-
-
     $scope.addSample = function() {
-        $scope.samples.push({});
+        $scope.samples.push();
     }
 
     $scope.removeSample = function(index) {
@@ -134,6 +129,42 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
     }
 
 
+    if ($location.$$search._id && $location.$$search.type == 'edit') {
+        $http({
+            method: "GET",
+            url: "/orders/getOneOrder",
+            params: {
+                id: $location.$$search._id
+            }
+        }).then(function(data) {
+            $scope.orderDetail.orderId = data.data.orderId;
+            $scope.orderDetail.proId = data.data.proId;
+            $scope.orderDetail.institution = data.data.institution;
+            $scope.orderDetail.address = data.data.address;
+            $scope.orderDetail.sequencingPlatform = data.data.sequencingPlatform;
+            $scope.orderDetail.readLong = data.data.readLong;
+            $scope.orderDetail.type = data.data.type;
+            $scope.orderDetail.laneNum = data.data.laneNum;
+            $scope.orderDetail.tagSelect = data.data.tagSelect;
+            $scope.orderDetail.library2100result = data.data.library2100result;
+            $scope.orderDetail.waybillNumber = data.data.waybillNumber;
+            $scope.orderDetail.modeOfTransport = data.data.modeOfTransport;
+            $scope.orderDetail.otherModeOfTransport = data.data.otherModeOfTransport;
+            $scope.orderDetail.carryHardDisk = data.data.carryHardDisk;
+            $scope.orderDetail.SNNum = data.data.SNNum;
+            $scope.orderDetail.totalNumberOfSamples = data.data.totalNumberOfSamples;
+            $scope.orderDetail.totalNumberOfTubes = data.data.totalNumberOfTubes;
+            $scope.orderDetail.sampleDescription = data.data.sampleDescription;
+            $scope.orderDetail.sampleSpecies = data.data.sampleSpecies;
+            $scope.orderDetail.constructionMethod = data.data.constructionMethod;
+            $scope.orderDetail.specificSequence = data.data.specificSequence;
+            $scope.orderDetail.remarks = data.data.remarks;
+            $scope.orderDetail.samples = data.data.samples;
+            $scope.samples.push();
+
+
+        });
+    }
 
 
 

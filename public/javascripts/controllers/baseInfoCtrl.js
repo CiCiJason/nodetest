@@ -20,6 +20,21 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
         method: "GET",
         url: "/orders/getOrderInfo"
     }).then(function(data) {
+        for (var i = 0; i < data.data.length; i++) {
+            if (data.data[i].type == '1') {
+                data.data[i].type = '文库无需世和混合，包lane';
+            }
+            if (data.data[i].type == '2') {
+                data.data[i].type = '文库需世和混合上机，包lane';
+            }
+            if (data.data[i].type == '3') {
+                data.data[i].type = '需要世和混合上机，不包lane包G';
+            }
+            if (data.data[i].type == '4') {
+                data.data[i].type = '文库无需世和混合，包FC(flow cell)';
+            }
+        }
+
         $scope.data = data.data;
     });
 

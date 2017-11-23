@@ -120,7 +120,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
 
 
     $scope.addSample = function() {
-        $scope.samples.push();
+        $scope.samples.push({});
     }
 
     $scope.removeSample = function(index) {
@@ -160,7 +160,12 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
             $scope.orderDetail.specificSequence = data.data.specificSequence;
             $scope.orderDetail.remarks = data.data.remarks;
             $scope.orderDetail.samples = data.data.samples;
-            $scope.samples.push();
+            $scope.$watch('orderDetail.samples', function() {
+                for (var i = 0; i < data.data.samples.length; i++) {
+                    $scope.samples.push(data.data.samples[i]);
+                }
+            });
+
 
 
         });

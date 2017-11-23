@@ -500,21 +500,21 @@
                                             </td>
                                             <td style="width:100px">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["splitData"+$index]] id="" value="true" ng-model="x.splitData" ng-checked="all==1"/>
+                                                        <input type="radio" name=[["splitData"+$index]] id="" value="true" ng-model="x.splitData" ng-checked="all==1" ng-checked="x.splitData=='true'"/>
                                                         是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["splitData"+$index]] id="" value="false" ng-model="x.splitData" />
+                                                        <input type="radio" name=[["splitData"+$index]] id="" value="false" ng-model="x.splitData"  ng-checked="x.splitData=='false'"/>
                                                         否
                                                     </label>
                                             </td>
                                             <td style="width:80px">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="true" ng-model="x.INshihe"/>
+                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="true" ng-model="x.INshihe" ng-checked="x.INshihe=='true'"/>
                                                         是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="false" ng-model="x.INshihe"/>
+                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="false" ng-model="x.INshihe" ng-checked="x.INshihe=='false'"/>
                                                         否
                                                     </label>
                                             </td>

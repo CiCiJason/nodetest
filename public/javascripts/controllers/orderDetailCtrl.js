@@ -165,12 +165,20 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
                     $scope.samples.push(data.data.samples[i]);
                 }
             });
-
-
-
         });
     }
 
+    $scope.removeSample = function(id) {
+        $http({
+            method: "GET",
+            url: "/orders/deleteSample",
+            params: { id: id }
+        }).then(function(data) {
+            if (data.data.code == 0) {
+                window.location.reload();
+            }
+        });
+    }
 
 
 

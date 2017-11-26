@@ -215,6 +215,22 @@ router.get('/getOneOrder', function(req, res, next) {
     });
 });
 
+/**
+ * 删除单个样本
+ */
+router.get('/deleteSample', function(req, res, next) {
+    var resultDate = {};
+    var id = req.query.id;
 
+    SampleService.removeById(id, function(flag, obj) {
+        if (flag) {
+            resultDate.code = 0;
+            return res.json(resultDate);
+        } else {
+            resultDate.code = 1;
+            return res.json(resultDate);
+        }
+    });
+});
 
 module.exports = router;

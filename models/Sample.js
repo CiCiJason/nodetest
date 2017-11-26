@@ -26,13 +26,13 @@ var SampleSchema = new Schema({
     },
 
     splitData: { //是否拆分数据
-        type: Boolean,
-        default: true //true:拆分数据  false:不拆分数据  
+        type: Number,
+        default: 1 //1:拆分数据  2:不拆分数据  
     },
 
     INshihe: {
-        type: Boolean,
-        default: true //true:在 false:不在
+        type: Number,
+        default: 1 //1:在 2:不在
     },
 
     MolarConcentration: { //	摩尔浓度

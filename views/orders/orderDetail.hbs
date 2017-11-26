@@ -500,21 +500,21 @@
                                             </td>
                                             <td style="width:100px">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["splitData"+$index]] id="" value="true" ng-model="x.splitData" ng-checked="all==1" ng-checked="x.splitData=='true'"/>
+                                                        <input type="radio" name=[["splitData"+$index]]  value=1 ng-model="x.splitData" ng-checked="x.splitData==1"/>
                                                         是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["splitData"+$index]] id="" value="false" ng-model="x.splitData"  ng-checked="x.splitData=='false'"/>
+                                                        <input type="radio" name=[["splitData"+$index]] value=2 ng-model="x.splitData"  ng-checked="x.splitData==2"/>
                                                         否
                                                     </label>
                                             </td>
                                             <td style="width:80px">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="true" ng-model="x.INshihe" ng-checked="x.INshihe=='true'"/>
+                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="1" ng-model="x.INshihe" ng-checked="x.INshihe==1"/>
                                                         是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="false" ng-model="x.INshihe" ng-checked="x.INshihe=='false'"/>
+                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="2" ng-model="x.INshihe" ng-checked="x.INshihe==2"/>
                                                         否
                                                     </label>
                                             </td>
@@ -528,7 +528,7 @@
                                                 <input type="text" style="width:60px" ng-model="x.proportion" value="[[x.proportion]]"/>%                                                
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary" ng-click="removeSample($index)">删除</a>
+                                                <a href="" class="btn btn-primary" ng-click="removeSample(x._id)">删除</a>
                                             </td>
                                             
                                         </tr>

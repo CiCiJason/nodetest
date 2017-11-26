@@ -48,21 +48,26 @@ exports.updateById = function(id, data, callback) {
         });
 
     }
-    //删除
-exports.deleteById = function(id, callback) {
-
-        Sample.remove({ orderId: id }).then(function(data) {
-            callback(true, "删除成功");
-        });
-    }
     //查找
 exports.find = function(id, callback) {
 
-    Sample.find({ orderId: id }).then(function(data) {
-        if (data) {
-            callback(true, data);
+        Sample.find({ orderId: id }).then(function(data) {
+            if (data) {
+                callback(true, data);
+            } else {
+                callback(false, "查找失败");
+            }
+        });
+    }
+    //删除
+exports.removeById = function(data, callback) {
+
+    Sample.remove({ _id: data }).then(function(result) {
+        if (result.result.n) {
+            callback(true, "删除成功");
         } else {
-            callback(false, "查找失败");
+            callback(false, "删除失败");
         }
     });
+
 }

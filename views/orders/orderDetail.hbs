@@ -93,7 +93,7 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="sequencingPlatform" id="" value="1" ng-model="orderDetail.sequencingPlatform"  ng-checked="orderDetail.sequencingPlatform==1"
+                                            <input type="radio" name="sequencingPlatform" id="" value="1" ng-model="orderDetail.sequencingPlatform" ng-checked="orderDetail.sequencingPlatform==1"
                                                 ng-init="orderDetail.sequencingPlatform=1"> Novaseq 6000 S2(仅包FC)
                                         </label>
                                         <label>
@@ -231,13 +231,14 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="library2100result" id="" value="1" ng-model="orderDetail.library2100result"  ng-checked="orderDetail.library2100result==1" ng-init="orderDetail.library2100result=1"> 已有2100质检结果（请上传2100原始结果附件）
+                                            <input type="radio" name="library2100result" id="" value="1" ng-model="orderDetail.library2100result" ng-checked="orderDetail.library2100result==1"
+                                                ng-init="orderDetail.library2100result=1"> 已有2100质检结果（请上传2100原始结果附件）
                                         </label>
                                         <label>
-                                            <input type="radio" name="library2100result" id="" value="2" ng-model="orderDetail.library2100result"  ng-checked="orderDetail.library2100result==2"> 无2100质检结果，需世和做（收费）
+                                            <input type="radio" name="library2100result" id="" value="2" ng-model="orderDetail.library2100result" ng-checked="orderDetail.library2100result==2"> 无2100质检结果，需世和做（收费）
                                         </label>
                                         <label>
-                                            <input type="radio" name="library2100result" id="" value="3" ng-model="orderDetail.library2100result"  ng-checked="orderDetail.library2100result==3"> 无2100质检结果，不需要
+                                            <input type="radio" name="library2100result" id="" value="3" ng-model="orderDetail.library2100result" ng-checked="orderDetail.library2100result==3"> 无2100质检结果，不需要
                                         </label>
                                     </div>
                                 </div>
@@ -263,7 +264,8 @@
                                 <div class="col-md-8">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="modeOfTransport" id="" value="1" ng-model="orderDetail.modeOfTransport" ng-init="orderDetail.modeOfTransport=1" ng-checked="orderDetail.modeOfTransport==1"> 干冰+冰袋(推荐使用)
+                                            <input type="radio" name="modeOfTransport" id="" value="1" ng-model="orderDetail.modeOfTransport" ng-init="orderDetail.modeOfTransport=1"
+                                                ng-checked="orderDetail.modeOfTransport==1"> 干冰+冰袋(推荐使用)
                                         </label>
                                         <label>
                                             <input type="radio" name="modeOfTransport" id="" value="2" ng-model="orderDetail.modeOfTransport" ng-checked="orderDetail.modeOfTransport==2"> 冰袋(推荐使用)
@@ -300,7 +302,8 @@
 
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="carryHardDisk" id="" value="1" ng-model="orderDetail.carryHardDisk" ng-init="orderDetail.carryHardDisk=1" ng-checked="orderDetail.carryHardDisk==1"> 是
+                                            <input type="radio" name="carryHardDisk" id="" value="1" ng-model="orderDetail.carryHardDisk" ng-init="orderDetail.carryHardDisk=1"
+                                                ng-checked="orderDetail.carryHardDisk==1"> 是
                                         </label>
                                         <label>
                                             <input type="radio" name="carryHardDisk" id="" value="2" ng-model="orderDetail.carryHardDisk" ng-checked="orderDetail.carryHardDisk==2"> 否
@@ -458,6 +461,20 @@
                         </table>
 
 
+                        {{!-- <div>
+                            <input type="file" nv-file-select uploader="uploader" />
+                            <br/>
+                            <ul>
+                                <li ng-repeat="item in uploader.queue">
+                                    Name:
+                                    <span ng-bind="item.file.name"></span>
+                                    <br/>
+                                    <button ng-click="item.upload()">upload</button>
+                                </li>
+                            </ul>
+                        </div> --}}
+
+
                         <div class="panel panel-success">
                             <div class="panel-heading">
                                 <span class="panel-title">样品列表</span>
@@ -472,74 +489,74 @@
                                             <th>样本编号</th>
                                             <th>文库类型</th>
                                             <th>包lane数量</th>
-                                            <th style="width:150px">文库插入片段长度<br>(接头+插入片段长<br>度,2100结果)</th>
+                                            <th style="width:150px">文库插入片段长度
+                                                <br>(接头+插入片段长
+                                                <br>度,2100结果)</th>
                                             <th style="width:140px">
-                                                是否拆分数据<br>
+                                                是否拆分数据
+                                                <br>
                                                 <input type="checkbox" value="1" ng-model="all"> 全是
                                             </th>
                                             <th style="width:140px">样品是否在世和</th>
                                             <th>摩尔浓度</th>
                                             <th>体积</th>
-                                            <th>要求世和<br>加phix比例</th>
+                                            <th>要求世和
+                                                <br>加phix比例</th>
                                             <th>操作列</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="x in samples track by $index">
                                             <td>
-                                                <input type="text" style="width:60px" ng-model="x.SampleId" value="[[x.SampleId]]"/>
+                                                <input type="text" style="width:60px" ng-model="x.SampleId" value="[[x.SampleId]]" />
                                             </td>
                                             <td>
-                                                <input type="text" style="width:60px" ng-model="x.type" value="[[x.type]]"/>                                                
+                                                <input type="text" style="width:60px" ng-model="x.type" value="[[x.type]]" />
                                             </td>
                                             <td>
-                                                <input type="text" style="width:60px" ng-model="x.laneNum" value="[[x.laneNum]]"/>                                                
+                                                <input type="text" style="width:60px" ng-model="x.laneNum" value="[[x.laneNum]]" />
                                             </td>
                                             <td>
-                                                <input type="text" style="width:60px" ng-model="x.fragmentLength" value="[[x.fragmentLength]]"/>bp                                          
+                                                <input type="text" style="width:60px" ng-model="x.fragmentLength" value="[[x.fragmentLength]]" />bp
                                             </td>
                                             <td style="width:100px">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name=[["splitData"+$index]]  value=1 ng-model="x.splitData" ng-checked="x.splitData==1"/>
-                                                        是
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name=[["splitData"+$index]] value=2 ng-model="x.splitData"  ng-checked="x.splitData==2"/>
-                                                        否
-                                                    </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name=[['splitData'+$index]] value="1" ng-model="x.splitData" ng-checked="x.splitData==1" /> 是
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name=[['splitData'+$index]] value="2" ng-model="x.splitData" ng-checked="x.splitData==2" /> 否
+                                                </label>
                                             </td>
                                             <td style="width:80px">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="1" ng-model="x.INshihe" ng-checked="x.INshihe==1"/>
-                                                        是
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name=[["INshihe"+$index]] id="" value="2" ng-model="x.INshihe" ng-checked="x.INshihe==2"/>
-                                                        否
-                                                    </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name=[['INshihe'+$index]] value="1" ng-model="x.INshihe" ng-checked="x.INshihe==1" /> 是
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name=[['INshihe'+$index]] value="2" ng-model="x.INshihe" ng-checked="x.INshihe==2" /> 否
+                                                </label>
                                             </td>
                                             <td>
-                                                <input type="text" style="width:60px" ng-model="x.MolarConcentration" value="[[x.MolarConcentration]]"/>nM
+                                                <input type="text" style="width:60px" ng-model="x.MolarConcentration" value="[[x.MolarConcentration]]" />nM
                                             </td>
                                             <td>
-                                                <input type="text" style="width:60px" ng-model="x.volume" value="[[x.volume]]"/>μl
+                                                <input type="text" style="width:60px" ng-model="x.volume" value="[[x.volume]]" />μl
                                             </td>
                                             <td>
-                                                <input type="text" style="width:60px" ng-model="x.proportion" value="[[x.proportion]]"/>%                                                
+                                                <input type="text" style="width:60px" ng-model="x.proportion" value="[[x.proportion]]" />%
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary" ng-click="removeSample(x._id)">删除</a>
+                                                <a href="" class="btn btn-primary" ng-click="removeSample(x._id,$index)">删除</a>
                                             </td>
-                                            
+
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        
-                      
-                        
+
+
+
 
 
 

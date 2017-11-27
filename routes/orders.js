@@ -99,35 +99,45 @@ router.post('/orderDetail', function(req, res, next) {
         typeText: req.body.typeText
     });
 
-    console.log(data);
-
     if (id) { //有id，即为保存修改过的数据
 
-        OrderService.updateById(id, data, function(flag, msg) {
+        OrderService.updateById(id, data, function(flag) {
             if (flag) {
-                // 删除
-                var id1 = String(req.query.id).slice(2, -2);
-                //if (id) { //有id
-                SampleService.deleteById(id1).then(function() {
-                    samples.map(function(item) {
-                        var sampleData = new SampleService.SampleModel({
-                            SampleId: item.SampleId,
-                            type: item.type,
-                            laneNum: item.laneNum,
-                            fragmentLength: item.fragmentLength,
-                            splitData: item.splitData,
-                            INshihe: item.INshihe,
-                            MolarConcentration: item.MolarConcentration,
-                            volume: item.volume,
-                            proportion: item.proportion,
-                            accountName: req.session.accountId,
-                            orderId: result
+                // 更新完orderDetail之后，查看每条sample，有_id的，则更新，没有_id的，则save
+
+                //var id1 = String(req.query.id).slice(2, -2);
+
+
+                samples.map(function(item) {
+
+                    var sampleData = new SampleService.SampleModel({
+                        SampleId: item.SampleId,
+                        type: item.type,
+                        laneNum: item.laneNum,
+                        fragmentLength: item.fragmentLength,
+                        splitData: item.splitData,
+                        INshihe: item.INshihe,
+                        MolarConcentration: item.MolarConcentration,
+                        volume: item.volume,
+                        proportion: item.proportion,
+                        accountName: req.session.accountId,
+                        orderId: id
+                    });
+
+                    if (item._id) {
+                        SampleService.updateById(item._id, sampleData, function(flag) {
+                            if (flag) {
+                                resultData.code = 0;
+                                //return res.json(resultData);
+                            }
                         });
+                    } else {
+
                         SampleService.save(sampleData, function(flag, msg) {
                             if (flag) {
-                                //resultData.code = 0;
-                                console.log("新增sample成功");
-                                //return res.json(resultData);
+                                resultData.code = 0;
+                                //console.log("新增sample成功");
+                                return res.json(resultData);
                             } else {
                                 //resultData.code = 2;
                                 //resultData.message = "新增失败";
@@ -135,10 +145,10 @@ router.post('/orderDetail', function(req, res, next) {
                                 //return res.json(resultData);
                             }
                         })
-                    });
-
-
+                    }
                 });
+
+
 
             } else {
                 resultData.code = 2;
@@ -206,7 +216,7 @@ router.get('/getOneOrder', function(req, res, next) {
                     obj.samples = data;
                     return res.json(obj);
                 } else {
-                    console.log("查找样本表错误");
+                    return res.json(obj);
                 }
             });
         } else {

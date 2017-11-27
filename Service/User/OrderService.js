@@ -77,9 +77,7 @@ exports.updateById = function(id, data, callback) {
         addressText: data.addressText,
         typeText: data.typeText
     }).then(function(data) {
-        callback(true, "修改成功");
-    }, function(err, data) {
-        callback(false, "修改失败");
+        callback(true);
     });
 
 }
@@ -93,4 +91,16 @@ exports.getOrderLists = function(id, callback) {
         callback(false, "查找失败");
     });
 
+}
+
+//查找
+exports.find = function(id, callback) {
+
+    Sample.find({ orderId: id }).then(function(data) {
+        if (data) {
+            callback(true, data);
+        } else {
+            callback(false, "查找失败");
+        }
+    });
 }

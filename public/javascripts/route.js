@@ -46,7 +46,7 @@ app.config(['$routeProvider', '$interpolateProvider', 'ACCESS_LEVELS', function(
         }) //地址管理
         .when('/orders/myorders', {
             templateUrl: 'orders/myorders',
-            access_level: [ACCESS_LEVELS.user]
+            controller: 'baseInfoCtrl'
         }) //送样信息表管理
         .when('/users/password', {
             templateUrl: '/users/password',

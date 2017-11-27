@@ -52,7 +52,7 @@ exports.updateById = function(id, data, callback) {
 exports.find = function(id, callback) {
 
         Sample.find({ orderId: id }).then(function(data) {
-            if (data) {
+            if (data.length) {
                 callback(true, data);
             } else {
                 callback(false, "查找失败");
@@ -68,6 +68,24 @@ exports.removeById = function(data, callback) {
         } else {
             callback(false, "删除失败");
         }
+    });
+
+}
+
+exports.updateById = function(id, data, callback) {
+
+    Sample.update({ _id: id }, {
+        SampleId: data.SampleId,
+        type: data.type,
+        laneNum: data.laneNum,
+        fragmentLength: data.fragmentLength,
+        splitData: data.splitData,
+        INshihe: data.INshihe,
+        MolarConcentration: data.MolarConcentration,
+        volume: data.volume,
+        proportion: data.proportion
+    }).then(function(data) {
+        callback(true);
     });
 
 }

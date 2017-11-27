@@ -87,20 +87,21 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
                     constructionMethod: $scope.orderDetail.constructionMethod,
                     specificSequence: $scope.orderDetail.specificSequence,
                     remarks: $scope.orderDetail.remarks,
-                    samples: $scope.orderDetail.samples,
+                    samples: $scope.samples,
                     institutionText: angular.element(":input[name=institution] option:selected").text(),
                     addressText: angular.element(":input[name=address] option:selected").text(),
 
                     id: $location.$$search._id
                 }
             }).then(function(data) {
-                if (data.data.code == 0) {
-                    $scope.message = data.data.message;
-                    $('#myModal').modal("show");
-                } else {
-                    $scope.message = data.data.message;
-                    $('#myModal').modal("show");
-                }
+                // if (data.data.code == 0) {
+                //     $scope.message = data.data.message;
+                //     $('#myModal').modal("show");
+                // } else {
+                //     $scope.message = data.data.message;
+                //     $('#myModal').modal("show");
+                // }
+                $window.location = '#!/users/baseInfo';
             });
         } else {
             $scope.message = "请填写完整的地址信息";
@@ -121,11 +122,6 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
 
     $scope.addSample = function() {
         $scope.samples.push({});
-    }
-
-    $scope.removeSample = function(index) {
-        var index = $scope.samples[index];
-        $scope.samples.splice(index, 1);
     }
 
 
@@ -159,28 +155,35 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
             $scope.orderDetail.constructionMethod = data.data.constructionMethod;
             $scope.orderDetail.specificSequence = data.data.specificSequence;
             $scope.orderDetail.remarks = data.data.remarks;
-            $scope.orderDetail.samples = data.data.samples;
-            $scope.$watch('orderDetail.samples', function() {
-                for (var i = 0; i < data.data.samples.length; i++) {
-                    $scope.samples.push(data.data.samples[i]);
+            $scope.samples = data.data.samples;
+        });
+    }
+
+
+    // $scope.removeSample = function(index) {
+    //     $scope.samples.splice(index, 1);
+    // }
+
+
+    $scope.removeSample = function(id, index) {
+        if (id) {
+            $http({
+                method: "GET",
+                url: "/orders/deleteSample",
+                params: { id: id }
+            }).then(function(data) {
+                if (data.data.code == 0) {
+                    $scope.samples.splice(index, 1);
                 }
             });
-        });
-    }
+        } else {
+            $scope.samples.splice(index, 1);
+        }
 
-    $scope.removeSample = function(id) {
-        $http({
-            method: "GET",
-            url: "/orders/deleteSample",
-            params: { id: id }
-        }).then(function(data) {
-            if (data.data.code == 0) {
-                window.location.reload();
-            }
-        });
     }
 
 
+    //$scope.uploader = new FileUploader();
 
 
 }]);

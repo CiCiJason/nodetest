@@ -432,7 +432,7 @@
                                     <a href="/files/download/正则表达式.docx" download="世和基因样本要求" class="btn btn-info">世和基因样本要求</a>
                                 </div>
                                 <div class="col-md-1">
-                                    <a class="btn btn-primary more" href="#!/">
+                                    <a class="btn btn-primary more" href="" ng-click="addAttachment()">
                                         <span class="glyphicon glyphicon-plus"></span>
                                         上传附件</a>
                                 </div>
@@ -450,18 +450,47 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr ng-repeat="itemfile in uploader.queue">
+                                    <td>
+                                        <a href=[[ "/files/"+itemfile.file.alias]] download=[[itemfile.file.name]]>
+                                            <strong>[[itemfile.file.name]]</strong>
+                                        </a>
+                                    </td>
+                                    <td ng-show="uploader.isHTML5" nowrap>[[(itemfile.file.size/1024/1024).toFixed(2)]]MB</td>
+                                    <td ng-show="uploader.isHTML5">
+                                        <div class="progress" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': itemfile.progress + '%' }"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span ng-show="itemfile.isSuccess">
+                                            <i class="glyphicon glyphicon-ok"></i>
+                                        </span>
+                                        <span ng-show="itemfile.isCancel">
+                                            <i class="glyphicon glyphicon-ban-circle"></i>
+                                        </span>
+                                        <span ng-show="itemfile.isError">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </span>
+                                    </td>
+                                    <td nowrap>
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="itemfile.upload()" ng-disabled="itemfile.isReady || iteitemfile.isUploading || itemfile.isSuccess">
+                                            <span class="glyphicon glyphicon-upload"></span> 上传
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" ng-click="itemfile.cancel()" ng-disabled="!itemfile.isUploading">
+                                            <span class="glyphicon glyphicon-ban-circle"></span> 取消
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="itemfile.remove()">
+                                            <span class="glyphicon glyphicon-trash"></span> 删除
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
 
 
-                        {{!-- <div>
+                        {{!--
+                        <div>
                             <input type="file" nv-file-select uploader="uploader" />
                             <br/>
                             <ul>
@@ -472,6 +501,16 @@
                                     <button ng-click="item.upload()">upload</button>
                                 </li>
                             </ul>
+                        </div> --}}
+
+                        {{!-- <div>
+                            <input type="text" ng-model="myModelObj">
+                            <input type="file" ng-file-select="onFileSelect($files)">
+                            <input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*">
+                            <div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
+                            <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function" ng-show="dropSupported">drop files here</div>
+                            <div ng-file-drop-available="dropSupported=true" ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
+                            <button ng-click="upload.abort()">Cancel Upload</button>
                         </div> --}}
 
 

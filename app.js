@@ -39,11 +39,11 @@ app.use(session({
     saveUninitialized: true, // 是否自动保存未初始化的会话，建议false
     store: new MongoStore({ //创建新的mongodb数据库
         host: '127.0.0.1', //数据库的地址，本机的话就是127.0.0.1，也可以是网络主机
-        port: 27020, //数据库的端口号
-        url: 'mongodb://127.0.0.1:27020/shihe',
+        port: 27017, //数据库的端口号
+        url: 'mongodb://127.0.0.1:27017/shihe',
         db: 'shihe', //数据库的名称。
         cookieSecret: 'shihe',
-        mongodb: 'mongodb://127.0.0.1:27020/shihe',
+        mongodb: 'mongodb://127.0.0.1:27017/shihe',
     })
 }));
 

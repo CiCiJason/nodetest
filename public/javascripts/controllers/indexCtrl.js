@@ -1,9 +1,9 @@
 app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
 
     if (localStorage.getItem('loginName')) {
-        $scope.logined = 1;
-    } else {
         $scope.logined = 0;
+    } else {
+        $scope.logined = 1;
     }
 
     $scope.login = 1;

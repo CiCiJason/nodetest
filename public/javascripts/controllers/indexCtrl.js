@@ -24,17 +24,16 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
                 localStorage.setItem('access_token', data.data.access_token);
                 localStorage.setItem('loginName', data.data.accountname);
                 localStorage.setItem('accountId', data.data.userId);
-                $('#myModal').modal("show");
-
-            } else {
-                $scope.message = data.data.message;
-
 
                 setTimeout(function() {
                     location.reload();
                 }, 1);
                 window.location = "#!/users/baseInfo";
 
+            } else {
+                $scope.message = data.data.message;
+
+                $('#myModal').modal("show");
 
             }
 

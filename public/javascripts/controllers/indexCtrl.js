@@ -80,17 +80,15 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
     $scope.closeModal = function() {
         setTimeout(function() {
-            //window.location.reload();
-            //$window.location.replace('#!/users/baseInfo');
-            //$window.location = '#!/users/baseInfo';
-            //window.location.reload();
-            window.location = "http://47.95.3.92:3000/#!/users/baseInfo";
 
             setTimeout(function() {
-
+                window.reload();
                 $('#myModal').modal("hide");
 
             }, 1);
+
+            window.location = "#!/users/baseInfo";
+
 
         }, 500);
     }

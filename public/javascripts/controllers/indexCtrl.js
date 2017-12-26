@@ -26,9 +26,9 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
                 localStorage.setItem('accountId', data.data.userId);
 
                 setTimeout(function() {
-                    location.reload();
+                    window.location = "#!/users/baseInfo";
                 }, 1);
-                window.location = "#!/users/baseInfo";
+                location.reload();
 
             } else {
                 $scope.message = data.data.message;

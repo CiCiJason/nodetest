@@ -77,8 +77,8 @@ router.post("/", function(req, res, next) {
                 resultData.accountname = req.body.accountname;
                 resultData.userId = userId;
 
-                //return res.json(Object.assign({}, jwtHelper.genToken(resultData), resultData));
-                return res.json(resultData);
+                return res.json(Object.assign({}, jwthelper.genToken(userId), resultData));
+                //return res.json(resultData);
             }
 
             // if (flag) {

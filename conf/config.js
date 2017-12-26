@@ -1,6 +1,6 @@
 var path = require('path');
 module.exports = {
-    mx_secret: "tokencici123"
+    mx_secret: "CiCiJason1234"
 }
 
 /**

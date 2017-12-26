@@ -21,7 +21,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
         }).then(function(data) {
             if (data.data.code == 0) {
                 $scope.message = data.data.message;
-                localStorage.setItem('token', data.data.token);
+                localStorage.setItem('access_token', data.data.access_token);
                 localStorage.setItem('loginName', data.data.accountname);
                 localStorage.setItem('accountId', data.data.userId);
                 $('#myModal').modal("show");
@@ -80,12 +80,18 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
     $scope.closeModal = function() {
         setTimeout(function() {
-            $window.location = '#!/users/baseInfo';
-            window.location.reload();
+            //window.location.reload();
+            //$window.location.replace('#!/users/baseInfo');
+            //$window.location = '#!/users/baseInfo';
+            //window.location.reload();
+            window.location = "http://" + window.location.host + "/#!" + localStorage.getItem("backurl");
+
             setTimeout(function() {
+
                 $('#myModal').modal("hide");
 
             }, 1);
+
         }, 500);
     }
 

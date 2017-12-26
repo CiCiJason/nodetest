@@ -5,4 +5,10 @@ app.controller('baseCtrl', ['$scope', '$http', '$window', function($scope, $http
 
 
 
+    $scope.logout = function() {
+        localStorage.clear();
+        window.location = "/login";
+    }
+
+
 }]);

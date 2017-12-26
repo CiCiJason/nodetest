@@ -1,4 +1,11 @@
 {{!-- <h1>{{message}}</h1>
 <h2>{{error.status}}</h2>
 <pre>{{error.stack}}</pre> --}}
-<h1>页面有错误</h1>
+
+<div class="serviceContant">
+    <input type="hidden" id="backurl" value={{backurl}} > </input>
+  <script>
+        localStorage.setItem('backurl',$("#backurl").val());
+        window.location=window.location.origin+"/login"
+  </script>
+</div>

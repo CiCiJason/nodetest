@@ -54,7 +54,7 @@ app.controller('addressDetailCtrl', ['$scope', '$http', '$window', '$location', 
         if ($scope.addressDetail.detailedAddress && $scope.addressDetail.contactPerson && $scope.addressDetail.contactTel) {
             $http({
                 method: "POST",
-                url: '/users/addressDetail',
+                url: '/users/addressDetail?' + accesstokenstring,
                 data: {
                     country: $scope.addressDetail.country,
                     province: $scope.addressDetail.province,
@@ -104,7 +104,7 @@ app.controller('addressDetailCtrl', ['$scope', '$http', '$window', '$location', 
     if ($location.$$search._id && $location.$$search.type == 'edit') {
         $http({
             method: "GET",
-            url: "/users/getOneAddress",
+            url: "/users/getOneAddress?" + accesstokenstring,
             params: {
                 id: $location.$$search._id
             }

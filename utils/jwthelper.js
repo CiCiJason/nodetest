@@ -17,7 +17,7 @@ function expiresIn(numDays) {
 //var decoded = jwt.decode(token, secret);
 //console.log(decoded); //=> { foo: 'bar' }
 
-exports.genToken = function(user) {
+exports.genToken = function(userid) {
         var expires = expiresIn(1); //1天后token过期
         var token = jwt.encode({
             exp: expires
@@ -25,7 +25,7 @@ exports.genToken = function(user) {
 
         return {
             access_token: token,
-            data: user,
+            userid: userid,
             expires: expires
         };
     }

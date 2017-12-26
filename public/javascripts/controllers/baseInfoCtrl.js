@@ -9,7 +9,7 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
 
     $http({
         method: "GET",
-        url: "/users/getUserInfo"
+        url: "/users/getUserInfo?" + accesstokenstring
     }).then(function(data) {
         $scope.userInfo.accountname = data.data.accountname;
         $scope.userInfo.username = data.data.username;
@@ -18,7 +18,7 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
     });
     $http({
         method: "GET",
-        url: "/orders/getOrderInfo"
+        url: "/orders/getOrderInfo?" + accesstokenstring
     }).then(function(data) {
         for (var i = 0; i < data.data.length; i++) {
             if (data.data[i].type == '1') {
@@ -42,7 +42,7 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
         if ($scope.userInfo.accountname && $scope.userInfo.username && $scope.userInfo.email && $scope.userInfo.tel) {
             $http({
                 method: "POST",
-                url: "/users/saveUserInfo",
+                url: "/users/saveUserInfo?" + accesstokenstring,
                 data: {
                     accountname: $scope.userInfo.accountname,
                     username: $scope.userInfo.username,

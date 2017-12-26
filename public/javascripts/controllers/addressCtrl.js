@@ -2,7 +2,7 @@ app.controller('addressCtrl', ['$scope', '$http', '$window', function($scope, $h
 
     $http({
         method: 'GET',
-        url: '/users/getAddressLists'
+        url: '/users/getAddressLists?' + accesstokenstring
     }).then(function(data) {
 
         $scope.data = data.data;
@@ -19,7 +19,7 @@ app.controller('addressCtrl', ['$scope', '$http', '$window', function($scope, $h
         if (id) {
             $http({
                 method: 'GET',
-                url: '/users/setDefaultAddress',
+                url: '/users/setDefaultAddress?' + accesstokenstring,
                 params: {
                     id: id
                 }
@@ -36,7 +36,7 @@ app.controller('addressCtrl', ['$scope', '$http', '$window', function($scope, $h
         if (id) {
             $http({
                 method: 'GET',
-                url: '/users/addressDelete',
+                url: '/users/addressDelete?' + accesstokenstring,
                 params: {
                     id: id
                 }

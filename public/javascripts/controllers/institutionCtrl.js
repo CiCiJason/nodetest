@@ -2,7 +2,7 @@ app.controller('institutionCtrl', ['$scope', '$http', '$window', '$location', fu
 
     $http({
         method: 'GET',
-        url: '/users/getInistitutionLists'
+        url: '/users/getInistitutionLists?' + accesstokenstring
     }).then(function(data) {
 
         $scope.data = data.data;
@@ -18,7 +18,7 @@ app.controller('institutionCtrl', ['$scope', '$http', '$window', '$location', fu
         if (id) {
             $http({
                 method: 'GET',
-                url: '/users/setDefaultInistitution',
+                url: '/users/setDefaultInistitution?' + accesstokenstring,
                 params: {
                     id: id
                 }
@@ -34,7 +34,7 @@ app.controller('institutionCtrl', ['$scope', '$http', '$window', '$location', fu
         if (id) {
             $http({
                 method: 'GET',
-                url: '/users/inistitutionDelete',
+                url: '/users/inistitutionDelete?' + accesstokenstring,
                 params: {
                     id: id
                 }

@@ -29,7 +29,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
     function init() {
         $http({
             method: "GET",
-            url: "/users/getDefaultInistitution"
+            url: "/users/getDefaultInistitution?" + accesstokenstring
         }).then(function(data) {
             $scope.institutionList = data.data;
             // $scope.orderDetail.institutionSelected = data.data[0].institutionName+"-"+data.data[0].department+"-"+data.data[0].secondaryDepartment+"-"+data.data[0].tertiaryDepartment;    
@@ -37,7 +37,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
         });
         $http({
             method: "GET",
-            url: "/users/getDefaultAddress"
+            url: "/users/getDefaultAddress?" + accesstokenstring
         }).then(function(data) {
             $scope.addressList = data.data;
             //$scope.orderDetail.addressSelected = data.data[0].province+"-"+data.data[0].city+"-"+data.data[0].district+"-"+data.data[0].detailedAddress;    
@@ -45,7 +45,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
         });
         $http({
             method: "GET",
-            url: "/orders/getDefaultOrderId"
+            url: "/orders/getDefaultOrderId?" + accesstokenstring
         }).then(function(data) {
             $scope.orderDetail.orderId = data.data;
             //$scope.orderDetail.addressSelected = data.data[0].province+"-"+data.data[0].city+"-"+data.data[0].district+"-"+data.data[0].detailedAddress;    
@@ -60,53 +60,43 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
 
     //提交保存表单
     $scope.orderSave = function() {
-        if (true) {
-            $http({
-                method: "POST",
-                url: '/orders/orderDetail',
-                data: {
-                    orderId: $scope.orderDetail.orderId,
-                    proId: $scope.orderDetail.proId,
-                    institution: $scope.orderDetail.institution,
-                    address: $scope.orderDetail.address,
-                    sequencingPlatform: $scope.orderDetail.sequencingPlatform,
-                    readLong: $scope.orderDetail.readLong,
-                    type: $scope.orderDetail.type,
-                    laneNum: $scope.orderDetail.laneNum,
-                    tagSelect: $scope.orderDetail.tagSelect,
-                    library2100result: $scope.orderDetail.library2100result,
-                    waybillNumber: $scope.orderDetail.waybillNumber,
-                    modeOfTransport: $scope.orderDetail.modeOfTransport,
-                    otherModeOfTransport: $scope.orderDetail.otherModeOfTransport,
-                    carryHardDisk: $scope.orderDetail.carryHardDisk,
-                    SNNum: $scope.orderDetail.SNNum,
-                    totalNumberOfSamples: $scope.orderDetail.totalNumberOfSamples,
-                    totalNumberOfTubes: $scope.orderDetail.totalNumberOfTubes,
-                    sampleDescription: $scope.orderDetail.sampleDescription,
-                    sampleSpecies: $scope.orderDetail.sampleSpecies,
-                    constructionMethod: $scope.orderDetail.constructionMethod,
-                    specificSequence: $scope.orderDetail.specificSequence,
-                    remarks: $scope.orderDetail.remarks,
-                    samples: $scope.samples,
-                    institutionText: angular.element(":input[name=institution] option:selected").text(),
-                    addressText: angular.element(":input[name=address] option:selected").text(),
+        $http({
+            method: "POST",
+            url: '/orders/orderDetail?' + accesstokenstring,
+            data: {
+                orderId: $scope.orderDetail.orderId,
+                proId: $scope.orderDetail.proId,
+                institution: $scope.orderDetail.institution,
+                address: $scope.orderDetail.address,
+                sequencingPlatform: $scope.orderDetail.sequencingPlatform,
+                readLong: $scope.orderDetail.readLong,
+                type: $scope.orderDetail.type,
+                laneNum: $scope.orderDetail.laneNum,
+                tagSelect: $scope.orderDetail.tagSelect,
+                library2100result: $scope.orderDetail.library2100result,
+                waybillNumber: $scope.orderDetail.waybillNumber,
+                modeOfTransport: $scope.orderDetail.modeOfTransport,
+                otherModeOfTransport: $scope.orderDetail.otherModeOfTransport,
+                carryHardDisk: $scope.orderDetail.carryHardDisk,
+                SNNum: $scope.orderDetail.SNNum,
+                totalNumberOfSamples: $scope.orderDetail.totalNumberOfSamples,
+                totalNumberOfTubes: $scope.orderDetail.totalNumberOfTubes,
+                sampleDescription: $scope.orderDetail.sampleDescription,
+                sampleSpecies: $scope.orderDetail.sampleSpecies,
+                constructionMethod: $scope.orderDetail.constructionMethod,
+                specificSequence: $scope.orderDetail.specificSequence,
+                remarks: $scope.orderDetail.remarks,
+                samples: $scope.samples,
+                institutionText: angular.element(":input[name=institution] option:selected").text(),
+                addressText: angular.element(":input[name=address] option:selected").text(),
+                id: $location.$$search._id
+            }
+        }).then(function(data) {
+            console.log(data);
+            //window.location = 'http://localhost:3000/#!/orders/myorders';
+            window.reload();
 
-                    id: $location.$$search._id
-                }
-            }).then(function(data) {
-                // if (data.data.code == 0) {
-                //     $scope.message = data.data.message;
-                //     $('#myModal').modal("show");
-                // } else {
-                //     $scope.message = data.data.message;
-                //     $('#myModal').modal("show");
-                // }
-                $window.location = '#!/users/baseInfo';
-            });
-        } else {
-            $scope.message = "请填写完整的地址信息";
-            $('#myModal').modal("show");
-        };
+        });
     }
 
 
@@ -128,7 +118,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
     if ($location.$$search._id && $location.$$search.type == 'edit') {
         $http({
             method: "GET",
-            url: "/orders/getOneOrder",
+            url: "/orders/getOneOrder?" + accesstokenstring,
             params: {
                 id: $location.$$search._id
             }
@@ -169,7 +159,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
         if (id) {
             $http({
                 method: "GET",
-                url: "/orders/deleteSample",
+                url: "/orders/deleteSample?" + accesstokenstring,
                 params: { id: id }
             }).then(function(data) {
                 if (data.data.code == 0) {

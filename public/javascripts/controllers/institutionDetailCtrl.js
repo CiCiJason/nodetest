@@ -14,7 +14,7 @@ app.controller('institutionDetailCtrl', ['$scope', '$http', '$window', '$locatio
         if ($scope.institutionDetail.principal) {
             $http({
                 method: 'POST',
-                url: '/users/institutionDetail',
+                url: '/users/institutionDetail?' + accesstokenstring,
                 data: {
                     country: $scope.institutionDetail.country,
                     institutionName: $scope.institutionDetail.institutionName,
@@ -24,7 +24,8 @@ app.controller('institutionDetailCtrl', ['$scope', '$http', '$window', '$locatio
                     principal: $scope.institutionDetail.principal,
                     remarks: $scope.institutionDetail.remarks,
                     accountName: localStorage.getItem('accountId'),
-                    id: $location.$$search._id
+                    id: $location.$$search._id,
+                    access_token: localStorage.getItem('access_token')
                 }
             }).then(function(data) {
                 if (data.data.code == 0) {
@@ -60,7 +61,7 @@ app.controller('institutionDetailCtrl', ['$scope', '$http', '$window', '$locatio
     if ($location.$$search._id && $location.$$search.type == 'edit') {
         $http({
             method: "GET",
-            url: "/users/getOneInstitution",
+            url: "/users/getOneInstitution?" + accesstokenstring,
             params: {
                 id: $location.$$search._id
             }

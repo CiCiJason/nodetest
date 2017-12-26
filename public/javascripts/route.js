@@ -1,19 +1,21 @@
+var accesstokenstring = "access_token=" + localStorage.getItem('access_token') + "&accountId=" + localStorage.getItem('accountId');
+
 var app = angular.module('orderSystem', ['ngRoute', 'ngMessages']);
 
 /**
  * 首先要定义应用的访问规则。可以通过在应用中设置常量，然后在每个路由中通过对比这些常量来判断用户是否具有访问权限
  */
-app.constant('ACCESS_LEVELS', {
-    pub: 1,
-    user: 2
-        //admin: 3
-});
+// app.constant('ACCESS_LEVELS', {
+//     pub: 1,
+//     user: 2
+//         //admin: 3
+// });
 
 
 /**
  * 系统设置
  */
-app.config(['$routeProvider', '$interpolateProvider', 'ACCESS_LEVELS', function($routeProvider, $interpolateProvider, ACCESS_LEVELS) {
+app.config(['$routeProvider', '$interpolateProvider', function($routeProvider, $interpolateProvider, ACCESS_LEVELS) {
 
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
@@ -23,45 +25,44 @@ app.config(['$routeProvider', '$interpolateProvider', 'ACCESS_LEVELS', function(
      */
     $routeProvider
         .when('/index/main', {
-            templateUrl: '/index/main',
+            templateUrl: '/index/main?' + accesstokenstring,
             controller: 'indexCtrl'
         }) //首页
         .when('/serviceInfo', {
-            templateUrl: '/serviceInfo'
+            templateUrl: '/serviceInfo?' + accesstokenstring
         }) //服务介绍
         .when('/serviceList', {
-            templateUrl: '/serviceList'
+            templateUrl: '/serviceList?' + accesstokenstring
         }) //测序服务
         .when('/users/baseInfo', {
             controller: 'baseInfoCtrl',
-            templateUrl: '/users/baseInfo'
+            templateUrl: '/users/baseInfo?' + accesstokenstring
         }) //基本信息设置
         .when('/users/institution', {
-            templateUrl: '/users/institution',
+            templateUrl: '/users/institution?' + accesstokenstring,
             controller: 'institutionCtrl'
         }) //机构管理
         .when('/users/address', {
-            templateUrl: '/users/address',
+            templateUrl: '/users/address?' + accesstokenstring,
             controller: 'addressCtrl'
         }) //地址管理
         .when('/orders/myorders', {
-            templateUrl: 'orders/myorders',
+            templateUrl: 'orders/myorders?' + accesstokenstring,
             controller: 'baseInfoCtrl'
         }) //送样信息表管理
         .when('/users/password', {
-            templateUrl: '/users/password',
-            access_level: [ACCESS_LEVELS.user]
+            templateUrl: '/users/password?' + accesstokenstring
         }) //密码管理
         .when('/orders/orderDetail', {
-            templateUrl: '/orders/orderDetail',
+            templateUrl: '/orders/orderDetail?' + accesstokenstring,
             controller: 'orderDetailCtrl'
         }) //送样信息表明细
         .when('/users/addressDetail', {
-            templateUrl: '/users/addressDetail',
+            templateUrl: '/users/addressDetail?' + accesstokenstring,
             controller: 'addressDetailCtrl'
         }) //地址管理明细
         .when('/users/institutionDetail', {
-            templateUrl: '/users/institutionDetail',
+            templateUrl: '/users/institutionDetail?' + accesstokenstring,
             controller: 'institutionDetailCtrl'
         }) //机构管理明细
         .when('/login', {

@@ -25,10 +25,11 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
                 localStorage.setItem('loginName', data.data.accountname);
                 localStorage.setItem('accountId', data.data.userId);
 
+                location.reload();
+
                 setTimeout(function() {
-                    location.reload();
+                    window.location = "#!/users/baseInfo";
                 }, 1);
-                window.location = "#!/users/baseInfo";
 
             } else {
                 $scope.message = data.data.message;

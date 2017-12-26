@@ -23,7 +23,7 @@ module.exports = function(req, res, next) {
     //     console.log("访问的url是" + req.url);
     //     next();
     // }
-    if (req.url === '/login' || req.url === '/' || req.url.indexOf('/api') > -1 || req.url.indexOf('/serviceList') > -1 || req.url.indexOf('/serviceInfo') > -1 || req.url.indexOf('/javascripts/') > -1 || req.url.indexOf('/stylesheets/') > -1 || req.url.indexOf('/images/') > -1 || req.url.indexOf('/fonts/') > -1 || req.url.indexOf('/index') > -1 || req.url === '/index/main' || req.url.indexOf('/files') > -1 || req.url.indexOf('/uploadimg') > -1 || req.url.indexOf('/printOrder') > -1 || req.url.indexOf('/favicon') > -1) {
+    if (req.url.indexOf('/login') > -1 || req.url === '/' || req.url.indexOf('/api') > -1 || req.url.indexOf('/serviceList') > -1 || req.url.indexOf('/serviceInfo') > -1 || req.url.indexOf('/javascripts/') > -1 || req.url.indexOf('/stylesheets/') > -1 || req.url.indexOf('/images/') > -1 || req.url.indexOf('/fonts/') > -1 || req.url.indexOf('/index') > -1 || req.url === '/index/main' || req.url.indexOf('/files') > -1 || req.url.indexOf('/uploadimg') > -1 || req.url.indexOf('/printOrder') > -1 || req.url.indexOf('/favicon') > -1) {
         next();
     } else {
 

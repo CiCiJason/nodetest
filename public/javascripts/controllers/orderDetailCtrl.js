@@ -93,14 +93,18 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
             }
         }).then(function(data) {
 
-            setTimeout(function() {
-                location.reload();
-            }, 1);
+                setTimeout(function() {
+                    location.reload();
+                }, 1);
 
-            window.location = 'http://47.95.3.92:3000/#!/orders/myorders';
-            //window.reload();
+                window.location = 'http://47.95.3.92:3000/#!/orders/myorders';
+                //window.reload();
 
-        });
+            },
+            function(data) {
+                console.log("系统出错" + data);
+
+            });
     }
 
 

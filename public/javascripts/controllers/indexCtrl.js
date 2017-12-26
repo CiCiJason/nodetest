@@ -82,13 +82,14 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
         setTimeout(function() {
 
             setTimeout(function() {
-                location.reload();
+
+                window.location = "#!/users/baseInfo";
+
                 $('#myModal').modal("hide");
 
-            }, 1);
+            }, 10);
 
-            window.location = "#!/users/baseInfo";
-
+            location.reload();
 
         }, 500);
     }

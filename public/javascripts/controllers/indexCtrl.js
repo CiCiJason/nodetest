@@ -29,7 +29,12 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
             } else {
                 $scope.message = data.data.message;
 
-                $('#myModal').modal("show");
+
+                setTimeout(function() {
+                    location.reload();
+                }, 1);
+                window.location = "#!/users/baseInfo";
+
 
             }
 

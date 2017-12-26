@@ -33,7 +33,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
         }).then(function(data) {
             $scope.institutionList = data.data;
             // $scope.orderDetail.institutionSelected = data.data[0].institutionName+"-"+data.data[0].department+"-"+data.data[0].secondaryDepartment+"-"+data.data[0].tertiaryDepartment;    
-            $scope.orderDetail.institution = data.data[0]._id;
+            $scope.orderDetail.institution = data.data[0]._id || "";
         });
         $http({
             method: "GET",
@@ -41,7 +41,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
         }).then(function(data) {
             $scope.addressList = data.data;
             //$scope.orderDetail.addressSelected = data.data[0].province+"-"+data.data[0].city+"-"+data.data[0].district+"-"+data.data[0].detailedAddress;    
-            $scope.orderDetail.address = data.data[0]._id;
+            $scope.orderDetail.address = data.data[0]._id || "";
         });
         $http({
             method: "GET",

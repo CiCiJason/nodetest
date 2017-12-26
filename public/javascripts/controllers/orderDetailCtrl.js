@@ -92,9 +92,9 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
                 id: $location.$$search._id
             }
         }).then(function(data) {
-            console.log(data);
-            //window.location = 'http://localhost:3000/#!/orders/myorders';
-            window.reload();
+            //console.log(data);
+            window.location = 'http://47.95.3.92:3000/#!/orders/myorders';
+            //window.reload();
 
         });
     }

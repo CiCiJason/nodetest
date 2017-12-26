@@ -84,7 +84,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
             //$window.location.replace('#!/users/baseInfo');
             //$window.location = '#!/users/baseInfo';
             //window.location.reload();
-            window.location = "http://" + window.location.host + "/#!" + localStorage.getItem("backurl");
+            window.location = "http://47.95.3.92:3000/#!/users/baseInfo";
 
             setTimeout(function() {
 

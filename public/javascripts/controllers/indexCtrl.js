@@ -82,7 +82,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
         setTimeout(function() {
 
             setTimeout(function() {
-                window.reload();
+                location.reload();
                 $('#myModal').modal("hide");
 
             }, 1);

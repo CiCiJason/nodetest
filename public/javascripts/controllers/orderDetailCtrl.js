@@ -94,7 +94,7 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
         }).then(function(data) {
 
             setTimeout(function() {
-                window.reload();
+                location.reload();
             }, 1);
 
             window.location = 'http://47.95.3.92:3000/#!/orders/myorders';

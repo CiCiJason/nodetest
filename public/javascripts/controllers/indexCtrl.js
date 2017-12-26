@@ -27,7 +27,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
                 setTimeout(function() {
                     window.location = "#!/users/baseInfo";
-                }, 1);
+                }, 50);
                 location.reload();
 
             } else {

@@ -1,4 +1,11 @@
 app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
+
+    if (localStorage.getItem('loginName')) {
+        $scope.logined = 1;
+    } else {
+        $scope.logined = 0;
+    }
+
     $scope.login = 1;
     $scope.reg = 1;
 
@@ -27,9 +34,6 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
                 setTimeout(function() {
                     location.reload();
-                    setTimeout(function() {
-                        window.location = "#!/users/baseInfo";
-                    }, 1000);
                 }, 10);
 
 

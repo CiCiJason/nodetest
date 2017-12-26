@@ -7,7 +7,10 @@ app.controller('baseCtrl', ['$scope', '$http', '$window', function($scope, $http
 
     $scope.logout = function() {
         localStorage.clear();
-        window.reload();
+        setTimeout(function() {
+            window.reload();
+        }, 1);
+        window.location = "#!/index/main";
     }
 
 

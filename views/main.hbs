@@ -28,7 +28,7 @@
             <h2>优质&nbsp;&nbsp;快速&nbsp;&nbsp;专业&nbsp;&nbsp;灵活</h2>
             <p>世和基因从2008年开始致力于高通量测序（NGS）在肿瘤精准医学领域的临床转化研究，拥有中国最大的肿瘤NGS基因组数据库（>50000份样本）。世和基因拥有国内首家无瑕疵通过CAP验收认证的肿瘤临床检验中心，并已通过包括美国CAP、欧洲EMQN、中国卫计委临检中心室间质评在内的多项国内外权威认证。</p>
             <p>世和基因在加拿大和中国两地建有转化医学中心逾10,000平方米，拥有Illumina全系列高通量测序平台。经过近九年的研发投入和近四年的市场耕耘，世和基因已经与全国400多家三级甲等医院和肿瘤专科医院开展合作，成为中国肿瘤精准医学领域的领军企业。</p>
-            <div class='firstpage-img'>
+            <div class='firstpage-img' ng-show='logined'>
                 <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
             </div>
         </div>
@@ -111,6 +111,9 @@
                 </div>
             </div>
 
+        </div>
+        <div class="col-md-5 firstpage-img" ng-hide="logined">
+            <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
         </div>
 
 

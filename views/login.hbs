@@ -22,7 +22,7 @@
     <div class="row index-info">
         <div class="col-md-7">
             <h2>优质&nbsp;&nbsp;快速&nbsp;&nbsp;专业&nbsp;&nbsp;灵活</h2>
-            <div class='firstpage-img'>
+            <div class='firstpage-img' ng-show='logined'>
                 <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
             </div>
         </div>
@@ -102,6 +102,9 @@
                 </div>
             </div>
 
+        </div>
+        <div class='col-md-5 firstpage-img' ng-hide='logined'>
+            <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
         </div>
     </div>
 

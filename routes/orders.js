@@ -107,47 +107,51 @@ router.post('/orderDetail', function(req, res, next) {
 
                 //var id1 = String(req.query.id).slice(2, -2);
 
+                if (samples.length) {
+                    samples.map(function(item) {
 
-                samples.map(function(item) {
-
-                    var sampleData = new SampleService.SampleModel({
-                        SampleId: item.SampleId,
-                        type: item.type,
-                        laneNum: item.laneNum,
-                        fragmentLength: item.fragmentLength,
-                        splitData: item.splitData,
-                        INshihe: item.INshihe,
-                        MolarConcentration: item.MolarConcentration,
-                        volume: item.volume,
-                        proportion: item.proportion,
-                        accountName: req.session.accountId,
-                        orderId: id
-                    });
-
-                    if (item._id) {
-                        SampleService.updateById(item._id, sampleData, function(flag) {
-                            if (flag) {
-                                resultData.code = 0;
-                                //return res.json(resultData);
-                            }
+                        var sampleData = new SampleService.SampleModel({
+                            SampleId: item.SampleId,
+                            type: item.type,
+                            laneNum: item.laneNum,
+                            fragmentLength: item.fragmentLength,
+                            splitData: item.splitData,
+                            INshihe: item.INshihe,
+                            MolarConcentration: item.MolarConcentration,
+                            volume: item.volume,
+                            proportion: item.proportion,
+                            accountName: req.session.accountId,
+                            orderId: id
                         });
-                    } else {
 
-                        SampleService.save(sampleData, function(flag, msg) {
-                            if (flag) {
-                                resultData.code = 0;
-                                //console.log("新增sample成功");
-                                return res.json(resultData);
-                            } else {
-                                //resultData.code = 2;
-                                //resultData.message = "新增失败";
-                                console.log("新增sample失败");
-                                //return res.json(resultData);
-                            }
-                        })
-                    }
-                });
+                        if (item._id) {
+                            SampleService.updateById(item._id, sampleData, function(flag) {
+                                if (flag) {
+                                    resultData.code = 0;
+                                    return res.json(resultData);
+                                }
+                            });
+                        } else {
 
+                            SampleService.save(sampleData, function(flag, msg) {
+                                if (flag) {
+                                    resultData.code = 0;
+                                    //console.log("新增sample成功");
+                                    return res.json(resultData);
+                                } else {
+                                    resultData.code = 2;
+                                    resultData.message = "新增失败";
+                                    //console.log("新增sample失败");
+                                    return res.json(resultData);
+                                }
+                            })
+                        }
+                    });
+                } else {
+                    resultData.code = 0;
+                    //console.log("新增sample成功");
+                    return res.json(resultData);
+                }
 
 
             } else {
@@ -161,39 +165,44 @@ router.post('/orderDetail', function(req, res, next) {
 
         OrderService.save(data, function(flag, result) {
             if (flag) {
-
-                samples.map(function(item) {
-                    var sampleData = new SampleService.SampleModel({
-                        SampleId: item.SampleId,
-                        type: item.type,
-                        laneNum: item.laneNum,
-                        fragmentLength: item.fragmentLength,
-                        splitData: item.splitData,
-                        INshihe: item.INshihe,
-                        MolarConcentration: item.MolarConcentration,
-                        volume: item.volume,
-                        proportion: item.proportion,
-                        accountName: req.session.accountId,
-                        orderId: result
+                if (samples.length) {
+                    samples.map(function(item) {
+                        var sampleData = new SampleService.SampleModel({
+                            SampleId: item.SampleId,
+                            type: item.type,
+                            laneNum: item.laneNum,
+                            fragmentLength: item.fragmentLength,
+                            splitData: item.splitData,
+                            INshihe: item.INshihe,
+                            MolarConcentration: item.MolarConcentration,
+                            volume: item.volume,
+                            proportion: item.proportion,
+                            accountName: req.session.accountId,
+                            orderId: result
+                        });
+                        SampleService.save(sampleData, function(flag, msg) {
+                            if (flag) {
+                                resultData.code = 0;
+                                //console.log("新增sample成功");
+                                return res.json(resultData);
+                            } else {
+                                resultData.code = 2;
+                                resultData.message = "新增失败";
+                                //console.log("新增sample失败");
+                                return res.json(resultData);
+                            }
+                        })
                     });
-                    SampleService.save(sampleData, function(flag, msg) {
-                        if (flag) {
-                            //resultData.code = 0;
-                            console.log("新增sample成功");
-                            //return res.json(resultData);
-                        } else {
-                            //resultData.code = 2;
-                            //resultData.message = "新增失败";
-                            console.log("新增sample失败");
-                            //return res.json(resultData);
-                        }
-                    })
-                });
+                } else {
+                    resultData.code = 0;
+                    //console.log("新增sample成功");
+                    return res.json(resultData);
+                }
 
             } else {
                 resultData.code = 2;
                 resultData.message = "新增失败";
-                //return res.json(resultData);
+                return res.json(resultData);
             }
         });
 
@@ -242,5 +251,33 @@ router.get('/deleteSample', function(req, res, next) {
         }
     });
 });
+
+
+
+/**
+ * 删除用户的订单信息
+ */
+router.get('/orderDelete', function(req, res, next) {
+    var resultData = {};
+    var id = String(req.query.id).slice(4, -4);
+
+
+
+    if (id) { //有id
+        OrderService.deleteById(id, function(flag, msg) {
+            if (flag) {
+                resultData.code = 0;
+                resultData.message = "删除成功";
+                return res.json(resultData);
+            } else {
+                resultData.code = 2;
+                resultData.message = "删除失败";
+                return res.json(resultData);
+            }
+        });
+
+    }
+});
+
 
 module.exports = router;

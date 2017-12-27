@@ -86,6 +86,8 @@ exports.updateById = function(id, data, callback) {
         proportion: data.proportion
     }).then(function(data) {
         callback(true);
+    }, function(err) {
+        callback(false);
     });
 
 }

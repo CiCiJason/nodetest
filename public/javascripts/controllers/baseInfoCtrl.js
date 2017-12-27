@@ -62,4 +62,29 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
         $scope.show = !$scope.show;
     }
 
+
+    $scope.delete = function(id) {
+        $scope.deleteid = id;
+        $('#myModal').modal("show");
+    }
+
+    $scope.ensure = function(id) {
+        if (id) {
+            $http({
+                method: 'GET',
+                url: '/orders/orderDelete?' + accesstokenstring,
+                params: {
+                    id: id
+                }
+            }).then(function(data) {
+
+                $window.location.reload()
+
+            });
+        }
+    }
+    $scope.closeModal = function() {
+        $('#myModal').modal("hide");
+    }
+
 }]);

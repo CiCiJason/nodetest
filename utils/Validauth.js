@@ -38,11 +38,11 @@ module.exports = function(req, res, next) {
             try {
                 if (token == undefined || token.split('.').length !== 3) {
 
-                    var error = {
-                        "status": 400,
-                        "message": "未登录!",
-                        "backurl": url
-                    };
+                    // var error = {
+                    //     "status": 400,
+                    //     "message": "未登录!",
+                    //     "backurl": url
+                    // };
                     // res.render("error", error);
                     // return;
                     res.render('login', { title: '世和送样信息表系统', layout: null });
@@ -51,11 +51,11 @@ module.exports = function(req, res, next) {
 
                 var decoded = jwt.decode(token, secret);
                 if (decoded.exp <= Date.now()) {
-                    var error = {
-                        "status": 400,
-                        "message": "登录过期!",
-                        "backurl": url
-                    };
+                    // var error = {
+                    //     "status": 400,
+                    //     "message": "登录过期!",
+                    //     "backurl": url
+                    // };
                     // res.render("error", error);
                     // return;
                     res.render('login', { title: '世和送样信息表系统', layout: null });
@@ -64,12 +64,12 @@ module.exports = function(req, res, next) {
                     next();
                 }
             } catch (err) {
-                var error = {
-                    "status": 500,
-                    "message": "应用程序错误!",
-                    "backurl": url
+                // var error = {
+                //     "status": 500,
+                //     "message": "应用程序错误!",
+                //     "backurl": url
 
-                };
+                // };
                 //res.render("error", error);
 
                 res.render('login', { title: '世和送样信息表系统', layout: null });
@@ -77,11 +77,11 @@ module.exports = function(req, res, next) {
             }
         } else {
 
-            var error = {
-                "status": 401,
-                "message": "未登录，提供鉴权Token!",
-                "backurl": url
-            };
+            // var error = {
+            //     "status": 401,
+            //     "message": "未登录，提供鉴权Token!",
+            //     "backurl": url
+            // };
             // res.render("error", error);
             // return;
             res.render('login', { title: '世和送样信息表系统', layout: null });

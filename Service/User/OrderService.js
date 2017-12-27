@@ -78,6 +78,8 @@ exports.updateById = function(id, data, callback) {
         typeText: data.typeText
     }).then(function(data) {
         callback(true);
+    }, function(err) {
+        callback(false);
     });
 
 }
@@ -103,4 +105,16 @@ exports.find = function(id, callback) {
             callback(false, "查找失败");
         }
     });
+}
+
+
+//删除
+exports.deleteById = function(id, callback) {
+
+    OrderDetail.remove({ _id: id }, function(err, data) {
+        if (err) console.log("失败");
+    }).then(function(data) {
+        callback(true, "删除成功");
+    });
+
 }

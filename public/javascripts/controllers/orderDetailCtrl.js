@@ -93,33 +93,23 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
             }
         }).then(function(data) {
 
-                setTimeout(function() {
-                    window.location = 'http://47.95.3.92:3000/#!/orders/myorders';
-                }, 10);
-
-                location.reload();
-                //window.reload();
+                window.location = '#!/orders/myorders';
 
             },
-            function(data) {
-                console.log("系统出错" + data);
+            function(err) {
+                console.log("系统出错" + err);
 
             });
     }
 
 
-    $scope.closeModal = function() {
-        setTimeout(function() {
-            window.history.back();
-            setTimeout(function() {
-                $('#myModal').modal("hide");
-            }, 1);
-        }, 500);
-    }
-
-
     $scope.addSample = function() {
-        $scope.samples.push({});
+        if ($scope.samples) {
+            $scope.samples.push({});
+        } else {
+            $scope.samples = [];
+            $scope.samples.push({});
+        }
     }
 
 
@@ -156,11 +146,6 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
             $scope.samples = data.data.samples;
         });
     }
-
-
-    // $scope.removeSample = function(index) {
-    //     $scope.samples.splice(index, 1);
-    // }
 
 
     $scope.removeSample = function(id, index) {
@@ -212,6 +197,19 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
         } /* alternative way of uploading, send the file binary with the file's content-type.       Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed.        It could also be used to monitor the progress of a normal http post/put request with large data*/
         // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
     };
+
+    $scope.orderCancel = function() {
+        window.history.back();
+    }
+
+    $scope.closeModal = function() {
+        setTimeout(function() {
+            window.history.back();
+            setTimeout(function() {
+                $('#myModal').modal("hide");
+            }, 1);
+        }, 500);
+    }
 
 
 }]);

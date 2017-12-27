@@ -1,11 +1,3 @@
-{{!-- <h1>{{message}}</h1>
+ <h1>{{message}}</h1>
 <h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre> --}}
-
-<div class="serviceContant">
-    <input type="hidden" id="backurl" value={{backurl}} > </input>
-  <script>
-        localStorage.setItem('backurl',$("#backurl").val());
-        window.location=window.location.origin+"/login"
-  </script>
-</div>
+<pre>{{error.stack}}</pre>

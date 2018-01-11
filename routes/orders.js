@@ -107,7 +107,7 @@ router.post('/orderDetail', function(req, res, next) {
 
                 //var id1 = String(req.query.id).slice(2, -2);
 
-                if (samples.length) {
+                if (samples && samples.length) {
                     samples.map(function(item) {
 
                         var sampleData = new SampleService.SampleModel({
@@ -165,7 +165,7 @@ router.post('/orderDetail', function(req, res, next) {
 
         OrderService.save(data, function(flag, result) {
             if (flag) {
-                if (samples.length) {
+                if (samples && samples.length) {
                     samples.map(function(item) {
                         var sampleData = new SampleService.SampleModel({
                             SampleId: item.SampleId,

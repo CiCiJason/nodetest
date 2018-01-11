@@ -1,42 +1,9 @@
 var User = require("../../models/User.js");
 var bcrypt = require('bcrypt');
-//var mongo = require('mongodb');
 
-
-// function ValidationUserName(data, callback, next, Validation) {
-//     User.getSingleUser({ 'accountname': data.accountname }, function(finddata) {
-//         if (finddata) {
-//             //callback(false, '用户名已经存在');
-//             return false;
-//         } else {
-//             //Validation(next, data, callBack, Validation);
-//             return true; //用户名不存在，可以注册
-//         }
-
-//     });
-// }
-
-// function ValidationEmail(data, callback, next, Validation) {
-//     User.findOne({ 'email': data.email }, function(finddata) {
-//         if (finddata) {
-//             // callback(false, '邮箱已经存在');
-//             return false;
-//         } else {
-//             //Validation(next, data, callBack, Validation);
-//             return true; //邮箱不存在，可以注册
-//         }
-
-//     });
-// }
 
 function InsertUser(data, callback) {
 
-    // bcrypt.hash(data.password, 12, function(err, hash) {
-    //     var userInsert = new User({ accountname: data.accountname, email: data.email, password: hash });
-    //     userInsert.save().then(function(result) {
-    //         callback(result);
-    //     });
-    // });
     bcrypt.genSalt(12, function(err, salt) {
         bcrypt.hash(data.password, salt, function(err, hash) {
             // Store hash in your password DB.
@@ -67,11 +34,12 @@ exports.SignUp = function(data, callback) {
 exports.SignIn = function(data, callback) {
 
     User.findOne({ accountname: data.accountname }).then(function(finddata) {
+        var password = data.password ? data.password : data.oldpassword;
         var hash = finddata._doc.password;
         //var id1 = JSON.stringify({ id: finddata._id });
         //var id2 = JSON.parse(id1);
         var id = finddata._id;
-        bcrypt.compare(data.password, hash, function(err, res) {
+        bcrypt.compare(password, hash, function(err, res) {
             if (res == true) {
                 return callback(true, "登录成功", id);
             } else {
@@ -90,7 +58,7 @@ exports.getById = function(data, callback) {
 
 }
 
-//更新更改之后的信息
+//通过ID更改
 exports.updateById = function(id, data, callback) {
 
     User.update({ _id: id }, {
@@ -102,6 +70,25 @@ exports.updateById = function(id, data, callback) {
         callback(true, "修改成功");
     }, function(err, data) {
         callback(false, "修改失败");
+    });
+
+}
+
+//一般更改
+exports.update = function(accountname, newpassword, callback) {
+
+    bcrypt.genSalt(12, function(err, salt) {
+        bcrypt.hash(newpassword, salt, function(err, hash) {
+            // Store hash in your password DB.
+            User.update({ accountname: accountname }, {
+                password: hash
+            }).then(function(data) {
+                callback(true, "修改成功");
+            }, function(err, data) {
+                callback(false, "修改失败");
+            });
+
+        });
     });
 
 }

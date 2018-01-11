@@ -388,9 +388,12 @@
                                 <div class="col-md-8">
 
 
-                                    <textarea id="editor1" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod"
+                                    {{!-- <textarea id="editor1" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod"
                                         autofocus>
-                                    </textarea>
+                                    </textarea> --}}
+
+                                    <ng-simditor content="orderDetail.constructionMethod"></ng-simditor>
+
 
                                     <p class="note">注：提供建库方法、使用的试剂盒及品牌、以及建库所用接头引物序列（若为illumina系统接头只需要提供接头种类和名称）。若为特殊接头并需要特殊测序引物请客户标注清楚并将所需引物与样品一起寄送。</p>
                                 </div>
@@ -403,7 +406,10 @@
                                     <label for="">特定序列</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <textarea id="editor2" class="form-control" rows="15" name="specificSequence" ng-model="orderDetail.specificSequence" autofocus></textarea>
+                                    {{!-- <textarea id="editor2" class="form-control" rows="15" name="specificSequence" ng-model="orderDetail.specificSequence" autofocus></textarea> --}}
+
+                                    <ng-simditor content="orderDetail.specificSequence"></ng-simditor>
+
                                     <p class="note">注：如果文库是PCR产物建库或者插入片段中有特定序列，请在样品信息单中说明。GC含量：</p>
                                 </div>
                             </div>
@@ -415,7 +421,10 @@
                                     <label for="">备注</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <textarea id="editor3" class="form-control" rows="15" name="remarks" ng-model="orderDetail.remarks" autofocus></textarea>
+                                    {{!-- <textarea id="editor3" class="form-control" rows="15" name="remarks" ng-model="orderDetail.remarks" autofocus></textarea> --}}
+
+                                    <ng-simditor content="orderDetail.remarks"></ng-simditor>
+
                                     <p class="note">注：送样单的备注信息</p>
                                 </div>
                             </div>
@@ -424,22 +433,22 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <label for="">上传附件列表</label>
+                                    <label for="">下载附件列表</label>
                                 </div>
                                 <div class="col-md-8">
                                     <a href="/files/download/正则表达式.docx" download="基因文库送样信息表" class="btn btn-info">下载世和基因文库送样信息表</a>
-                                    <a href="/files/download/问题.docx" download="SR样本文库信息附表" class="btn btn-info">下载SR样本文库信息附表</a>
+                                    <a href="/files/download/正则表达式.docx" download="SR样本文库信息附表" class="btn btn-info">下载SR样本文库信息附表</a>
                                     <a href="/files/download/正则表达式.docx" download="世和基因样本要求" class="btn btn-info">世和基因样本要求</a>
                                 </div>
-                                <div class="col-md-1">
+                                {{!-- <div class="col-md-1">
                                     <a class="btn btn-primary more" href="" ng-click="addAttachment()">
                                         <span class="glyphicon glyphicon-plus"></span>
                                         上传附件</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
-                        <table class="table table-striped table-hover">
+                        {{!-- <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th>附件名称</th>
@@ -486,7 +495,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> --}}
 
 
                         {{!--
@@ -533,8 +542,8 @@
                                                 <br>度,2100结果)</th>
                                             <th style="width:140px">
                                                 是否拆分数据
-                                                <br>
-                                                <input type="checkbox" value="1" ng-model="all"> 全是
+                                                {{!-- <br>
+                                                <input type="checkbox" value="1" ng-model="all"> 全是 --}}
                                             </th>
                                             <th style="width:140px">样品是否在世和</th>
                                             <th>摩尔浓度</th>

@@ -32,9 +32,17 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
                 localStorage.setItem('loginName', data.data.accountname);
                 localStorage.setItem('accountId', data.data.userId);
 
+                // setTimeout(function() {
+                //     location.reload();
+                // }, 10);
+
+
                 setTimeout(function() {
-                    location.reload();
-                }, 10);
+                    window.location.href = "#!/index/main";
+                    setTimeout(function() {
+                        location.reload();
+                    }, 10);
+                }, 1);
 
 
 

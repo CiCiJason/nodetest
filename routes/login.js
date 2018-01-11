@@ -104,6 +104,59 @@ router.post("/", function(req, res, next) {
 });
 
 
+/**
+ * 修改密码
+ */
+router.post("/changePwd", function(req, res, next) {
+    var resultData = {};
+    var accountname = req.body.accountname;
+    //var accountId = req.body.accountId;
+    var oldpassword = req.body.oldpassword;
+    var newpassword = req.body.newpassword;
+    var renewpassword = req.body.renewpassword;
+
+
+    //var password = req.body.password;
+    var data = new User({
+        //_id: accountId,
+        accountname: accountname,
+        password: oldpassword
+    });
+
+    if (newpassword == renewpassword) {
+
+        UserService.SignIn(req.body, function(flag, msg, userId) {
+
+            if (flag) {
+
+                UserService.update(accountname, newpassword, function(flag, msg) {
+                    if (flag) {
+                        resultData.code = 0;
+                        resultData.message = "密码修改成功！";
+                        return res.json(resultData);
+                    } else {
+                        resultData.code = 3;
+                        resultData.message = "密码修改失败！";
+                        return res.json(resultData);
+                    }
+                })
+            } else {
+                resultData.code = 2;
+                resultData.message = "原密码输入不正确，请重新输入！";
+                return res.json(resultData);
+            }
+        });
+
+    } else {
+        resultData.code = 1;
+        resultData.message = "新密码前后两次不一致，请重新输入！";
+        return res.json(resultData);
+    }
+
+
+
+});
+
 
 
 

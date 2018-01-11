@@ -34,7 +34,7 @@ module.exports = function(req, res, next) {
         var accountId = (req.body && req.body.accountName) || (req.query && req.query.accountId) || req.headers['accountId'];
         var index = req.url.indexOf("?")
         var url = index > 0 ? req.url.substring(0, index) : req.url;
-        if (token || accountId) {
+        if (token && accountId) {
             try {
                 if (token == undefined || token.split('.').length !== 3) {
 

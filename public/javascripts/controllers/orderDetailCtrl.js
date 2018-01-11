@@ -1,25 +1,25 @@
-app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location) {
+app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', '$sce', function($scope, $http, $window, $location, $sce) {
 
-    var editor1 = new Simditor({
-        textarea: $('#editor1'),
-        // placeholder: '',
-        // defaultImage: 'images/image.png',
-        // params: {},
-        // upload: false,
-        // tabIndent: true,
-        // toolbar: true,
-        // toolbarFloat: true,
-        // toolbarFloatOffset: 0,
-        // toolbarHidden: false,
-        // pasteImage: false,
-        // cleanPaste: false
-    });
-    var editor2 = new Simditor({
-        textarea: $('#editor2')
-    });
-    var editor3 = new Simditor({
-        textarea: $('#editor3')
-    });
+    // var editor1 = new Simditor({
+    //     textarea: $('#editor1'),
+    //     // placeholder: '',
+    //     // defaultImage: 'images/image.png',
+    //     // params: {},
+    //     // upload: false,
+    //     // tabIndent: true,
+    //     // toolbar: true,
+    //     // toolbarFloat: true,
+    //     // toolbarFloatOffset: 0,
+    //     // toolbarHidden: false,
+    //     // pasteImage: false,
+    //     // cleanPaste: false
+    // });
+    // var editor2 = new Simditor({
+    //     textarea: $('#editor2')
+    // });
+    // var editor3 = new Simditor({
+    //     textarea: $('#editor3')
+    // });
 
     $scope.orderDetail = { samples: [] }; //orderdetail
     $scope.samples = $scope.orderDetail.samples; //sample lists
@@ -83,9 +83,11 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
                 totalNumberOfTubes: $scope.orderDetail.totalNumberOfTubes,
                 sampleDescription: $scope.orderDetail.sampleDescription,
                 sampleSpecies: $scope.orderDetail.sampleSpecies,
+
                 constructionMethod: $scope.orderDetail.constructionMethod,
                 specificSequence: $scope.orderDetail.specificSequence,
                 remarks: $scope.orderDetail.remarks,
+
                 samples: $scope.samples,
                 institutionText: angular.element(":input[name=institution] option:selected").text(),
                 addressText: angular.element(":input[name=address] option:selected").text(),
@@ -140,9 +142,11 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', fu
             $scope.orderDetail.totalNumberOfTubes = data.data.totalNumberOfTubes;
             $scope.orderDetail.sampleDescription = data.data.sampleDescription;
             $scope.orderDetail.sampleSpecies = data.data.sampleSpecies;
+
             $scope.orderDetail.constructionMethod = data.data.constructionMethod;
             $scope.orderDetail.specificSequence = data.data.specificSequence;
             $scope.orderDetail.remarks = data.data.remarks;
+
             $scope.samples = data.data.samples;
         });
     }

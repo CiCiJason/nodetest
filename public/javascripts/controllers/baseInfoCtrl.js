@@ -16,6 +16,11 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
         $scope.userInfo.email = data.data.email;
         $scope.userInfo.tel = data.data.tel;
     });
+
+    /**
+     * 显示样品列表
+     */
+
     $http({
         method: "GET",
         url: "/orders/getOrderInfo?" + accesstokenstring
@@ -36,7 +41,15 @@ app.controller('baseInfoCtrl', ['$scope', '$http', '$window', '$sce', function($
         }
 
         $scope.data = data.data;
+
+
+
+
+
+
     });
+
+
 
     $scope.saveUser = function() {
         if ($scope.userInfo.accountname && $scope.userInfo.username && $scope.userInfo.email && $scope.userInfo.tel) {

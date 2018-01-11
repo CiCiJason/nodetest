@@ -206,9 +206,39 @@ router.get('/getAddressLists', function(req, res, next) {
 
     var userid = req.session.accountId;
 
-    Address.find({ accountName: userid }).then(function(data) {
+    var limit = 10;
+    var counts = 0;
+    var pages = 0;
+    var page = Number(req.query.page) || 1;
 
-        return res.json(data);
+    // Address.find({ accountName: userid }).then(function(data) {
+
+    //     return res.json(data);
+    // });
+
+    Address.find({ accountName: userid }).count().then(function(counts) {
+
+        if (counts) {
+
+            //取值限制
+            pages = Math.ceil(counts / limit);
+            page = Math.max(page, 1);
+            page = Math.min(page, pages);
+
+            var skip = (page - 1) * limit;
+
+            Address.find({ accountName: userid }).limit(limit).skip(skip).then(function(address) {
+                return res.json({
+                    address: address,
+                    counts: counts,
+                    page: page,
+                    pages: pages
+                });
+            });
+        } else {
+            return res.json("查询失败");
+        }
+
     });
 
 });
@@ -277,7 +307,7 @@ router.post('/institutionDetail', function(req, res, next) {
     }
 });
 /**
- * 获取单个地址信息
+ * 获取单个机构信息
  */
 router.get('/getOneInstitution', function(req, res, next) {
     var resultData = {};
@@ -363,8 +393,38 @@ router.get('/getDefaultInistitution', function(req, res, next) {
 router.get('/getInistitutionLists', function(req, res, next) {
 
     var userid = req.session.accountId;
-    Institution.find({ accountName: userid }).then(function(data) {
-        return res.json(data);
+
+    var limit = 10;
+    var counts = 0;
+    var pages = 0;
+    var page = Number(req.query.page) || 1;
+
+    // Institution.find({ accountName: userid }).then(function(data) {
+    //     return res.json(data);
+    // });
+    Institution.find({ accountName: userid }).count().then(function(counts) {
+
+        if (counts) {
+
+            //取值限制
+            pages = Math.ceil(counts / limit);
+            page = Math.max(page, 1);
+            page = Math.min(page, pages);
+
+            var skip = (page - 1) * limit;
+
+            Institution.find({ accountName: userid }).limit(limit).skip(skip).then(function(institution) {
+                return res.json({
+                    institution: institution,
+                    counts: counts,
+                    page: page,
+                    pages: pages
+                });
+            });
+        } else {
+            return res.json("查询失败");
+        }
+
     });
 });
 

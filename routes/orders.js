@@ -38,7 +38,9 @@ router.get('/getOrderInfo', function(req, res, next) {
 
     var userid = req.session.accountId;
 
-    OrderService.getOrderLists(userid, function(flag, data) {
+    var page = Number(req.query.page) || 1;
+
+    OrderService.getOrderLists(page, userid, function(flag, data) {
         if (flag) {
             return res.json(data);
         } else {

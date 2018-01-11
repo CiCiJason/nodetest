@@ -85,12 +85,42 @@ exports.updateById = function(id, data, callback) {
 }
 
 //获取送样信息列表
-exports.getOrderLists = function(id, callback) {
+exports.getOrderLists = function(page, id, callback) {
 
-    OrderDetail.find({ accountName: id }).sort({ "createDate": -1 }).then(function(data) {
-        callback(true, data);
-    }, function(err, data) {
-        callback(false, "查找失败");
+
+    var limit = 10;
+    var counts = 0;
+    var pages = 0;
+
+    // OrderDetail.find({ accountName: id }).sort({ "createDate": -1 }).then(function(data) {
+    //     callback(true, data);
+    // }, function(err, data) {
+    //     callback(false, "查找失败");
+    // });
+
+    OrderDetail.find({ accountName: id }).count().then(function(counts) {
+
+        if (counts) {
+
+            //取值限制
+            pages = Math.ceil(counts / limit);
+            page = Math.max(page, 1);
+            page = Math.min(page, pages);
+
+            var skip = (page - 1) * limit;
+
+            OrderDetail.find({ accountName: id }).sort({ "createDate": -1 }).limit(limit).skip(skip).then(function(OrderDetail) {
+                callback(true, {
+                    OrderDetail: OrderDetail,
+                    counts: counts,
+                    page: page,
+                    pages: pages
+                })
+            });
+        } else {
+            callback(false, "查询失败");
+        }
+
     });
 
 }

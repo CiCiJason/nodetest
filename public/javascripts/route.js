@@ -6,7 +6,7 @@ var app = angular.module('orderSystem', ['ngRoute', 'ngMessages', 'angular-simdi
 /**
  * 系统设置
  */
-app.config(['$routeProvider', '$interpolateProvider', function($routeProvider, $interpolateProvider, ACCESS_LEVELS) {
+app.config(['$routeProvider', '$interpolateProvider', function($routeProvider, $interpolateProvider) {
 
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');

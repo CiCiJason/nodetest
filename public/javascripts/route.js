@@ -1,6 +1,6 @@
 var accesstokenstring = "access_token=" + localStorage.getItem('access_token') + "&accountId=" + localStorage.getItem('accountId');
 
-var app = angular.module('orderSystem', ['ngRoute', 'ngMessages', 'angular-simditor', 'cici.pagination']);
+var app = angular.module('orderSystem', ['ngRoute', 'ngMessages','cici.pagination','angular.simditor']);
 
 
 /**

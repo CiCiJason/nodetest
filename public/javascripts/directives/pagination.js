@@ -1,4 +1,4 @@
-angular.module('cici.pagination', []).directive('ciciPagination', function() {
+angular.module('cici.pagination', []).directive('ciciPagination', [function() {
     return {
         restrict: 'EA',
         replace: true,
@@ -80,4 +80,4 @@ angular.module('cici.pagination', []).directive('ciciPagination', function() {
 
         }
     }
-});
+}]);

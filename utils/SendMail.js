@@ -7,7 +7,6 @@ var transporter = nodemailer.createTransport({
     auth: {
         user: '501981226@qq.com', //
         pass: 'nlgdmdecwxhsbbgb' //授权码,通过QQ获取  
-
     }
 });
 

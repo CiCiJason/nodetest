@@ -20,40 +20,60 @@ router.post('/register', function(req, res, next) {
     var password = req.body.password;
     var repassword = req.body.repassword;
     var email = req.body.email;
-    var data = new User({
-        accountname: accountname,
-        password: password,
-        repassword: repassword,
-        email: email
-    });
-    //console.log(data);
-    if (!accountname && !password && !repassword && !email) {
-        resultData.code = 1;
-        resultData.message = "请填写完整的注册信息";
-        return res.json(resultData);
-    } else if (password != repassword) {
-        resultData.code = 2;
-        resultData.message = "两次输入密码不一致";
-        return res.json(resultData);
-    } else {
-        UserService.SignUp(data, function(flag, msg) {
+    var vertifycode = req.body.vertifycode;
+
+    var ensure = req.body.ensure;
+
+    if (ensure) {
+        var data = {
+            accountname: accountname,
+            email: email
+        };
+        UserService.SignUp(data, ensure, function(flag, msg) {
             if (flag) {
                 resultData.code = 0;
-                resultData.message = "注册成功";
+                resultData.message = "可以注册";
                 return res.json(resultData);
             } else {
-                resultData.code = 3;
-                resultData.message = "用户名或者邮箱已经被注册";
+                resultData.code = 1;
+                resultData.message = msg;
                 return res.json(resultData);
             }
         });
+    } else {
+        var data = new User({
+            accountname: accountname,
+            password: password,
+            repassword: repassword,
+            email: email
+        });
+        if (!accountname && !password && !repassword && !email) {
+            resultData.code = 1;
+            resultData.message = "请填写完整的注册信息";
+            return res.json(resultData);
+        } else if (password != repassword) {
+            resultData.code = 2;
+            resultData.message = "两次输入密码不一致";
+            return res.json(resultData);
+        } else {
+            UserService.SignUp(data, 'register', function(flag, msg) {
+                if (flag) {
+                    resultData.code = 0;
+                    resultData.message = "注册成功";
+                    return res.json(resultData);
+                } else {
+                    resultData.code = 3;
+                    resultData.message = "用户名或者邮箱已经被注册";
+                    return res.json(resultData);
+                }
+            });
+        }
     }
 });
 
 /**
  * 用户登录
  */
-
 router.post("/", function(req, res, next) {
     var resultData = {};
     var accountname = req.body.accountname;
@@ -66,30 +86,18 @@ router.post("/", function(req, res, next) {
         UserService.SignIn(req.body, function(flag, msg, userId) {
 
             if (flag) {
-
                 req.session.accountname = req.body.accountname;
                 req.session.accountId = userId;
 
-
                 resultData.code = 0;
                 resultData.message = msg;
-                resultData.backurl = req.baseUrl;
+                //resultData.backurl = req.baseUrl;
                 resultData.accountname = req.body.accountname;
                 resultData.userId = userId;
 
                 return res.json(Object.assign({}, jwthelper.genToken(userId), resultData));
                 //return res.json(resultData);
-            }
-
-            // if (flag) {
-            //     resultData.code = 0;
-            //     resultData.message = msg;
-            //     resultData.token = jwthelper.genToken(req.body.accountname);
-            //     resultData.accountname = req.body.accountname;
-            //     //console.log(resultData.token);
-            //     return res.json(resultData);
-            // }
-            else {
+            } else {
                 resultData.code = 2;
                 resultData.message = msg;
                 return res.json(resultData);

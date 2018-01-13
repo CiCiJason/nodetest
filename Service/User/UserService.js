@@ -18,35 +18,57 @@ function InsertUser(data, callback) {
 
 
 //注册
-exports.SignUp = function(data, callback) {
-    User.find({ $or: [{ 'accountname': data.accountname }, { 'email': data.email }] }, function(err, finddata) {
-        if (!finddata.length) {
-            InsertUser(data, function(result) {
-                return callback(true, "注册成功");
-            });
-        } else {
-            return callback(false, "用户名或者邮箱已经被注册");
-        }
-    });
+exports.SignUp = function(data, type, callback) {
+    if (type == "accountname") {
+        User.findOne({ accountname: data.accountname }).then(function(finddata) {
+            if (finddata) {
+                return callback(false, "用户名已经被注册");
+            } else {
+                return callback(true, "用户名可以注册");
+            }
+        });
+    }
+    if (type == "email") {
+        User.findOne({ email: data.email }).then(function(finddata) {
+            if (finddata) {
+                return callback(false, "邮箱已经被注册");
+            } else {
+                return callback(true, "用户名可以注册");
+            }
+        });
+    }
+    if (type == "register") {
+        User.find({ $or: [{ 'accountname': data.accountname }, { 'email': data.email }] }, function(err, finddata) {
+            if (!finddata.length) {
+                InsertUser(data, function(result) {
+                    return callback(true, "注册成功");
+                });
+            } else {
+                return callback(false, "用户名或者邮箱已经被注册");
+            }
+        });
+    }
 }
 
 //登录
 exports.SignIn = function(data, callback) {
 
     User.findOne({ accountname: data.accountname }).then(function(finddata) {
-        var password = data.password ? data.password : data.oldpassword;
-        var hash = finddata._doc.password;
-        //var id1 = JSON.stringify({ id: finddata._id });
-        //var id2 = JSON.parse(id1);
-        var id = finddata._id;
-        bcrypt.compare(password, hash, function(err, res) {
-            if (res == true) {
-                return callback(true, "登录成功", id);
-            } else {
-                return callback(false, "账户名或者密码错误", null);
+        if (finddata) {
+            var password = data.password ? data.password : data.oldpassword;
+            var hash = finddata._doc.password;
+            var id = finddata._id;
+            bcrypt.compare(password, hash, function(err, res) {
+                if (res == true) {
+                    return callback(true, "登录成功", id);
+                } else {
+                    return callback(false, "密码错误", null);
+                }
+            });
+        } else {
+            return callback(false, "用户名不存在", null);
+        }
 
-            }
-        });
     });
 }
 

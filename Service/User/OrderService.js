@@ -30,10 +30,10 @@ exports.save = function(data, callBack) {
 exports.getorderId = function(callBack) {
 
     OrderDetail.find().sort({ 'orderId': -1 }).then(function(finddata) {
-        if (finddata) {
-            callBack(true, finddata[0].orderId);
+        if (finddata.length == 0) {
+            callBack(false, 10000);
         } else {
-            callBack(false, "新增失败");
+            callBack(true, finddata[0].orderId);
         }
     });
 }

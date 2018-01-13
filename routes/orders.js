@@ -27,9 +27,7 @@ router.get('/getDefaultOrderId', function(req, res, next) {
             data++;
             return res.json(data);
         } else {
-            resultData.code = 2;
-            resultData.message = "删除失败";
-            return res.json(resultData);
+            return res.json(data);
         }
     });
 });

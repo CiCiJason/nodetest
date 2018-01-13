@@ -2,7 +2,7 @@ var express = require('express');
 var captchapng = require('captchapng');
 var SendMail = require('../../utils/SendMail');
 
-
+//生成图片的验证码
 module.exports.generateCode = function() {
         var code = parseInt(Math.random() * 9000 + 1000);
         req.session.checkcode = code;

@@ -44,7 +44,8 @@
                             <input type="text" class="form-control" name="accountname" ng-model='user.accountname' placeholder="用户名" ng-minlength='6'
                                 ng-maxlength='20' required/>
                             <div class="error" ng-messages="loginForm.accountname.$error">
-                                {{!-- <div ng-message="required" style="color:green">请输入账号(数字,字母的组合)</div> --}}
+                                {{!--
+                                <div ng-message="required" style="color:green">请输入账号(数字,字母的组合)</div> --}}
                                 <div ng-message="minlength" style="color:red">账户名至少为6位</div>
                                 <div ng-message="maxlength" style="color:red">账户名最多为20位</div>
                             </div>
@@ -52,7 +53,8 @@
                             <input type="password" class="form-control" name="password" ng-model='user.password' placeholder="密码" ng-minlength='6' ng-maxlength='20'
                                 required/>
                             <div class="error" ng-messages="loginForm.password.$error">
-                                {{!-- <div ng-message="required" style="color:green">请输入密码(数字,字母的组合)</div> --}}
+                                {{!--
+                                <div ng-message="required" style="color:green">请输入密码(数字,字母的组合)</div> --}}
                                 <div ng-message="minlength" style="color:red">密码至少为6位</div>
                                 <div ng-message="maxlength" style="color:red">密码最多为20位</div>
                             </div>
@@ -75,13 +77,16 @@
                     <form role="form" name='regForm' novalidate ng-submit="regSubmit()">
                         <div class="form-group">
                             <input type="text" name='accountname' class="form-control" ng-model='user.accountname' placeholder="用户名(数字,字母的组合)" ng-minlength='6'
-                                ng-maxlength='20' required ng-blur="querySameUser(1)" /> {{!--
+                                ng-maxlength='20' required ng-blur="querySameUser(1)" ng-focus="clearInfo(1)"/> {{!--
                             <div>请输入账号</div>--}}
                             <div class="error" ng-messages="regForm.accountname.$error">
                                 {{!--
                                 <div ng-message="required" style="color:green">请输入账号(数字,字母的组合)</div> --}}
                                 <div ng-message="minlength" style="color:red">账户名至少为6位</div>
                                 <div ng-message="maxlength" style="color:red">请输入不超过20个字符的账号</div>
+                            </div>
+                            <div style="color:red">
+                                <b>[[resultmsgaccountname]]</b>
                             </div>
 
                             <input type="password" class="form-control" name="password" ng-model='user.password' id="" placeholder="密码(数字,字母的组合)" ng-minlength='6'
@@ -99,8 +104,7 @@
                                 <div ng-message="required" style="color:green">请再次输入密码</div> --}}
                             </div>
 
-                            <input type="email" class="form-control" name="email" ng-model='user.email' placeholder="请输入您的常用邮箱" required ng-blur="querySameUser(2)"
-                            />
+                            <input type="email" class="form-control" name="email" ng-model='user.email' placeholder="请输入您的常用邮箱" required ng-blur="querySameUser(2)" ng-focus="clearInfo(2)"/>
                             <div class="error" ng-messages="regForm.email.$error">
                                 {{!--
                                 <div ng-message="required" style="color:green">请输入您的常用邮箱</div> --}}
@@ -108,22 +112,20 @@
                             </div>
 
                             <div ng-show="hasVertifyCode">
-                                <input type="text" class="form-control" name="vertifycode" ng-model='user.vertifycode' placeholder="请输入您邮箱收到的验证码" ng-minlength='6'
-                                    ng-maxlength='6' required/>
+                                <input type="text" class="form-control" name="vertifycode" ng-model='user.vertifycode' placeholder="请输入您邮箱收到的验证码" ng-minlength='4'
+                                    ng-maxlength='4' required/>
                                 <div class="error" ng-messages="regForm.vertifycode.$error">
                                     {{!--
                                     <div ng-message="required" style="color:green">请输入您邮箱收到的验证码</div> --}}
-                                    <div ng-message="minlength" style="color:red">请输入6位数的验证码</div>
-                                    <div ng-message="maxlength" style="color:red">请输入6位数的验证码</div>
+                                    <div ng-message="minlength" style="color:red">请输入4位数的验证码</div>
+                                    <div ng-message="maxlength" style="color:red">请输入4位数的验证码</div>
                                 </div>
                             </div>
+                            <div style="color:red">
+                                <b>[[resultmsgemail]]</b>
+                            </div>
                         </div>
-                        <div style="color:red">
-                            <b>[[resultmsgaccountname]]</b>
-                        </div>
-                        <div style="color:red">
-                            <b>[[resultmsgemail]]</b>
-                        </div>
+
                         <div style="color:red">
                             <b>[[resultmsg]]</b>
                         </div>

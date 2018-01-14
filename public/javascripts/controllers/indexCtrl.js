@@ -65,7 +65,19 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
         if (!accountname && !password && !repassword && !email) {
             if (!$scope.hasVertifyCode && $scope.resultmsgaccountname == "" && $scope.resultmsgemail == "") {
-                $scope.hasVertifyCode = 1;
+                //$scope.hasVertifyCode = 1;
+                $http({
+                    method: "POST",
+                    url: "/login/getVertifycode?" + accesstokenstring,
+                    data: {
+                        email: $scope.user.email
+                    }
+                }).then(function(data) {
+                    $scope.userInfo.accountname = data.data.accountname;
+                    $scope.userInfo.username = data.data.username;
+                    $scope.userInfo.email = data.data.email;
+                    $scope.userInfo.tel = data.data.tel;
+                });
             } else {
                 if (!vertifycode) {
                     $http({
@@ -148,5 +160,13 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
         }
     }
 
+    $scope.clearInfo(type) = function() {
+        if (type == "1") {
+            $scope.resultmsgaccountname = "";
+        }
+        if (type == "2") {
+            $scope.resultmsgemail = "";
+        }
+    }
 
 }]);

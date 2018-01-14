@@ -41,17 +41,23 @@ router.post('/register', function(req, res, next) {
             }
         });
     } else {
-        var data = new User({
+        var data = {
             accountname: accountname,
             password: password,
             repassword: repassword,
-            email: email
-        });
-        if (!accountname && !password && !repassword && !email) {
+            email: email,
+            vertifycode: vertifycode
+        };
+        CodeService.generateCodeEmail
+        if (!accountname && !password && !repassword && !email && !vertifycode) {
             resultData.code = 1;
             resultData.message = "请填写完整的注册信息";
             return res.json(resultData);
         } else if (password != repassword) {
+            resultData.code = 2;
+            resultData.message = "两次输入密码不一致";
+            return res.json(resultData);
+        } else if (vertifycode != CodeService) { /////////////////验证码
             resultData.code = 2;
             resultData.message = "两次输入密码不一致";
             return res.json(resultData);
@@ -165,7 +171,19 @@ router.post("/changePwd", function(req, res, next) {
 
 });
 
+/**
+ * 获取邮箱验证码
+ */
+router.post("/getVertifycode", function(req, res, next) {
+    var resultData = {};
+    var email = req.body.email;
 
+    CodeService.generateCodeEmail(email);
+
+
+
+
+});
 
 
 module.exports = router;

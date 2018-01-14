@@ -48,8 +48,6 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
                     //$('#myModal').modal("show");
                 }
             });
-        } else {
-            $scope.resultmsg = "用户名和邮箱不能为空";
         }
     };
 

@@ -82,9 +82,9 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', '$
                 sampleDescription: $scope.orderDetail.sampleDescription,
                 sampleSpecies: $scope.orderDetail.sampleSpecies,
 
-                constructionMethod: angular.element("#editor1").val(),
-                specificSequence: angular.element("#editor2").val(),
-                remarks: angular.element("#editor3").val(),
+                constructionMethod: $scope.orderDetail.constructionMethod,
+                specificSequence: $scope.orderDetail.specificSequence,
+                remarks: $scope.orderDetail.remarks,
 
                 samples: $scope.samples,
                 institutionText: angular.element(":input[name=institution] option:selected").text(),

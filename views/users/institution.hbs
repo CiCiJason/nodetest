@@ -39,18 +39,18 @@
                                 <label for="">国家</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="country" />
+                                <input type="text" class="form-control" name="country" ng-model="institutionquery.country"/>
                             </div>
 
                             <div class="col-md-2">
                                 <label for="">机构名称(学校/公司/医院)</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="institutionName" />
+                                <input type="text" class="form-control" name="institutionName"  ng-model="institutionquery.institutionName"/>
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-primary">查询</button>
-                                <button type="submit" class="btn btn-primary">取消</button>
+                                <a class="btn btn-primary" ng-click="query()">查询</a>
+                                <a class="btn btn-primary" ng-click="queryCancel()">取消</a>
                             </div>
                         </div>
                     </div>

@@ -392,6 +392,9 @@ router.get('/getDefaultInistitution', function(req, res, next) {
 //获得机构列表
 router.get('/getInistitutionLists', function(req, res, next) {
 
+    var querycountry = req.query.querycountry;
+    var queryinstitutionName = req.query.queryinstitutionName;
+
     var userid = req.session.accountId;
 
     var limit = 10;
@@ -402,30 +405,68 @@ router.get('/getInistitutionLists', function(req, res, next) {
     // Institution.find({ accountName: userid }).then(function(data) {
     //     return res.json(data);
     // });
-    Institution.find({ accountName: userid }).count().then(function(counts) {
+    if (querycountry || queryinstitutionName) {
+        Institution.find({ accountName: userid }).count().then(function(counts) {
 
-        if (counts) {
+            if (counts) {
 
-            //取值限制
-            pages = Math.ceil(counts / limit);
-            page = Math.max(page, 1);
-            page = Math.min(page, pages);
+                //取值限制
+                pages = Math.ceil(counts / limit);
+                page = Math.max(page, 1);
+                page = Math.min(page, pages);
 
-            var skip = (page - 1) * limit;
+                var skip = (page - 1) * limit;
 
-            Institution.find({ accountName: userid }).limit(limit).skip(skip).then(function(institution) {
-                return res.json({
-                    institution: institution,
-                    counts: counts,
-                    page: page,
-                    pages: pages
+                Institution.find({ accountName: userid }).limit(limit).skip(skip).then(function(institution) {
+                    return res.json({
+                        institution: institution,
+                        counts: counts,
+                        page: page,
+                        pages: pages
+                    });
                 });
-            });
-        } else {
-            return res.json("查询失败");
-        }
 
-    });
+                Institution.find({ 'accountName': userid, $or: [{ 'country': querycountry }, { 'institutionName': queryinstitutionName }] }, function(err, finddata) {
+                    if (!finddata.length) {
+                        ////
+                    } else {
+                        ////
+                    }
+                });
+
+
+            } else {
+                return res.json("查询失败");
+            }
+
+        });
+    } else {
+        Institution.find({ accountName: userid }).count().then(function(counts) {
+
+            if (counts) {
+
+                //取值限制
+                pages = Math.ceil(counts / limit);
+                page = Math.max(page, 1);
+                page = Math.min(page, pages);
+
+                var skip = (page - 1) * limit;
+
+                Institution.find({ accountName: userid }).limit(limit).skip(skip).then(function(institution) {
+                    return res.json({
+                        institution: institution,
+                        counts: counts,
+                        page: page,
+                        pages: pages
+                    });
+                });
+            } else {
+                return res.json("查询失败");
+            }
+
+        });
+    }
+
 });
 
 

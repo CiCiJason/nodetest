@@ -65,18 +65,16 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
 
         if (!accountname && !password && !repassword && !email) {
             if (!$scope.hasVertifyCode && $scope.resultmsgaccountname == "" && $scope.resultmsgemail == "") {
-                //$scope.hasVertifyCode = 1;
                 $http({
                     method: "POST",
-                    url: "/login/getVertifycode?" + accesstokenstring,
+                    url: "/login/getVertifycode",
                     data: {
                         email: $scope.user.email
                     }
                 }).then(function(data) {
-                    $scope.userInfo.accountname = data.data.accountname;
-                    $scope.userInfo.username = data.data.username;
-                    $scope.userInfo.email = data.data.email;
-                    $scope.userInfo.tel = data.data.tel;
+                    if (data.data.code == 0) {
+                        $scope.hasVertifyCode = 1;
+                    }
                 });
             } else {
                 if (!vertifycode) {
@@ -104,19 +102,8 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
     }
 
     $scope.closeModal = function() {
-        setTimeout(function() {
-
-            setTimeout(function() {
-
-                window.location = "#!/users/baseInfo";
-
-                $('#myModal').modal("hide");
-
-            }, 10);
-
-            location.reload();
-
-        }, 500);
+        $('#myModal').modal("hide");
+        location.reload();
     }
 
     $scope.querySameUser = function(name) {
@@ -160,7 +147,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $htt
         }
     }
 
-    $scope.clearInfo(type) = function() {
+    $scope.clearInfo = function(type) {
         if (type == "1") {
             $scope.resultmsgaccountname = "";
         }

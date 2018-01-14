@@ -24,6 +24,10 @@ router.post('/register', function(req, res, next) {
 
     var ensure = req.body.ensure;
 
+
+    var resultCheckCode = CodeService.CheckCode(req);
+
+
     if (ensure) {
         var data = {
             accountname: accountname,
@@ -57,9 +61,9 @@ router.post('/register', function(req, res, next) {
             resultData.code = 2;
             resultData.message = "两次输入密码不一致";
             return res.json(resultData);
-        } else if (vertifycode != CodeService) { /////////////////验证码
-            resultData.code = 2;
-            resultData.message = "两次输入密码不一致";
+        } else if (!resultCheckCode) { /////////////////验证码
+            resultData.code = 3;
+            resultData.message = "您输入的邮箱验证码不正确";
             return res.json(resultData);
         } else {
             UserService.SignUp(data, 'register', function(flag, msg) {
@@ -132,7 +136,6 @@ router.post("/changePwd", function(req, res, next) {
 
     //var password = req.body.password;
     var data = new User({
-        //_id: accountId,
         accountname: accountname,
         password: oldpassword
     });
@@ -176,12 +179,16 @@ router.post("/changePwd", function(req, res, next) {
  */
 router.post("/getVertifycode", function(req, res, next) {
     var resultData = {};
-    var email = req.body.email;
 
-    CodeService.generateCodeEmail(email);
-
-
-
+    CodeService.generateCodeEmail(req, function(flag) {
+        if (flag) {
+            resultData.code = 0;
+            return res.json(resultData);
+        } else {
+            resultData.code = 1;
+            return res.json(resultData);
+        }
+    });
 
 });
 

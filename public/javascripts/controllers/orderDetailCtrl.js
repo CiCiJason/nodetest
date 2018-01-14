@@ -1,5 +1,10 @@
 app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', '$sce', function($scope, $http, $window, $location, $sce) {
 
+
+
+    $scope.orderDetail = { samples: [] }; //orderdetail
+    $scope.samples = $scope.orderDetail.samples; //sample lists
+
     // var editor1 = new Simditor({
     //     textarea: $('#editor1'),
     //     // placeholder: '',
@@ -20,11 +25,6 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', '$
     // var editor3 = new Simditor({
     //     textarea: $('#editor3')
     // });
-
-    $scope.orderDetail = { samples: [] }; //orderdetail
-    $scope.samples = $scope.orderDetail.samples; //sample lists
-
-
 
     function init() {
         $http({
@@ -55,11 +55,9 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', '$
     init();
 
 
-
-
-
     //提交保存表单
     $scope.orderSave = function() {
+
         $http({
             method: "POST",
             url: '/orders/orderDetail?' + accesstokenstring,
@@ -84,9 +82,9 @@ app.controller('orderDetailCtrl', ['$scope', '$http', '$window', '$location', '$
                 sampleDescription: $scope.orderDetail.sampleDescription,
                 sampleSpecies: $scope.orderDetail.sampleSpecies,
 
-                constructionMethod: $scope.orderDetail.constructionMethod,
-                specificSequence: $scope.orderDetail.specificSequence,
-                remarks: $scope.orderDetail.remarks,
+                constructionMethod: angular.element("#editor1").val(),
+                specificSequence: angular.element("#editor2").val(),
+                remarks: angular.element("#editor3").val(),
 
                 samples: $scope.samples,
                 institutionText: angular.element(":input[name=institution] option:selected").text(),

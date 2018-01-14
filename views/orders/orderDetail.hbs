@@ -387,13 +387,8 @@
                                 </div>
                                 <div class="col-md-8">
 
-
-                                    {{!-- <textarea id="editor1" class="form-control" rows="15" name="constructionMethod" ng-model="orderDetail.constructionMethod"
-                                        autofocus>
-                                    </textarea> --}}
-
                                     <ng-simditor content="orderDetail.constructionMethod"></ng-simditor>
-
+                                    {{!-- <textarea style="color:red" name="constructionMethod" id="editor1" rows="10" ng-model="orderDetail.constructionMethod"></textarea> --}}
 
                                     <p class="note">注：提供建库方法、使用的试剂盒及品牌、以及建库所用接头引物序列（若为illumina系统接头只需要提供接头种类和名称）。若为特殊接头并需要特殊测序引物请客户标注清楚并将所需引物与样品一起寄送。</p>
                                 </div>
@@ -406,8 +401,8 @@
                                     <label for="">特定序列</label>
                                 </div>
                                 <div class="col-md-8">
-                                    {{!-- <textarea id="editor2" class="form-control" rows="15" name="specificSequence" ng-model="orderDetail.specificSequence" autofocus></textarea> --}}
 
+                                    {{!-- <textarea name="specificSequence" id="editor2" rows="10" ng-model="orderDetail.specificSequence"></textarea> --}}
                                     <ng-simditor content="orderDetail.specificSequence"></ng-simditor>
 
                                     <p class="note">注：如果文库是PCR产物建库或者插入片段中有特定序列，请在样品信息单中说明。GC含量：</p>
@@ -421,8 +416,8 @@
                                     <label for="">备注</label>
                                 </div>
                                 <div class="col-md-8">
-                                    {{!-- <textarea id="editor3" class="form-control" rows="15" name="remarks" ng-model="orderDetail.remarks" autofocus></textarea> --}}
 
+                                    {{!-- <textarea name="remarks" id="editor3" rows="10" ng-model="orderDetail.remarks"></textarea> --}}
                                     <ng-simditor content="orderDetail.remarks"></ng-simditor>
 
                                     <p class="note">注：送样单的备注信息</p>

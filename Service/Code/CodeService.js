@@ -36,30 +36,14 @@ var SendMail = require('../../utils/SendMail');
 // }
 
 
-//生成邮箱的验证码
-// module.exports.generateCodeEmail = function() {
-//         var code = parseInt(Math.random() * 9000 + 1000);
-//         var toEmail = req.body.email;
-//         SendMail.SendMail(toEmail, code, next);
-//     }
-//     //校验邮箱验证码
-// module.exports.checkEmailCode = function() {
-//     return req.session.codeEmail = req.body.codeEmail;
-// }
-
-module.exports = function() {
-
+exports.generateCodeEmail = function(req, callback) {
     var code = parseInt(Math.random() * 9000 + 1000);
-    //var toEmail = req.body.email;
-    console.log(code);
-    //console.log(toEmail);
-
-    var generateCodeEmail = function(toEmail) {
-        SendMail.SendMail(toEmail, code);
-    }
-
-    var checkEmailCode = function() {
-        return req.session.codeEmail = req.body.codeEmail;
-    }
-
+    req.session.codeEmail = code;
+    req.session.email = req.body.email;
+    var result = SendMail(code, req.body.email, function(result) {
+        callback(result);
+    });
+}
+exports.CheckCode = function(req) {
+    return req.session.codeEmail == req.body.vertifycode;
 }

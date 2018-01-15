@@ -236,7 +236,12 @@ router.get('/getAddressLists', function(req, res, next) {
                 });
             });
         } else {
-            return res.json("查询失败");
+            return res.json({
+                address: "",
+                counts: 0,
+                page: 1,
+                pages: 1
+            });
         }
 
     });
@@ -466,7 +471,12 @@ router.get('/getInistitutionLists', function(req, res, next) {
                     });
                 });
             } else {
-                return res.json("查询失败");
+                return res.json({
+                    institution: '',
+                    counts: 0,
+                    page: 1,
+                    pages: 1
+                });
             }
 
         });

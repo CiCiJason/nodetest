@@ -141,7 +141,12 @@ exports.getOrderLists = function(isquery, findOption, page, id, callback) {
                     })
                 });
             } else {
-                callback(false, "查询失败");
+                callback(false, {
+                    OrderDetail: '',
+                    counts: 0,
+                    page: 1,
+                    pages: 1
+                });
             }
 
         });

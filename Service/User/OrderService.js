@@ -85,43 +85,67 @@ exports.updateById = function(id, data, callback) {
 }
 
 //获取送样信息列表
-exports.getOrderLists = function(page, id, callback) {
-
+exports.getOrderLists = function(isquery, findOption, page, id, callback) {
 
     var limit = 10;
     var counts = 0;
     var pages = 0;
 
-    // OrderDetail.find({ accountName: id }).sort({ "createDate": -1 }).then(function(data) {
-    //     callback(true, data);
-    // }, function(err, data) {
-    //     callback(false, "查找失败");
-    // });
+    if (isquery) {
+        OrderDetail.find(findOption).count().then(function(counts) {
 
-    OrderDetail.find({ accountName: id }).count().then(function(counts) {
+            if (counts) {
 
-        if (counts) {
+                //取值限制
+                pages = Math.ceil(counts / limit);
+                page = Math.max(page, 1);
+                page = Math.min(page, pages);
 
-            //取值限制
-            pages = Math.ceil(counts / limit);
-            page = Math.max(page, 1);
-            page = Math.min(page, pages);
+                var skip = (page - 1) * limit;
 
-            var skip = (page - 1) * limit;
+                OrderDetail.find(findOption).sort({ "createDate": -1 }).limit(limit).skip(skip).then(function(OrderDetail) {
+                    callback(true, {
+                        OrderDetail: OrderDetail,
+                        counts: counts,
+                        page: page,
+                        pages: pages
+                    })
+                });
+            } else {
+                callback(false, {
+                    OrderDetail: '',
+                    counts: 0,
+                    page: 1,
+                    pages: 1
+                });
+            }
+        });
+    } else {
+        OrderDetail.find({ accountName: id }).count().then(function(counts) {
 
-            OrderDetail.find({ accountName: id }).sort({ "createDate": -1 }).limit(limit).skip(skip).then(function(OrderDetail) {
-                callback(true, {
-                    OrderDetail: OrderDetail,
-                    counts: counts,
-                    page: page,
-                    pages: pages
-                })
-            });
-        } else {
-            callback(false, "查询失败");
-        }
+            if (counts) {
 
-    });
+                //取值限制
+                pages = Math.ceil(counts / limit);
+                page = Math.max(page, 1);
+                page = Math.min(page, pages);
+
+                var skip = (page - 1) * limit;
+
+                OrderDetail.find({ accountName: id }).sort({ "createDate": -1 }).limit(limit).skip(skip).then(function(OrderDetail) {
+                    callback(true, {
+                        OrderDetail: OrderDetail,
+                        counts: counts,
+                        page: page,
+                        pages: pages
+                    })
+                });
+            } else {
+                callback(false, "查询失败");
+            }
+
+        });
+    }
 
 }
 

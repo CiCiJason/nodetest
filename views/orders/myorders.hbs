@@ -39,21 +39,29 @@
                                 <label for="">送样信息表ID</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="accountname" />
+                                <input type="text" class="form-control" name="accountname" ng-model="orderquery.orderId"/>
                             </div>
 
                             <div class="col-md-1" class="name-institution">
                                 <label for="">送样信息表类型</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="accountname" />
+                                <select class="form-control" name="type" ng-model="orderquery.type">
+                                    <option value="1">文库无需世和混合，包lane</option>
+                                    <option value="2">文库需世和混合上机，包lane</option>
+                                    <option value="3">需要世和混合上机，不包lane包G</option>
+                                    <option value="4">文库无需世和混合，包FC(flow cell)</option>                                        
+                                </select>
                             </div>
 
                             <div class="col-md-1">
-                                <label for="">联系电话</label>
+                                <label for="">机构地址</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="accountname" />
+                                {{!-- <input type="text" class="form-control" name="institution"  ng-model="orderquery.institution"/> --}}
+                                <select id="institution" class="form-control" name="institution" ng-model="orderquery.institution">
+                                    <option value="[[x._id]]" ng-repeat="x in institutionList">[[x.institutionName]][[x.department]][[x.secondaryDepartment]][[x.tertiaryDepartment]]</option>
+                                </select>
                             </div>
 
                         </div>
@@ -62,34 +70,29 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-1">
-                                <label for="">机构地址</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" name="accountname" />
-                            </div>
-
-                            <div class="col-md-1" class="name-institution">
                                 <label for="">收货地址</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="accountname" />
+                                {{!-- <input type="text" class="form-control" name="address"  ng-model="orderquery.address"/> --}}
+                                <select id="address" class="form-control" name="address" ng-model="orderquery.address">
+                                    <option value="[[x._id]]" ng-repeat="x in addressList">[[x.province]][[x.city]][[x.district]][[x.detailedAddress]] [[x.contactPerson]],[[x.contactTel]]</option>
+                                </select>
                             </div>
-
-                            <div class="col-md-1">
+                            <div class="col-md-1" class="name-institution">
                                 <label for="">运单号</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="accountname" />
+                                <input type="text" class="form-control" name="waybillNumber"  ng-model="orderquery.waybillNumber"/>
                             </div>
-
+                            
                         </div>
                     </div>
 
                     <div class="form-group">
 
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary">查询</button>
-                            <button type="submit" class="btn btn-primary">取消</button>
+                            <a class="btn btn-primary" ng-click="query()">查询</a>
+                            <a class="btn btn-primary" ng-click="queryCancel()">取消</a>
                         </div>
 
                     </div>

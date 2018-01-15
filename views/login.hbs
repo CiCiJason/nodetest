@@ -1,19 +1,24 @@
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">提示信息：</h4>
-      </div>
-      <div class="modal-body">
-        <p>[[message]]</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="closeModal()">确定</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">提示信息：</h4>
+            </div>
+            <div class="modal-body">
+                <p>[[message]]</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="closeModal()">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 
 
@@ -22,12 +27,13 @@
     <div class="row index-info">
         <div class="col-md-7">
             <h2>优质&nbsp;&nbsp;快速&nbsp;&nbsp;专业&nbsp;&nbsp;灵活</h2>
-            {{!-- <div class='firstpage-img' ng-show='logined'> --}}
-                <div class='firstpage-img' ng-show='logined'>
-                <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
+            <div class='firstpage-img'>
+                <div class='firstpage-img'>
+                    <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
+                </div>
             </div>
         </div>
-        <div class="col-md-5" ng-show='logined'>
+        <div class="col-md-5">
             {{!-- 登录 --}}
             <div class="login" ng-show='login'>
                 <h2 ng-hide='loginSuccess'>&nbsp;&nbsp;&nbsp;&nbsp;登录</h2>
@@ -70,7 +76,7 @@
                     <form role="form" name='regForm' novalidate ng-submit="regSubmit()">
                         <div class="form-group">
                             <input type="text" name='accountname' class="form-control" ng-model='user.accountname' placeholder="用户名(数字,字母的组合)" ng-minlength='6'
-                                ng-maxlength='20' required ng-blur="querySameUser(1)" ng-focus="clearInfo(1)"/> {{!--
+                                ng-maxlength='20' required ng-blur="querySameUser(1)" ng-focus="clearInfo(1)" /> {{!--
                             <div>请输入账号</div>--}}
                             <div class="error" ng-messages="regForm.accountname.$error">
                                 {{!--
@@ -97,7 +103,8 @@
                                 <div ng-message="required" style="color:green">请再次输入密码</div> --}}
                             </div>
 
-                            <input type="email" class="form-control" name="email" ng-model='user.email' placeholder="请输入您的常用邮箱" required ng-blur="querySameUser(2)" ng-focus="clearInfo(2)"/>
+                            <input type="email" class="form-control" name="email" ng-model='user.email' placeholder="请输入您的常用邮箱" required ng-blur="querySameUser(2)"
+                                ng-focus="clearInfo(2)" />
                             <div class="error" ng-messages="regForm.email.$error">
                                 {{!--
                                 <div ng-message="required" style="color:green">请输入您的常用邮箱</div> --}}
@@ -132,7 +139,8 @@
             </div>
 
         </div>
-        {{!-- <div class='col-md-5 firstpage-img' ng-hide='logined'>
+        {{!--
+        <div class='col-md-5 firstpage-img' ng-hide='logined'>
             <img src="/images/hiseqXTen.jpg" alt="HiSeqX">
         </div> --}}
     </div>
@@ -141,8 +149,8 @@
 </div>
 
 <script>
-    window.location=window.location.origin+"#!/login";
-   console.log("window.location.origin:"+window.location.origin);
-   console.log("window.location:"+window.location);
-   
+    window.location = window.location.origin + "#!/login";
+    console.log("window.location.origin:" + window.location.origin);
+    console.log("window.location:" + window.location);
+
 </script>

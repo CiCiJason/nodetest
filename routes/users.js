@@ -406,10 +406,20 @@ router.get('/getInistitutionLists', function(req, res, next) {
     //     return res.json(data);
     // });
     if (querycountry || queryinstitutionName) {
-        Institution.find({ accountName: userid }).count().then(function(counts) {
+
+        var findOption = {};
+
+        if (querycountry && queryinstitutionName) {
+            findOption = { accountName: userid, country: querycountry, institutionName: queryinstitutionName };
+        } else if (querycountry && !queryinstitutionName) {
+            findOption = { accountName: userid, country: querycountry };
+        } else {
+            findOption = { accountName: userid, institutionName: queryinstitutionName };
+        }
+
+        Institution.find(findOption).count().then(function(counts) {
 
             if (counts) {
-
                 //取值限制
                 pages = Math.ceil(counts / limit);
                 page = Math.max(page, 1);
@@ -417,7 +427,7 @@ router.get('/getInistitutionLists', function(req, res, next) {
 
                 var skip = (page - 1) * limit;
 
-                Institution.find({ accountName: userid }).limit(limit).skip(skip).then(function(institution) {
+                Institution.find(findOption).limit(limit).skip(skip).then(function(institution) {
                     return res.json({
                         institution: institution,
                         counts: counts,
@@ -425,18 +435,13 @@ router.get('/getInistitutionLists', function(req, res, next) {
                         pages: pages
                     });
                 });
-
-                Institution.find({ 'accountName': userid, $or: [{ 'country': querycountry }, { 'institutionName': queryinstitutionName }] }, function(err, finddata) {
-                    if (!finddata.length) {
-                        ////
-                    } else {
-                        ////
-                    }
-                });
-
-
             } else {
-                return res.json("查询失败");
+                return res.json({
+                    institution: '',
+                    counts: 0,
+                    page: 1,
+                    pages: 1
+                });
             }
 
         });

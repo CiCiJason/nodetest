@@ -34,19 +34,44 @@ router.get('/getDefaultOrderId', function(req, res, next) {
 //用户首页显示的送样信息表列表
 router.get('/getOrderInfo', function(req, res, next) {
 
+    var queryorderId = req.query.orderId;
+    var querytype = req.query.type;
+    var queryinstitution = req.query.institution;
+    var queryaddress = req.query.address;
+    var querywaybillNumber = req.query.waybillNumber;
+
     var userid = req.session.accountId;
 
     var page = Number(req.query.page) || 1;
 
-    OrderService.getOrderLists(page, userid, function(flag, data) {
-        if (flag) {
-            return res.json(data);
-        } else {
-            resultData.code = 2;
-            resultData.message = "删除失败";
-            return res.json(resultData);
-        }
-    });
+    if (queryorderId || querytype || queryinstitution || queryaddress || querywaybillNumber) {
+
+        var findOption = {};
+        findOption.accountName = userid;
+        if (queryorderId) { findOption.orderId = queryorderId; }
+        if (querytype) { findOption.type = querytype; }
+        if (queryinstitution) { findOption.institution = queryinstitution; }
+        if (queryaddress) { findOption.address = queryaddress; }
+        if (querywaybillNumber) { findOption.waybillNumber = querywaybillNumber; }
+
+
+        OrderService.getOrderLists(true, findOption, page, userid, function(flag, data) {
+            if (flag) {
+                return res.json(data);
+            } else {
+                return res.json(data);
+            }
+        });
+    } else {
+        OrderService.getOrderLists(false, null, page, userid, function(flag, data) {
+            if (flag) {
+                return res.json(data);
+            } else {
+                return res.json(data);
+            }
+        });
+    }
+
 });
 //获得地址列表
 router.get('/getAddressLists', function(req, res, next) {
